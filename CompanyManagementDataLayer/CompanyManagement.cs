@@ -13,25 +13,25 @@ namespace CompanyManagementDataLayer
         public List<Project> GetAllProjects()
         {
 
-            List<Project> ListOfProjects = (from Project in dc.Projects select Project).ToList();
-            return ListOfProjects;
+            List<Project> listOfProjects = (from Project in dc.Projects select Project).ToList();
+            return listOfProjects;
         }
         public List<Technology> GetAllTechnologies()
         {
-            List<Technology> ListOfTechnologies = (from Technology in dc.Technologies select Technology).ToList();
-            return ListOfTechnologies;
+            List<Technology> listOfTechnologies = (from Technology in dc.Technologies select Technology).ToList();
+            return listOfTechnologies;
         }
 
         public int GetEmployeeCountForProject(int projectID)
         {
-            int CountOfEmployeesOfProject = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.ProjectID == projectID select EmployeeProject).Count();
-            return CountOfEmployeesOfProject;
+            int countOfEmployeesOfProject = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.ProjectID == projectID select EmployeeProject).Count();
+            return countOfEmployeesOfProject;
         }
 
         public List<Employee> GetAllEmployeesForProject(int projectID)
         {
-            List<Employee> ListOfEmployeeFromProject = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.ProjectID == projectID select EmployeeProject.Employee).ToList();
-            return ListOfEmployeeFromProject;
+            List<Employee> listOfEmployeeFromProject = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.ProjectID == projectID select EmployeeProject.Employee).ToList();
+            return listOfEmployeeFromProject;
         }
 
         public List<Project> GetAllDelayedProjects()
