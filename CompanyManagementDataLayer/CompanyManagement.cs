@@ -90,7 +90,7 @@ namespace CompanyManagementDataLayer
 
         public List<EmployeeTask> GetAllDelayedTasksForEmployee(int employeeID)
         {
-            List<EmployeeTask> listOfAllDelayedTasksForEmployee = (from EmployeeTask in dc.EmployeeTasks where EmployeeTask.EmployeeID == employeeID select EmployeeTask).ToList();
+            List<EmployeeTask> listOfAllDelayedTasksForEmployee = (from EmployeeTask in dc.EmployeeTasks where EmployeeTask.EmployeeID == employeeID && EmployeeTask.EmployeeTaskStatus == 4 select EmployeeTask).ToList();
             return listOfAllDelayedTasksForEmployee;
         }
 
