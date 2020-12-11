@@ -98,17 +98,16 @@ namespace CompanyManagementDataLayer
         {
             
             Project objProject = new Project();
-            // fields to be insert
+            // fields to be inserted
             objProject.ProjectID = project.ProjectID;
             objProject.ProjectName = project.ProjectName;
             objProject.ProjectStatus = project.ProjectStatus;
             objProject.ClientID = project.ClientID;
             objProject.DepartmentID = project.DepartmentID;
-            // executes the commands to implement the changes to the database
+            // Insert the values to the database
             dc.Projects.InsertOnSubmit(objProject);
             dc.SubmitChanges();
-            
-            
+                       
         }
 
 
