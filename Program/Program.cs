@@ -34,6 +34,10 @@ namespace Program
                 Console.WriteLine(employeeForProject.EmployeeID + " " + employeeForProject.EmployeeName);
             }
 
+            foreach (var taskTechnology in c1.GetAllTechnologyTasksForEmployee(2, 2))
+            {
+                Console.WriteLine(taskTechnology.TaskTechnologyID + " " + taskTechnology.Technology.TechnologyName);
+            }
 
             Console.WriteLine("Press enter to close...");
             Console.ReadLine();
