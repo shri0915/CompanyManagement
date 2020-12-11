@@ -94,6 +94,23 @@ namespace CompanyManagementDataLayer
             return listOfAllDelayedTasksForEmployee;
         }
 
+        public void AddProject(Project project)
+        {
+            
+            Project objProject = new Project();
+            // fields to be insert
+            objProject.ProjectID = project.ProjectID;
+            objProject.ProjectName = project.ProjectName;
+            objProject.ProjectStatus = project.ProjectStatus;
+            objProject.ClientID = project.ClientID;
+            objProject.DepartmentID = project.DepartmentID;
+            // executes the commands to implement the changes to the database
+            dc.Projects.InsertOnSubmit(objProject);
+            dc.SubmitChanges();
+            
+            
+        }
+
 
     }
 }

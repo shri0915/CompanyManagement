@@ -38,6 +38,13 @@ namespace Program
             {
                 Console.WriteLine(taskTechnology.TaskTechnologyID + " " + taskTechnology.Technology.TechnologyName);
             }
+            Project project = new Project();
+            project.ProjectID = 23;
+            project.ProjectName = "Insert Operation";
+            project.ProjectStatus = 4;
+            project.ClientID = 3;
+            project.DepartmentID = 3;
+            c1.AddProject(project);
 
             Console.WriteLine("Press enter to close...");
             Console.ReadLine();
