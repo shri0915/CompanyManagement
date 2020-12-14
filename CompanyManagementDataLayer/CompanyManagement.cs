@@ -110,6 +110,19 @@ namespace CompanyManagementDataLayer
                        
         }
 
+        public void AddTechnology(Technology technology)
+        {
+            Technology objTechnology = new Technology();
+            objTechnology.TechnologyID = technology.TechnologyID;
+
+        }
+
+        public void AddEmployee(Employee employee)
+        {
+            Employee objEmployee = new Employee();
+            objEmployee.EmployeeID = employee.EmployeeID;
+        }
+
 
     }
 }
