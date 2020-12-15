@@ -171,42 +171,82 @@ namespace CompanyManagementDataLayer
         }
         public void UpdateTechnologiesForTask(List<int> technologyIDs, int taskID) //Incomplete. Yet to be written.
         {
-            TaskTechnology taskToBeUpdated = new TaskTechnology();
-            taskToBeUpdated = (TaskTechnology)(from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID select TaskTechnology);
-            foreach (var technology in technologyIDs)
+            List<TaskTechnology> taskToBeDeletedForUpdation = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID select TaskTechnology).ToList();
+            dc.TaskTechnologies.DeleteAllOnSubmit(taskToBeDeletedForUpdation);
+            dc.SubmitChanges();
+            foreach (int technology in technologyIDs)
             {
 
-                taskToBeUpdated.TaskTechnologyID = technology;
-                dc.TaskTechnologies.InsertOnSubmit(taskToBeUpdated);
+                TaskTechnology taskTechnologyToBeInsertedForUpdation = new TaskTechnology();
+                taskTechnologyToBeInsertedForUpdation.TaskID = taskID;
+                taskTechnologyToBeInsertedForUpdation.TechnologyID = technology;
+                dc.TaskTechnologies.InsertOnSubmit(taskTechnologyToBeInsertedForUpdation);
                 dc.SubmitChanges();
+                
             }
         }
         public void DeleteEmployeeFromSystem(int employeeID)
         {
-            Employee employeeToBeRemoved = new Employee();
-            employeeToBeRemoved = (Employee)(from Employee in dc.Employees where Employee.EmployeeID == employeeID select Employee);
-            dc.Employees.DeleteOnSubmit(employeeToBeRemoved);
+            List<EmployeeProject> employeeProjectToBeRemoved = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID select EmployeeProject).ToList();
+            dc.EmployeeProjects.DeleteAllOnSubmit(employeeProjectToBeRemoved);
+            dc.SubmitChanges();
+
+            List<EmployeeTask> employeeTaskToBeRemoved = (from EmployeeTask in dc.EmployeeTasks where EmployeeTask.EmployeeID == employeeID select EmployeeTask).ToList();
+            dc.EmployeeTasks.DeleteAllOnSubmit(employeeTaskToBeRemoved);
+            dc.SubmitChanges();
+
+            List<Employee> employeeToBeRemoved = (from Employee in dc.Employees where Employee.EmployeeID == employeeID select Employee).ToList();
+            dc.Employees.DeleteAllOnSubmit(employeeToBeRemoved);
             dc.SubmitChanges();
         }
         public void DeleteTechnology(int technology)
         {
-            Technology technologyToBeDeleted = new Technology();
-            technologyToBeDeleted = (Technology)(from Technology in dc.Technologies where Technology.TechnologyID == technology select Technology);
-            dc.Technologies.DeleteOnSubmit(technologyToBeDeleted);
+           List<TaskTechnology> taskTechnologyToBeDeleted = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TechnologyID == technology select TaskTechnology).ToList();
+            dc.TaskTechnologies.DeleteAllOnSubmit(taskTechnologyToBeDeleted);
+            dc.SubmitChanges();
+
+            List<ProjectTechnology> projectTechnologyToBeDeleted = (from ProjectTechnology in dc.ProjectTechnologies where ProjectTechnology.TechnologyID == technology select ProjectTechnology).ToList();
+            dc.ProjectTechnologies.DeleteAllOnSubmit(projectTechnologyToBeDeleted);
+            dc.SubmitChanges();
+
+            List<Technology> technologyToBeDeleted = (from Technology in dc.Technologies where Technology.TechnologyID == technology select Technology).ToList();
+            dc.Technologies.DeleteAllOnSubmit(technologyToBeDeleted);
             dc.SubmitChanges();
         }
         public void DeleteTask(int taskID)
         {
-            Task taskToBeDeleted = new Task();
-            taskToBeDeleted = (Task)(from Task in dc.Tasks where Task.TaskID == taskID select Task);
-            dc.Tasks.DeleteOnSubmit(taskToBeDeleted);
+            List<EmployeeTask> employeeTaskToBeDeleted = (from EmployeeTask in dc.EmployeeTasks where EmployeeTask.TaskID == taskID select EmployeeTask).ToList();
+            dc.EmployeeTasks.DeleteAllOnSubmit(employeeTaskToBeDeleted);
+            dc.SubmitChanges();
+
+            List<ProjectTask> projectTaskToBeDeleted = (from ProjectTask in dc.ProjectTasks where ProjectTask.TaskID == taskID select ProjectTask).ToList();
+            dc.ProjectTasks.DeleteAllOnSubmit(projectTaskToBeDeleted);
+            dc.SubmitChanges();
+
+            List<TaskTechnology> taskTechnologyToBeDeleted = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID select TaskTechnology).ToList();
+            dc.TaskTechnologies.DeleteAllOnSubmit(taskTechnologyToBeDeleted);
+            dc.SubmitChanges();
+
+            List<Task> taskToBeDeleted = (from Task in dc.Tasks where Task.TaskID == taskID select Task).ToList();
+            dc.Tasks.DeleteAllOnSubmit(taskToBeDeleted);
             dc.SubmitChanges();
         }
         public void DeleteProject(int projectID)
         {
-            Project projectToBeDeleted = new Project();
-            projectToBeDeleted = (Project)(from Project in dc.Projects where Project.ProjectID == projectID select Project);
-            dc.Projects.DeleteOnSubmit(projectToBeDeleted);
+            List<EmployeeProject> employeeProjectToBeDeleted = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.ProjectID == projectID select EmployeeProject).ToList();
+            dc.EmployeeProjects.DeleteAllOnSubmit(employeeProjectToBeDeleted);
+            dc.SubmitChanges();
+
+            List<ProjectTask> projectTaskToBeDeleted = (from ProjectTask in dc.ProjectTasks where ProjectTask.ProjectID == projectID select ProjectTask).ToList();
+            dc.ProjectTasks.DeleteAllOnSubmit(projectTaskToBeDeleted);
+            dc.SubmitChanges();
+
+            List<ProjectTechnology> projectTechnologyToBeDeleted = (from ProjectTechnology in dc.ProjectTechnologies where ProjectTechnology.ProjectID == projectID select ProjectTechnology).ToList();
+            dc.ProjectTechnologies.DeleteAllOnSubmit(projectTechnologyToBeDeleted);
+            dc.SubmitChanges();
+
+            List<Project> projectToBeDeleted = (from Project in dc.Projects where Project.ProjectID == projectID select Project).ToList();
+            dc.Projects.DeleteAllOnSubmit(projectToBeDeleted);
             dc.SubmitChanges();
         }
 

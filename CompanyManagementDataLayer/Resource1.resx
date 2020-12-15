@@ -117,8 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ClientIDForProjectMissing" xml:space="preserve">
+    <value>No client assigned for the Project</value>
+  </data>
+  <data name="ClientIDMissing" xml:space="preserve">
+    <value>Client ID is missing</value>
+  </data>
+  <data name="ClientNameMissing" xml:space="preserve">
+    <value>Client Name is missing</value>
+  </data>
   <data name="DepartmentHeadID" xml:space="preserve">
     <value>Department Head ID is missing</value>
+  </data>
+  <data name="DepartmentIDForClientMissing" xml:space="preserve">
+    <value>No department is assigned to the Client</value>
+  </data>
+  <data name="DepartmentIDForProjectMissing" xml:space="preserve">
+    <value>No department assigned for handling the Project</value>
   </data>
   <data name="DepartmentIDMissing" xml:space="preserve">
     <value>Department ID is missing</value>
@@ -128,5 +143,11 @@
   </data>
   <data name="DepartmentNameMissing" xml:space="preserve">
     <value>Department Name is missing</value>
+  </data>
+  <data name="ProjectIDMissing" xml:space="preserve">
+    <value>Project ID is missing</value>
+  </data>
+  <data name="ProjectNameMissing" xml:space="preserve">
+    <value>Project Name is missing</value>
   </data>
 </root>

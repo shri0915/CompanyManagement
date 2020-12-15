@@ -39,12 +39,19 @@ namespace Program
                 Console.WriteLine(taskTechnology.TaskTechnologyID + " " + taskTechnology.Technology.TechnologyName);
             }
             Project project1 = new Project();
-            project1.ProjectID = 23;
-            project1.ProjectName = "Insert Operation";
-            project1.ProjectStatus = 4;
-            project1.ClientID = 3;
-            project1.DepartmentID = 3;
+            Console.WriteLine("Please enter the Project ID");
+            project1.ProjectID = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Please enter the Project Name");
+            project1.ProjectName = Console.ReadLine();
+            project1.ProjectStatus = 1;
+            Console.WriteLine("Please enter the Client ID for the Project");
+            project1.ClientID = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Please enter the Department ID for the Project");
+            project1.DepartmentID = Convert.ToInt32(Console.ReadLine());
             c1.AddProject(project1);
+
+            Console.WriteLine("Please enter the Employee ID to be deleted");
+            c1.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));
 
             Console.WriteLine("Press enter to close...");
             Console.ReadLine();

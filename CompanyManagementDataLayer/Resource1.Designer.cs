@@ -61,11 +61,56 @@ namespace CompanyManagementDataLayer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No client assigned for the Project.
+        /// </summary>
+        internal static string ClientIDForProjectMissing {
+            get {
+                return ResourceManager.GetString("ClientIDForProjectMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client ID is missing.
+        /// </summary>
+        internal static string ClientIDMissing {
+            get {
+                return ResourceManager.GetString("ClientIDMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client Name is missing.
+        /// </summary>
+        internal static string ClientNameMissing {
+            get {
+                return ResourceManager.GetString("ClientNameMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Department Head ID is missing.
         /// </summary>
         internal static string DepartmentHeadID {
             get {
                 return ResourceManager.GetString("DepartmentHeadID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No department is assigned to the Client.
+        /// </summary>
+        internal static string DepartmentIDForClientMissing {
+            get {
+                return ResourceManager.GetString("DepartmentIDForClientMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No department assigned for handling the Project.
+        /// </summary>
+        internal static string DepartmentIDForProjectMissing {
+            get {
+                return ResourceManager.GetString("DepartmentIDForProjectMissing", resourceCulture);
             }
         }
         
@@ -93,6 +138,24 @@ namespace CompanyManagementDataLayer {
         internal static string DepartmentNameMissing {
             get {
                 return ResourceManager.GetString("DepartmentNameMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project ID is missing.
+        /// </summary>
+        internal static string ProjectIDMissing {
+            get {
+                return ResourceManager.GetString("ProjectIDMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project Name is missing.
+        /// </summary>
+        internal static string ProjectNameMissing {
+            get {
+                return ResourceManager.GetString("ProjectNameMissing", resourceCulture);
             }
         }
     }
