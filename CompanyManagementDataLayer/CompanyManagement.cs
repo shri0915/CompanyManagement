@@ -114,6 +114,9 @@ namespace CompanyManagementDataLayer
         {
             Technology objTechnology = new Technology();
             objTechnology.TechnologyID = technology.TechnologyID;
+            objTechnology.TechnologyName = technology.TechnologyName;
+            dc.Technologies.InsertOnSubmit(objTechnology);
+            dc.SubmitChanges();
 
         }
 
@@ -121,6 +124,75 @@ namespace CompanyManagementDataLayer
         {
             Employee objEmployee = new Employee();
             objEmployee.EmployeeID = employee.EmployeeID;
+            objEmployee.EmployeeName = employee.EmployeeName;
+            objEmployee.EmployeeDesignation = employee.EmployeeDesignation;
+            objEmployee.EmployeeAddress = employee.EmployeeAddress;
+            objEmployee.EmployeeContact = employee.EmployeeContact;
+            objEmployee.DepartmentID = objEmployee.DepartmentID;
+            dc.Employees.InsertOnSubmit(objEmployee);
+            dc.SubmitChanges();
+        }
+
+        public void AssignEmployeeToProject(int employeeID, int projectID)
+        {
+            EmployeeProject objEmployeeProject = new EmployeeProject();
+            objEmployeeProject.EmployeeID = employeeID;
+            objEmployeeProject.ProjectID = projectID;
+            dc.EmployeeProjects.InsertOnSubmit(objEmployeeProject);
+            dc.SubmitChanges();
+        }
+        public void CreateTaskInProject(Task task, int projectID)
+        {
+            ProjectTask objProjectTask = new ProjectTask();
+            objProjectTask.ProjectID = projectID;
+            objProjectTask.TaskID = task.TaskID;
+            dc.ProjectTasks.InsertOnSubmit(objProjectTask);
+            dc.SubmitChanges();
+        }
+        public void AssignTechnologyToTask(int technologyID, int taskID)
+        {
+            TaskTechnology objTaskTechnology = new TaskTechnology();
+            objTaskTechnology.TaskTechnologyID = technologyID;
+            objTaskTechnology.TaskID = taskID;
+            dc.TaskTechnologies.InsertOnSubmit(objTaskTechnology);
+            dc.SubmitChanges();
+        }
+        public void UpdateTechnologiesForTask(List<int> technologyIDs, int taskID) //Incomplete. Yet to be written.
+        {
+            
+            List<TaskTechnology> listOfTaskTechnologiesToBeUpdated = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID select TaskTechnology).ToList();
+            foreach (var technology in technologyIDs)
+            {
+                
+            }
+        }
+        public void DeleteEmployeeFromSystem(int employeeID)
+        {
+            Employee employeeToBeRemoved = new Employee();
+            employeeToBeRemoved = (Employee)(from Employee in dc.Employees where Employee.EmployeeID == employeeID select Employee);
+            dc.Employees.DeleteOnSubmit(employeeToBeRemoved);
+            dc.SubmitChanges();
+        }
+        public void DeleteTechnology(int technology)
+        {
+            Technology technologyToBeDeleted = new Technology();
+            technologyToBeDeleted = (Technology)(from Technology in dc.Technologies where Technology.TechnologyID == technology select Technology);
+            dc.Technologies.DeleteOnSubmit(technologyToBeDeleted);
+            dc.SubmitChanges();
+        }
+        public void DeleteTask(int taskID)
+        {
+            Task taskToBeDeleted = new Task();
+            taskToBeDeleted = (Task)(from Task in dc.Tasks where Task.TaskID == taskID select Task);
+            dc.Tasks.DeleteOnSubmit(taskToBeDeleted);
+            dc.SubmitChanges();
+        }
+        public void DeleteProject(int projectID)
+        {
+            Project projectToBeDeleted = new Project();
+            projectToBeDeleted = (Project)(from Project in dc.Projects where Project.ProjectID == projectID select Project);
+            dc.Projects.DeleteOnSubmit(projectToBeDeleted);
+            dc.SubmitChanges();
         }
 
 
