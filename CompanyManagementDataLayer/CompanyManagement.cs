@@ -8,6 +8,18 @@ namespace CompanyManagementDataLayer
 {
     public class CompanyManagement
     {
+        public enum Status
+        {
+            NotStarted = 1,
+            Active = 2,
+            Completed = 3,
+            Delayed = 4
+        }
+
+        
+
+     
+
         DataClasses1DataContext dc = new DataClasses1DataContext();
 
         public List<Project> GetAllProjects()
@@ -36,7 +48,7 @@ namespace CompanyManagementDataLayer
 
         public List<Project> GetAllDelayedProjects()
         {
-            List<Project> listOfDelayedProjects = (from Project in dc.Projects where Project.ProjectStatus == 4 select Project).ToList();
+            List<Project> listOfDelayedProjects = (from Project in dc.Projects where Project.ProjectStatus == (int)Status.Delayed select Project).ToList();
             return listOfDelayedProjects;
         }
 
@@ -66,7 +78,7 @@ namespace CompanyManagementDataLayer
 
         public List<ProjectTask> GetAllActiveTasksForProject(int projectID)
         {
-            List<ProjectTask> listOfActiveTasksForProject = (from ProjectTask in dc.ProjectTasks where ProjectTask.ProjectID == projectID && ProjectTask.ProjectTaskStatus == 1 select ProjectTask).ToList();
+            List<ProjectTask> listOfActiveTasksForProject = (from ProjectTask in dc.ProjectTasks where ProjectTask.ProjectID == projectID && ProjectTask.ProjectTaskStatus == (int)Status.Active select ProjectTask).ToList();
             return listOfActiveTasksForProject;
         }
 
@@ -84,13 +96,13 @@ namespace CompanyManagementDataLayer
 
         public List<EmployeeProject> GetAllActiveProjectsManagedByEmployee(int employeeID)
         {
-            List <EmployeeProject> listOfActiveProjectsManagedByEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID && EmployeeProject.Project.ProjectStatus == 1 select EmployeeProject).ToList();
+            List <EmployeeProject> listOfActiveProjectsManagedByEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID && EmployeeProject.Project.ProjectStatus == (int)Status.Active select EmployeeProject).ToList();
             return listOfActiveProjectsManagedByEmployee;
         }
 
         public List<EmployeeTask> GetAllDelayedTasksForEmployee(int employeeID)
         {
-            List<EmployeeTask> listOfAllDelayedTasksForEmployee = (from EmployeeTask in dc.EmployeeTasks where EmployeeTask.EmployeeID == employeeID && EmployeeTask.EmployeeTaskStatus == 4 select EmployeeTask).ToList();
+            List<EmployeeTask> listOfAllDelayedTasksForEmployee = (from EmployeeTask in dc.EmployeeTasks where EmployeeTask.EmployeeID == employeeID && EmployeeTask.EmployeeTaskStatus == (int)Status.Delayed select EmployeeTask).ToList();
             return listOfAllDelayedTasksForEmployee;
         }
 
