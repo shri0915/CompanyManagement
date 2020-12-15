@@ -16,7 +16,9 @@ namespace CompanyManagementDataLayer
             Delayed = 4
         }
 
-        
+        /* Things remaining:
+         * Data validation
+         * Validation on operations like update, delete*/
 
      
 
