@@ -159,11 +159,14 @@ namespace CompanyManagementDataLayer
         }
         public void UpdateTechnologiesForTask(List<int> technologyIDs, int taskID) //Incomplete. Yet to be written.
         {
-            
-            List<TaskTechnology> listOfTaskTechnologiesToBeUpdated = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID select TaskTechnology).ToList();
+            TaskTechnology taskToBeUpdated = new TaskTechnology();
+            taskToBeUpdated = (TaskTechnology)(from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID select TaskTechnology);
             foreach (var technology in technologyIDs)
             {
-                
+
+                taskToBeUpdated.TaskTechnologyID = technology;
+                dc.TaskTechnologies.InsertOnSubmit(taskToBeUpdated);
+                dc.SubmitChanges();
             }
         }
         public void DeleteEmployeeFromSystem(int employeeID)
