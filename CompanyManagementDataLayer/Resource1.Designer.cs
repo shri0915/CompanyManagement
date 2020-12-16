@@ -160,6 +160,15 @@ namespace CompanyManagementDataLayer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Project ID has to be greater than 0.
+        /// </summary>
+        internal static string ProjectIDNegativeOrZero {
+            get {
+                return ResourceManager.GetString("ProjectIDNegativeOrZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Project Name is missing.
         /// </summary>
         internal static string ProjectNameMissing {

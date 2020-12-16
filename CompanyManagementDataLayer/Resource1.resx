@@ -150,6 +150,9 @@
   <data name="ProjectIDMissing" xml:space="preserve">
     <value>Project ID is missing</value>
   </data>
+  <data name="ProjectIDNegativeOrZero" xml:space="preserve">
+    <value>Project ID has to be greater than 0</value>
+  </data>
   <data name="ProjectNameMissing" xml:space="preserve">
     <value>Project Name is missing</value>
   </data>

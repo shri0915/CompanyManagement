@@ -25,10 +25,14 @@ namespace CompanyManagementDataLayer
 
         public String CheckCumpulsoryFieldsOfProject(Project project)
         {
-            int i;
-            if (project.ProjectID.Equals(null) || project.ProjectID <= 0)
+            
+            if (project.ProjectID.Equals(null))
             {
                 return Resource1.ProjectIDMissing;
+            }
+            else if (project.ProjectID <= 0)
+            {
+                return Resource1.ProjectIDNegativeOrZero;
             }
             else if (string.IsNullOrEmpty(project.ProjectName))
             {
@@ -136,28 +140,40 @@ namespace CompanyManagementDataLayer
 
         public void AddProject(Project project)
         {
-           
-            
-            Project objProject = new Project();
-            // fields to be inserted
-            objProject.ProjectID = project.ProjectID;
-            objProject.ProjectName = project.ProjectName;
-            objProject.ProjectStatus = project.ProjectStatus;
-            objProject.ClientID = project.ClientID;
-            objProject.DepartmentID = project.DepartmentID;
-            // Insert the values to the database
-            String checkProjectCumpulsoryFieldsValidation = CheckCumpulsoryFieldsOfProject(objProject);
-            if (checkProjectCumpulsoryFieldsValidation != Resource1.AllCloumnsPresent)
+
+            try
             {
-                throw new Exception(checkProjectCumpulsoryFieldsValidation);
+
+                Project objProject = new Project();
+                // fields to be inserted
+                objProject.ProjectID = project.ProjectID;
+                objProject.ProjectName = project.ProjectName;
+                objProject.ProjectStatus = project.ProjectStatus;
+                objProject.ClientID = project.ClientID;
+                objProject.DepartmentID = project.DepartmentID;
+                // Insert the values to the database
+                String checkProjectCumpulsoryFieldsValidation = CheckCumpulsoryFieldsOfProject(objProject);
+                if (checkProjectCumpulsoryFieldsValidation != Resource1.AllCloumnsPresent)
+                {
+                    throw new Exception(checkProjectCumpulsoryFieldsValidation);
+                }
+                else
+                {
+                    dc.Projects.InsertOnSubmit(objProject);
+                    dc.SubmitChanges();
+                }
+
             }
-            else
+
+            catch(Exception e)
             {
-                dc.Projects.InsertOnSubmit(objProject);
-                dc.SubmitChanges();
+                Console.WriteLine(e.Message);
+                Console.WriteLine("Project not added because of the issue mentioned above");
+
             }
-            
-                       
+
+
+
         }
 
         public void AddTechnology(Technology technology)
