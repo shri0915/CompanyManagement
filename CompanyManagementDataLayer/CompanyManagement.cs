@@ -20,7 +20,33 @@ namespace CompanyManagementDataLayer
          * Data validation
          * Validation on operations like update, delete*/
 
-     
+
+        
+
+        public String CheckCumpulsoryFieldsOfProject(Project project)
+        {
+            int i;
+            if (project.ProjectID.Equals(null) || project.ProjectID <= 0)
+            {
+                return Resource1.ProjectIDMissing;
+            }
+            else if (string.IsNullOrEmpty(project.ProjectName))
+            {
+                return Resource1.ProjectNameMissing;
+            }
+            else if (project.ClientID.Equals(null))
+            {
+                return Resource1.ClientIDForProjectMissing;
+            }
+            else if (project.DepartmentID.Equals(null))
+            {
+                return Resource1.DepartmentIDForProjectMissing;
+            }
+            else
+            {
+                return Resource1.AllCloumnsPresent;
+            }
+        }
 
         DataClasses1DataContext dc = new DataClasses1DataContext();
 
@@ -110,6 +136,7 @@ namespace CompanyManagementDataLayer
 
         public void AddProject(Project project)
         {
+           
             
             Project objProject = new Project();
             // fields to be inserted
@@ -119,8 +146,17 @@ namespace CompanyManagementDataLayer
             objProject.ClientID = project.ClientID;
             objProject.DepartmentID = project.DepartmentID;
             // Insert the values to the database
-            dc.Projects.InsertOnSubmit(objProject);
-            dc.SubmitChanges();
+            String checkProjectCumpulsoryFieldsValidation = CheckCumpulsoryFieldsOfProject(objProject);
+            if (checkProjectCumpulsoryFieldsValidation != Resource1.AllCloumnsPresent)
+            {
+                throw new Exception(checkProjectCumpulsoryFieldsValidation);
+            }
+            else
+            {
+                dc.Projects.InsertOnSubmit(objProject);
+                dc.SubmitChanges();
+            }
+            
                        
         }
 

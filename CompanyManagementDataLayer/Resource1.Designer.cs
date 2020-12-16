@@ -61,6 +61,15 @@ namespace CompanyManagementDataLayer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All columns have values.
+        /// </summary>
+        internal static string AllCloumnsPresent {
+            get {
+                return ResourceManager.GetString("AllCloumnsPresent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No client assigned for the Project.
         /// </summary>
         internal static string ClientIDForProjectMissing {
