@@ -15,18 +15,26 @@ namespace Program
             BusinessLayer businessLayer = new BusinessLayer();
 
             //List all the Projects
+            Console.WriteLine("Here are all the projects in the database");
             foreach (var project in businessLayer.GetAllProjects())
             {
+                
                 Console.WriteLine(project.ProjectID + " " + project.ProjectName);
+                
             }
+            Console.WriteLine("************************************************");
 
-            /*List all the Technologies
+            //List all the Technologies
+            Console.WriteLine("Here are all the technologies in the database");
             foreach (var technology in businessLayer.GetAllTechnologies())
             {
+                
                 Console.WriteLine(technology.TechnologyID + " " + technology.TechnologyName);
+                
             }
+            Console.WriteLine("************************************************");
 
-            //Print the count of Employees in Project
+            /*Print the count of Employees in Project
             Console.WriteLine(businessLayer.GetEmployeeCountForProject(2));
 
             //List all the Employees in the Project

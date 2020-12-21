@@ -74,7 +74,8 @@ namespace CompanyManagementBL
         public static BOTechnology ConvertTechnologyToBOTechnology(Technology technology)
         {
             BOTechnology boTechnology = new BOTechnology();
-
+            boTechnology.TechnologyID = technology.TechnologyID;
+            boTechnology.TechnologyName = technology.TechnologyName;
            
 
             return boTechnology;
