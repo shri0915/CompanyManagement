@@ -80,6 +80,7 @@ namespace CompanyManagementBL
             {
 
                 List<BOEmployee> listOfBOEmployee = new List<BOEmployee>();
+                listOfBOEmployee = ConvertDataLayerToBusinessLayer.ConvertEmployeeListToBOEmployeeList(dataLayer.GetAllEmployeesForProject(projectID));
                 return listOfBOEmployee;
 
             }

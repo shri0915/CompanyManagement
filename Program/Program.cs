@@ -37,13 +37,16 @@ namespace Program
             //Print the count of Employees in Project
             Console.WriteLine("The number of employees in the project: ");
             Console.WriteLine(businessLayer.GetEmployeeCountForProject(2));
+            Console.WriteLine("************************************************");
 
-            /*List all the Employees in the Project
+            //List all the Employees in the Project
             foreach (var employeeForProject in businessLayer.GetAllEmployeesForProject(2))
             {
-                Console.WriteLine(employeeForProject.EmployeeId + " " + employeeForProject.EmployeeName);
+                Console.WriteLine("The employees in the project: ");
+                Console.WriteLine(employeeForProject.EmployeeID + " " + employeeForProject.EmployeeName);
             }
-
+            
+            /*
             foreach (var taskTechnology in businessLayer.GetAllTechnologyTasksForEmployee(2, 2))
             {
                 Console.WriteLine(taskTechnology.TaskTechnologyID);
