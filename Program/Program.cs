@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CompanyManagementBL;
 using CompanyManagementDataLayer;
 
 namespace Program
@@ -11,33 +12,34 @@ namespace Program
     {
         static void Main(string[] args)
         {
-            CompanyManagement c1 = new CompanyManagement();
+            BusinessLayer businessLayer = new BusinessLayer();
 
             //List all the Projects
-            foreach (var project in c1.GetAllProjects())
+            foreach (var project in businessLayer.GetAllProjects())
             {
-                Console.WriteLine(project.ProjectID + " " + project.ProjectName + " is assigned to Department : " + project.Department.DepartmentName);
+                Console.WriteLine(project.ProjectID + " " + project.ProjectName);
             }
 
-            //List all the Technologies
-            foreach (var technology in c1.GetAllTechnologies())
+            /*List all the Technologies
+            foreach (var technology in businessLayer.GetAllTechnologies())
             {
                 Console.WriteLine(technology.TechnologyID + " " + technology.TechnologyName);
             }
 
             //Print the count of Employees in Project
-            Console.WriteLine(c1.GetEmployeeCountForProject(2));
+            Console.WriteLine(businessLayer.GetEmployeeCountForProject(2));
 
             //List all the Employees in the Project
-            foreach (var employeeForProject in c1.GetAllEmployeesForProject(2))
+            foreach (var employeeForProject in businessLayer.GetAllEmployeesForProject(2))
             {
-                Console.WriteLine(employeeForProject.EmployeeID + " " + employeeForProject.EmployeeName);
+                Console.WriteLine(employeeForProject.EmployeeId + " " + employeeForProject.EmployeeName);
             }
 
-            foreach (var taskTechnology in c1.GetAllTechnologyTasksForEmployee(2, 2))
+            foreach (var taskTechnology in businessLayer.GetAllTechnologyTasksForEmployee(2, 2))
             {
-                Console.WriteLine(taskTechnology.TaskTechnologyID + " " + taskTechnology.Technology.TechnologyName);
+                Console.WriteLine(taskTechnology.TaskTechnologyID);
             }
+            
             Project project1 = new Project();
             Console.WriteLine("Please enter the Project ID");
             project1.ProjectID = Convert.ToInt32(Console.ReadLine());
@@ -48,10 +50,10 @@ namespace Program
             project1.ClientID = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Please enter the Department ID for the Project");
             project1.DepartmentID = Convert.ToInt32(Console.ReadLine());
-            c1.AddProject(project1);
+            businessLayer.AddProject(project1);
 
             Console.WriteLine("Please enter the Employee ID to be deleted");
-            c1.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));
+            businessLayer.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));*/
 
             Console.WriteLine("Press enter to close...");
             Console.ReadLine();

@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{62B065CD-51EF-4134-9BA4-0ABB14A14887}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Program</RootNamespace>
-    <AssemblyName>Program</AssemblyName>
+    <ProjectGuid>{E9320046-9163-4D43-B3BD-A5AD46611277}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CompanyManagementBL</RootNamespace>
+    <AssemblyName>CompanyManagementBL</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,17 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="BusinessLayer.cs" />
+    <Compile Include="ConvertDataLayerToBusinessLayer.cs" />
+    <Compile Include="Entities\BOEmployee.cs" />
+    <Compile Include="Entities\BOEmployeeProject.cs" />
+    <Compile Include="Entities\BOEmployeeTask.cs" />
+    <Compile Include="Entities\BOProject.cs" />
+    <Compile Include="Entities\BOProjectTask.cs" />
+    <Compile Include="Entities\BOProjectTechnology.cs" />
+    <Compile Include="Entities\BOTask.cs" />
+    <Compile Include="Entities\BOTechnology.cs" />
+    <Compile Include="Entities\BOTaskTechnology.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CompanyManagementBL\CompanyManagementBL.csproj">
-      <Project>{e9320046-9163-4d43-b3bd-a5ad46611277}</Project>
-      <Name>CompanyManagementBL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CompanyManagementDataLayer\CompanyManagementDataLayer.csproj">
       <Project>{b20d93b8-af73-4ba4-b418-495f4a278e77}</Project>
       <Name>CompanyManagementDataLayer</Name>
