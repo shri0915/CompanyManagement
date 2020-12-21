@@ -59,6 +59,7 @@ namespace CompanyManagementBL
             try
             {
                 int countOfEmployeesForProject = 0;
+                countOfEmployeesForProject = dataLayer.GetEmployeeCountForProject(projectID);
                 return countOfEmployeesForProject;
 
 

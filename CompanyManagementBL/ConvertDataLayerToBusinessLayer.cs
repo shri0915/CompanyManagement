@@ -83,7 +83,12 @@ namespace CompanyManagementBL
         public static BOEmployee ConvertEmployeeToBOEmployee(Employee employee)
         {
             BOEmployee boEmployee = new BOEmployee();
-
+            boEmployee.EmployeeID = employee.EmployeeID;
+            boEmployee.EmployeeName = employee.EmployeeName;
+            boEmployee.EmployeeDesignation = employee.EmployeeDesignation;
+            boEmployee.EmployeeAddress = employee.EmployeeAddress;
+            boEmployee.EmployeeContact = employee.EmployeeContact;
+            boEmployee.DepartmentID = employee.DepartmentID;
             
 
             return boEmployee;

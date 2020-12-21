@@ -8,12 +8,12 @@ namespace CompanyManagementBL.Entities
 {
     public class BOEmployee
     {
-        public int EmployeeId;
+        public int EmployeeID;
         public string EmployeeName;
         public string EmployeeDesignation;
         public string EmployeeAddress;
         public string EmployeeContact;
-        public int DepartmentId;
+        public int DepartmentID;
 
 
     }
