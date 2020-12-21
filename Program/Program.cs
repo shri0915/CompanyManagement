@@ -45,14 +45,15 @@ namespace Program
                 Console.WriteLine("The employees in the project: ");
                 Console.WriteLine(employeeForProject.EmployeeID + " " + employeeForProject.EmployeeName);
             }
-            
-            /*
+
+            Console.WriteLine("************************************************");
+            Console.WriteLine("The technology for the employee are: ");
             foreach (var taskTechnology in businessLayer.GetAllTechnologyTasksForEmployee(2, 2))
             {
                 Console.WriteLine(taskTechnology.TaskTechnologyID);
             }
             
-            Project project1 = new Project();
+            /*Project project1 = new Project();
             Console.WriteLine("Please enter the Project ID");
             project1.ProjectID = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Please enter the Project Name");

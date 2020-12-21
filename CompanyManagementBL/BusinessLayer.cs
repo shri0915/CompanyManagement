@@ -99,6 +99,7 @@ namespace CompanyManagementBL
             {
 
                 List<BOProject> listOfDelayedProjects = new List<BOProject>();
+                listOfDelayedProjects = ConvertDataLayerToBusinessLayer.ConvertProjectListToBOProjectList(dataLayer.GetAllDelayedProjects());
                 return listOfDelayedProjects;
 
             }
@@ -153,6 +154,7 @@ namespace CompanyManagementBL
             {
 
                 List<BOTaskTechnology> listOfTechnologyTasksForEmployee = new List<BOTaskTechnology>();
+                listOfTechnologyTasksForEmployee = ConvertDataLayerToBusinessLayer.ConvertTaskTechnologyListToBOTaskTechnologyList(dataLayer.GetAllTechnologyTasksForEmployee(technologyID, employeeID));
                 return listOfTechnologyTasksForEmployee;
 
             }

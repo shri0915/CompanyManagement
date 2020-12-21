@@ -57,6 +57,17 @@ namespace CompanyManagementBL
             return businessTasks;
         }
 
+        public static List<BOTaskTechnology> ConvertTaskTechnologyListToBOTaskTechnologyList(List<TaskTechnology> taskTechnologies)
+        {
+            List<BOTaskTechnology> businessTaskTechnologies = new List<BOTaskTechnology>();
+            foreach (TaskTechnology taskTechnology in taskTechnologies)
+            {
+                BOTaskTechnology bOTaskTechnology = ConvertTaskTechnologyToBOTaskTechnology(taskTechnology);
+                businessTaskTechnologies.Add(bOTaskTechnology);
+            }
+            return businessTaskTechnologies;
+        }
+
 
         public static BOProject ConvertProjectToBOProject(Project project)
         {
@@ -101,6 +112,15 @@ namespace CompanyManagementBL
 
 
             return boTask;
+        }
+        public static BOTaskTechnology ConvertTaskTechnologyToBOTaskTechnology(TaskTechnology taskTechnology)
+        {
+            BOTaskTechnology bOTaskTechnology = new BOTaskTechnology();
+            bOTaskTechnology.TaskTechnologyID = taskTechnology.TaskTechnologyID;
+            bOTaskTechnology.TechnologyID = taskTechnology.TechnologyID;
+            bOTaskTechnology.TaskID = taskTechnology.TaskID;
+
+            return bOTaskTechnology;
         }
         public static Project ConvertBOProjectToProject(BOProject boProject)
         {
