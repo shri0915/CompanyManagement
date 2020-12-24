@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer.cs" />
-    <Compile Include="ConvertDataLayerToBusinessLayer.cs" />
+    <Compile Include="DataConverter.cs" />
     <Compile Include="Entities\BOEmployee.cs" />
     <Compile Include="Entities\BOEmployeeProject.cs" />
     <Compile Include="Entities\BOEmployeeTask.cs" />

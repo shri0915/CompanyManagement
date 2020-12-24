@@ -16,43 +16,25 @@ namespace CompanyManagementDataLayer
             Delayed = 4
         }
 
+        public enum Role
+        {
+            ProjectManager = 1,
+            TeamLead = 2,
+            UIDeveloper = 3,
+            BackendDeveloper = 4,
+            SystemManager = 5
+        }
+
         /* Things remaining:
          * Data validation
          * Validation on operations like update, delete*/
 
 
-        
 
-        public String CheckCumpulsoryFieldsOfProject(Project project)
-        {
-            
-            if (project.ProjectID.Equals(null))
-            {
-                return Resource1.ProjectIDMissing;
-            }
-            else if (project.ProjectID <= 0)
-            {
-                return Resource1.ProjectIDNegativeOrZero;
-            }
-            else if (string.IsNullOrEmpty(project.ProjectName))
-            {
-                return Resource1.ProjectNameMissing;
-            }
-            else if (project.ClientID.Equals(null))
-            {
-                return Resource1.ClientIDForProjectMissing;
-            }
-            else if (project.DepartmentID.Equals(null))
-            {
-                return Resource1.DepartmentIDForProjectMissing;
-            }
-            else
-            {
-                return Resource1.AllCloumnsPresent;
-            }
-        }
+
 
         DataClasses1DataContext dc = new DataClasses1DataContext();
+        DataValidationHelper validateTheInput = new DataValidationHelper();
 
         public List<Project> GetAllProjects()
         {
@@ -226,7 +208,7 @@ namespace CompanyManagementDataLayer
         {
             try
             {
-                List<EmployeeProject> listOfActiveProjectsManagedByEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID && EmployeeProject.Project.ProjectStatus == (int)Status.Active select EmployeeProject).ToList();
+                List<EmployeeProject> listOfActiveProjectsManagedByEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID && EmployeeProject.Project.ProjectStatus == (int)Status.Active && EmployeeProject.EmployeeRoleID == (int)Role.ProjectManager  select EmployeeProject).ToList();
                 return listOfActiveProjectsManagedByEmployee;
             }
             catch (Exception e)
@@ -256,25 +238,25 @@ namespace CompanyManagementDataLayer
             try
             {
 
-                Project objProject = new Project();
-                // fields to be inserted
-                objProject.ProjectID = project.ProjectID;
-                objProject.ProjectName = project.ProjectName;
-                objProject.ProjectStatus = project.ProjectStatus;
-                objProject.ClientID = project.ClientID;
-                objProject.DepartmentID = project.DepartmentID;
+
                 // Insert the values to the database
-                String checkProjectCumpulsoryFieldsValidation = CheckCumpulsoryFieldsOfProject(objProject);
-                if (checkProjectCumpulsoryFieldsValidation != Resource1.AllCloumnsPresent)
+                if (!validateTheInput.IfProjectExists(project.ProjectID))
                 {
-                    throw new Exception(checkProjectCumpulsoryFieldsValidation);
+                    String checkProjectCumpulsoryFieldsValidation = validateTheInput.CheckCumpulsoryFieldsOfProject(project);
+                    if (checkProjectCumpulsoryFieldsValidation != Resource1.AllColumnsPresent)
+                    {
+                        throw new Exception(checkProjectCumpulsoryFieldsValidation);
+                    }
+                    else
+                    {
+                        dc.Projects.InsertOnSubmit(project);
+                        dc.SubmitChanges();
+                    }
                 }
                 else
                 {
-                    dc.Projects.InsertOnSubmit(objProject);
-                    dc.SubmitChanges();
+                    Console.WriteLine(Resource1.ProjectAlreadyExists);
                 }
-
             }
 
             catch(Exception e)
@@ -292,11 +274,22 @@ namespace CompanyManagementDataLayer
         {
             try
             {
-                Technology objTechnology = new Technology();
-                objTechnology.TechnologyID = technology.TechnologyID;
-                objTechnology.TechnologyName = technology.TechnologyName;
-                dc.Technologies.InsertOnSubmit(objTechnology);
-                dc.SubmitChanges();
+                if (!validateTheInput.IfTechnologyExists(technology.TechnologyID))
+                {
+                    string checkCumpolsoryFieldsForTechnology = validateTheInput.CheckCompulsoryFieldsOfTechnology(technology);
+                    if (checkCumpolsoryFieldsForTechnology != Resource1.AllColumnsPresent)
+                    {
+                        Console.WriteLine(checkCumpolsoryFieldsForTechnology);
+                    }
+                    else {
+                        dc.Technologies.InsertOnSubmit(technology);
+                        dc.SubmitChanges();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(Resource1.TechnologyAlreadyExists);
+                }
             }
             catch (Exception e)
             {
@@ -309,15 +302,23 @@ namespace CompanyManagementDataLayer
         {
             try
             {
-                Employee objEmployee = new Employee();
-                objEmployee.EmployeeID = employee.EmployeeID;
-                objEmployee.EmployeeName = employee.EmployeeName;
-                objEmployee.EmployeeDesignation = employee.EmployeeDesignation;
-                objEmployee.EmployeeAddress = employee.EmployeeAddress;
-                objEmployee.EmployeeContact = employee.EmployeeContact;
-                objEmployee.DepartmentID = objEmployee.DepartmentID;
-                dc.Employees.InsertOnSubmit(objEmployee);
-                dc.SubmitChanges();
+                if (!validateTheInput.IfEmployeeExists(employee.EmployeeID))
+                {
+                    string checkCumpolsoryFieldsForEmployee = validateTheInput.CheckCompulsoryFieldsOfEmployee(employee);
+                    if (checkCumpolsoryFieldsForEmployee != Resource1.AllColumnsPresent)
+                    {
+                        Console.WriteLine(checkCumpolsoryFieldsForEmployee);
+                    }
+                    else
+                    {
+                        dc.Employees.InsertOnSubmit(employee);
+                        dc.SubmitChanges();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(Resource1.EmployeeAlreadyExists);
+                }
             }
             catch (Exception e)
             {
@@ -330,11 +331,22 @@ namespace CompanyManagementDataLayer
         {
             try
             {
-                EmployeeProject objEmployeeProject = new EmployeeProject();
-                objEmployeeProject.EmployeeID = employeeID;
-                objEmployeeProject.ProjectID = projectID;
-                dc.EmployeeProjects.InsertOnSubmit(objEmployeeProject);
-                dc.SubmitChanges();
+                if (!validateTheInput.IfEmployeeExists(employeeID))
+                {
+                    Console.WriteLine(Resource1.EmployeeMissing);
+                }
+                else if (!validateTheInput.IfProjectExists(projectID))
+                {
+                    Console.WriteLine(Resource1.ProjectMissing);
+                }
+                else
+                {
+                    EmployeeProject objEmployeeProject = new EmployeeProject();
+                    objEmployeeProject.EmployeeID = employeeID;
+                    objEmployeeProject.ProjectID = projectID;
+                    dc.EmployeeProjects.InsertOnSubmit(objEmployeeProject);
+                    dc.SubmitChanges();
+                }
             }
             catch (Exception e)
             {
@@ -346,11 +358,30 @@ namespace CompanyManagementDataLayer
         {
             try
             {
-                ProjectTask objProjectTask = new ProjectTask();
-                objProjectTask.ProjectID = projectID;
-                objProjectTask.TaskID = task.TaskID;
-                dc.ProjectTasks.InsertOnSubmit(objProjectTask);
-                dc.SubmitChanges();
+                if (validateTheInput.IfProjectExists(projectID))
+                {
+                    Console.WriteLine(Resource1.ProjectMissing);
+                }
+                else if(validateTheInput.IfTaskExists(task.TaskID))
+                {
+                    Console.WriteLine(Resource1.TaskMissing);
+                }
+                else
+                {
+                    string checkCompulsoryFieldsOfTask = validateTheInput.CheckCompulsoryFieldsOfTask(task);
+                    if (checkCompulsoryFieldsOfTask != Resource1.AllColumnsPresent)
+                    {
+                        Console.WriteLine(checkCompulsoryFieldsOfTask);
+                    }
+                    else
+                    {
+                        ProjectTask objProjectTask = new ProjectTask();
+                        objProjectTask.ProjectID = projectID;
+                        objProjectTask.TaskID = task.TaskID;
+                        dc.ProjectTasks.InsertOnSubmit(objProjectTask);
+                        dc.SubmitChanges();
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -362,11 +393,18 @@ namespace CompanyManagementDataLayer
         {
             try
             {
-                TaskTechnology objTaskTechnology = new TaskTechnology();
-                objTaskTechnology.TaskTechnologyID = technologyID;
-                objTaskTechnology.TaskID = taskID;
-                dc.TaskTechnologies.InsertOnSubmit(objTaskTechnology);
-                dc.SubmitChanges();
+                if (!validateTheInput.IfTechnologyIsAssignedToTask(technologyID, taskID))
+                {
+                    TaskTechnology objTaskTechnology = new TaskTechnology();
+                    objTaskTechnology.TaskTechnologyID = technologyID;
+                    objTaskTechnology.TaskID = taskID;
+                    dc.TaskTechnologies.InsertOnSubmit(objTaskTechnology);
+                    dc.SubmitChanges();
+                }
+                else
+                {
+                    Console.WriteLine(Resource1.TechnologyAssignedToTask);
+                }
             }
             catch (Exception e)
             {
@@ -378,18 +416,30 @@ namespace CompanyManagementDataLayer
         {
             try
             {
-                List<TaskTechnology> taskToBeDeletedForUpdation = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID select TaskTechnology).ToList();
-                dc.TaskTechnologies.DeleteAllOnSubmit(taskToBeDeletedForUpdation);
-                dc.SubmitChanges();
-                foreach (int technology in technologyIDs)
-                {
-
-                    TaskTechnology taskTechnologyToBeInsertedForUpdation = new TaskTechnology();
-                    taskTechnologyToBeInsertedForUpdation.TaskID = taskID;
-                    taskTechnologyToBeInsertedForUpdation.TechnologyID = technology;
-                    dc.TaskTechnologies.InsertOnSubmit(taskTechnologyToBeInsertedForUpdation);
+                if (validateTheInput.IfTaskExists(taskID)) {
+                    List<TaskTechnology> taskTechnologyToBeDeletedForUpdation = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID select TaskTechnology).ToList();
+                    dc.TaskTechnologies.DeleteAllOnSubmit(taskTechnologyToBeDeletedForUpdation);
                     dc.SubmitChanges();
+                    foreach (int technology in technologyIDs)
+                    {
+                        if (validateTheInput.IfTechnologyExists(technology))
+                        {
+                            TaskTechnology taskTechnologyToBeInsertedForUpdation = new TaskTechnology();
+                            taskTechnologyToBeInsertedForUpdation.TaskID = taskID;
+                            taskTechnologyToBeInsertedForUpdation.TechnologyID = technology;
+                            dc.TaskTechnologies.InsertOnSubmit(taskTechnologyToBeInsertedForUpdation);
+                            dc.SubmitChanges();
+                        }
+                        else
+                        {
+                            Console.WriteLine(Resource1.TechnologyMissing);
+                        }
 
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(Resource1.TaskMissing);
                 }
             }
             catch (Exception e)
@@ -402,17 +452,22 @@ namespace CompanyManagementDataLayer
         {
             try
             {
-                List<EmployeeProject> employeeProjectToBeRemoved = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID select EmployeeProject).ToList();
-                dc.EmployeeProjects.DeleteAllOnSubmit(employeeProjectToBeRemoved);
-                dc.SubmitChanges();
 
-                List<EmployeeTask> employeeTaskToBeRemoved = (from EmployeeTask in dc.EmployeeTasks where EmployeeTask.EmployeeID == employeeID select EmployeeTask).ToList();
-                dc.EmployeeTasks.DeleteAllOnSubmit(employeeTaskToBeRemoved);
-                dc.SubmitChanges();
 
-                List<Employee> employeeToBeRemoved = (from Employee in dc.Employees where Employee.EmployeeID == employeeID select Employee).ToList();
-                dc.Employees.DeleteAllOnSubmit(employeeToBeRemoved);
-                dc.SubmitChanges();
+                if (validateTheInput.IfEmployeeExists(employeeID))
+                {
+                    List<Employee> employeeToBeRemoved = (from Employee in dc.Employees where Employee.EmployeeID == employeeID select Employee).ToList();
+                    dc.Employees.DeleteAllOnSubmit(employeeToBeRemoved);
+                    List<EmployeeProject> employeeProjectToBeRemoved = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID select EmployeeProject).ToList();
+                    dc.EmployeeProjects.DeleteAllOnSubmit(employeeProjectToBeRemoved);
+                    List<EmployeeTask> employeeTaskToBeRemoved = (from EmployeeTask in dc.EmployeeTasks where EmployeeTask.EmployeeID == employeeID select EmployeeTask).ToList();
+                    dc.EmployeeTasks.DeleteAllOnSubmit(employeeTaskToBeRemoved);
+                    dc.SubmitChanges();
+                }
+                else 
+                {
+                    Console.WriteLine(Resource1.EmployeeMissing);
+                }
             }
             catch (Exception e)
             {
@@ -424,17 +479,24 @@ namespace CompanyManagementDataLayer
         {
             try
             {
-                List<TaskTechnology> taskTechnologyToBeDeleted = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TechnologyID == technology select TaskTechnology).ToList();
-                dc.TaskTechnologies.DeleteAllOnSubmit(taskTechnologyToBeDeleted);
-                dc.SubmitChanges();
+                if (validateTheInput.IfTechnologyExists(technology))
+                {
+                    List<TaskTechnology> taskTechnologyToBeDeleted = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TechnologyID == technology select TaskTechnology).ToList();
+                    dc.TaskTechnologies.DeleteAllOnSubmit(taskTechnologyToBeDeleted);
+                    dc.SubmitChanges();
 
-                List<ProjectTechnology> projectTechnologyToBeDeleted = (from ProjectTechnology in dc.ProjectTechnologies where ProjectTechnology.TechnologyID == technology select ProjectTechnology).ToList();
-                dc.ProjectTechnologies.DeleteAllOnSubmit(projectTechnologyToBeDeleted);
-                dc.SubmitChanges();
+                    List<ProjectTechnology> projectTechnologyToBeDeleted = (from ProjectTechnology in dc.ProjectTechnologies where ProjectTechnology.TechnologyID == technology select ProjectTechnology).ToList();
+                    dc.ProjectTechnologies.DeleteAllOnSubmit(projectTechnologyToBeDeleted);
+                    dc.SubmitChanges();
 
-                List<Technology> technologyToBeDeleted = (from Technology in dc.Technologies where Technology.TechnologyID == technology select Technology).ToList();
-                dc.Technologies.DeleteAllOnSubmit(technologyToBeDeleted);
-                dc.SubmitChanges();
+                    List<Technology> technologyToBeDeleted = (from Technology in dc.Technologies where Technology.TechnologyID == technology select Technology).ToList();
+                    dc.Technologies.DeleteAllOnSubmit(technologyToBeDeleted);
+                    dc.SubmitChanges();
+                }
+                else 
+                {
+                    Console.WriteLine(Resource1.TechnologyMissing);
+                }
             }
             catch (Exception e)
             {
@@ -446,21 +508,22 @@ namespace CompanyManagementDataLayer
         {
             try
             {
-                List<EmployeeTask> employeeTaskToBeDeleted = (from EmployeeTask in dc.EmployeeTasks where EmployeeTask.TaskID == taskID select EmployeeTask).ToList();
-                dc.EmployeeTasks.DeleteAllOnSubmit(employeeTaskToBeDeleted);
-                dc.SubmitChanges();
-
-                List<ProjectTask> projectTaskToBeDeleted = (from ProjectTask in dc.ProjectTasks where ProjectTask.TaskID == taskID select ProjectTask).ToList();
-                dc.ProjectTasks.DeleteAllOnSubmit(projectTaskToBeDeleted);
-                dc.SubmitChanges();
-
-                List<TaskTechnology> taskTechnologyToBeDeleted = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID select TaskTechnology).ToList();
-                dc.TaskTechnologies.DeleteAllOnSubmit(taskTechnologyToBeDeleted);
-                dc.SubmitChanges();
-
-                List<Task> taskToBeDeleted = (from Task in dc.Tasks where Task.TaskID == taskID select Task).ToList();
-                dc.Tasks.DeleteAllOnSubmit(taskToBeDeleted);
-                dc.SubmitChanges();
+                if (validateTheInput.IfTaskExists(taskID))
+                {
+                    List<EmployeeTask> employeeTaskToBeDeleted = (from EmployeeTask in dc.EmployeeTasks where EmployeeTask.TaskID == taskID select EmployeeTask).ToList();
+                    dc.EmployeeTasks.DeleteAllOnSubmit(employeeTaskToBeDeleted);
+                    List<ProjectTask> projectTaskToBeDeleted = (from ProjectTask in dc.ProjectTasks where ProjectTask.TaskID == taskID select ProjectTask).ToList();
+                    dc.ProjectTasks.DeleteAllOnSubmit(projectTaskToBeDeleted);
+                    List<TaskTechnology> taskTechnologyToBeDeleted = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID select TaskTechnology).ToList();
+                    dc.TaskTechnologies.DeleteAllOnSubmit(taskTechnologyToBeDeleted);
+                    List<Task> taskToBeDeleted = (from Task in dc.Tasks where Task.TaskID == taskID select Task).ToList();
+                    dc.Tasks.DeleteAllOnSubmit(taskToBeDeleted);
+                    dc.SubmitChanges();
+                }
+                else
+                {
+                    Console.WriteLine(Resource1.TaskMissing);
+                }
             }
             catch (Exception e)
             {
@@ -472,21 +535,22 @@ namespace CompanyManagementDataLayer
         {
             try
             {
-                List<EmployeeProject> employeeProjectToBeDeleted = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.ProjectID == projectID select EmployeeProject).ToList();
-                dc.EmployeeProjects.DeleteAllOnSubmit(employeeProjectToBeDeleted);
-                dc.SubmitChanges();
-
-                List<ProjectTask> projectTaskToBeDeleted = (from ProjectTask in dc.ProjectTasks where ProjectTask.ProjectID == projectID select ProjectTask).ToList();
-                dc.ProjectTasks.DeleteAllOnSubmit(projectTaskToBeDeleted);
-                dc.SubmitChanges();
-
-                List<ProjectTechnology> projectTechnologyToBeDeleted = (from ProjectTechnology in dc.ProjectTechnologies where ProjectTechnology.ProjectID == projectID select ProjectTechnology).ToList();
-                dc.ProjectTechnologies.DeleteAllOnSubmit(projectTechnologyToBeDeleted);
-                dc.SubmitChanges();
-
-                List<Project> projectToBeDeleted = (from Project in dc.Projects where Project.ProjectID == projectID select Project).ToList();
-                dc.Projects.DeleteAllOnSubmit(projectToBeDeleted);
-                dc.SubmitChanges();
+                if (validateTheInput.IfProjectExists(projectID))
+                {
+                    List<EmployeeProject> employeeProjectToBeDeleted = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.ProjectID == projectID select EmployeeProject).ToList();
+                    dc.EmployeeProjects.DeleteAllOnSubmit(employeeProjectToBeDeleted);
+                    List<ProjectTask> projectTaskToBeDeleted = (from ProjectTask in dc.ProjectTasks where ProjectTask.ProjectID == projectID select ProjectTask).ToList();
+                    dc.ProjectTasks.DeleteAllOnSubmit(projectTaskToBeDeleted);
+                    List<ProjectTechnology> projectTechnologyToBeDeleted = (from ProjectTechnology in dc.ProjectTechnologies where ProjectTechnology.ProjectID == projectID select ProjectTechnology).ToList();
+                    dc.ProjectTechnologies.DeleteAllOnSubmit(projectTechnologyToBeDeleted);
+                    List<Project> projectToBeDeleted = (from Project in dc.Projects where Project.ProjectID == projectID select Project).ToList();
+                    dc.Projects.DeleteAllOnSubmit(projectToBeDeleted);
+                    dc.SubmitChanges();
+                }
+                else
+                {
+                    Console.WriteLine(Resource1.ProjectMissing);
+                }
             }
             catch (Exception e)
             {

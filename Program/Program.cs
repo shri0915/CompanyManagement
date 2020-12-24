@@ -13,6 +13,7 @@ namespace Program
         static void Main(string[] args)
         {
             BusinessLayer businessLayer = new BusinessLayer();
+            DataLayer dataLayer = new DataLayer();
 
             //List all the Projects
             Console.WriteLine("Here are all the projects in the database");
@@ -64,9 +65,9 @@ namespace Program
             Console.WriteLine("Please enter the Department ID for the Project");
             project1.DepartmentID = Convert.ToInt32(Console.ReadLine());
             businessLayer.AddProject(project1);
-
+            */
             Console.WriteLine("Please enter the Employee ID to be deleted");
-            businessLayer.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));*/
+            dataLayer.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));
 
             Console.WriteLine("Press enter to close...");
             Console.ReadLine();

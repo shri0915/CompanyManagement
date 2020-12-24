@@ -21,7 +21,7 @@ namespace CompanyManagementBL
             {
 
                 List<BOProject> listOfBOProjects = new List<BOProject>();
-                listOfBOProjects =  ConvertDataLayerToBusinessLayer.ConvertProjectListToBOProjectList(dataLayer.GetAllProjects());
+                listOfBOProjects =  DataConverter.ConvertProjectListToBOProjectList(dataLayer.GetAllProjects());
                 return listOfBOProjects;
 
             }
@@ -39,7 +39,7 @@ namespace CompanyManagementBL
             try
             {
                 List<BOTechnology> listOfBOTechologies = new List<BOTechnology>();
-                listOfBOTechologies = ConvertDataLayerToBusinessLayer.ConvertTechnologyListToBOTechnologyList(dataLayer.GetAllTechnologies());
+                listOfBOTechologies = DataConverter.ConvertTechnologyListToBOTechnologyList(dataLayer.GetAllTechnologies());
                 return listOfBOTechologies;
 
 
@@ -80,7 +80,7 @@ namespace CompanyManagementBL
             {
 
                 List<BOEmployee> listOfBOEmployee = new List<BOEmployee>();
-                listOfBOEmployee = ConvertDataLayerToBusinessLayer.ConvertEmployeeListToBOEmployeeList(dataLayer.GetAllEmployeesForProject(projectID));
+                listOfBOEmployee = DataConverter.ConvertEmployeeListToBOEmployeeList(dataLayer.GetAllEmployeesForProject(projectID));
                 return listOfBOEmployee;
 
             }
@@ -99,7 +99,7 @@ namespace CompanyManagementBL
             {
 
                 List<BOProject> listOfDelayedProjects = new List<BOProject>();
-                listOfDelayedProjects = ConvertDataLayerToBusinessLayer.ConvertProjectListToBOProjectList(dataLayer.GetAllDelayedProjects());
+                listOfDelayedProjects = DataConverter.ConvertProjectListToBOProjectList(dataLayer.GetAllDelayedProjects());
                 return listOfDelayedProjects;
 
             }
@@ -154,7 +154,7 @@ namespace CompanyManagementBL
             {
 
                 List<BOTaskTechnology> listOfTechnologyTasksForEmployee = new List<BOTaskTechnology>();
-                listOfTechnologyTasksForEmployee = ConvertDataLayerToBusinessLayer.ConvertTaskTechnologyListToBOTaskTechnologyList(dataLayer.GetAllTechnologyTasksForEmployee(technologyID, employeeID));
+                listOfTechnologyTasksForEmployee = DataConverter.ConvertTaskTechnologyListToBOTaskTechnologyList(dataLayer.GetAllTechnologyTasksForEmployee(technologyID, employeeID));
                 return listOfTechnologyTasksForEmployee;
 
             }

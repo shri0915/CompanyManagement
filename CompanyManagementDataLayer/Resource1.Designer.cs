@@ -63,9 +63,9 @@ namespace CompanyManagementDataLayer {
         /// <summary>
         ///   Looks up a localized string similar to All columns have values.
         /// </summary>
-        internal static string AllCloumnsPresent {
+        internal static string AllColumnsPresent {
             get {
-                return ResourceManager.GetString("AllCloumnsPresent", resourceCulture);
+                return ResourceManager.GetString("AllColumnsPresent", resourceCulture);
             }
         }
         
@@ -151,6 +151,78 @@ namespace CompanyManagementDataLayer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Employee Address cannot be empty.
+        /// </summary>
+        internal static string EmployeeAddressMissing {
+            get {
+                return ResourceManager.GetString("EmployeeAddressMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee with this EmployeeID already exists in the system.
+        /// </summary>
+        internal static string EmployeeAlreadyExists {
+            get {
+                return ResourceManager.GetString("EmployeeAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee Designation cannot be empty.
+        /// </summary>
+        internal static string EmployeeDesignationMissing {
+            get {
+                return ResourceManager.GetString("EmployeeDesignationMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee ID cannot be null or 0 or -ve.
+        /// </summary>
+        internal static string EmployeeIDMissing {
+            get {
+                return ResourceManager.GetString("EmployeeIDMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee does not exist. Please input an existing exployee&apos;s Employee ID.
+        /// </summary>
+        internal static string EmployeeMissing {
+            get {
+                return ResourceManager.GetString("EmployeeMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee Name field is empty.
+        /// </summary>
+        internal static string EmployeeNameMissing {
+            get {
+                return ResourceManager.GetString("EmployeeNameMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee must have a role in the project.
+        /// </summary>
+        internal static string EmployeeRoleIDMIssing {
+            get {
+                return ResourceManager.GetString("EmployeeRoleIDMIssing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project with this ProjectID already exists in the system.
+        /// </summary>
+        internal static string ProjectAlreadyExists {
+            get {
+                return ResourceManager.GetString("ProjectAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Project ID is missing.
         /// </summary>
         internal static string ProjectIDMissing {
@@ -169,11 +241,101 @@ namespace CompanyManagementDataLayer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Project does not exist. Please input an existing project&apos;s Project ID.
+        /// </summary>
+        internal static string ProjectMissing {
+            get {
+                return ResourceManager.GetString("ProjectMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Project Name is missing.
         /// </summary>
         internal static string ProjectNameMissing {
             get {
                 return ResourceManager.GetString("ProjectNameMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status cannot be empty.
+        /// </summary>
+        internal static string StatusMissing {
+            get {
+                return ResourceManager.GetString("StatusMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task ID is missing.
+        /// </summary>
+        internal static string TaskIDMissing {
+            get {
+                return ResourceManager.GetString("TaskIDMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task does not exist. Please input an existing task&apos;s Task ID.
+        /// </summary>
+        internal static string TaskMissing {
+            get {
+                return ResourceManager.GetString("TaskMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task Name is missing.
+        /// </summary>
+        internal static string TaskNameMissing {
+            get {
+                return ResourceManager.GetString("TaskNameMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Technology with this TechnologyID already exists in the system.
+        /// </summary>
+        internal static string TechnologyAlreadyExists {
+            get {
+                return ResourceManager.GetString("TechnologyAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This specific Technology is already assigned to the specific Task.
+        /// </summary>
+        internal static string TechnologyAssignedToTask {
+            get {
+                return ResourceManager.GetString("TechnologyAssignedToTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Technology ID is missing.
+        /// </summary>
+        internal static string TechnologyIDMissing {
+            get {
+                return ResourceManager.GetString("TechnologyIDMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Technology does not exist. Please input an existing technology&apos;s Technology ID.
+        /// </summary>
+        internal static string TechnologyMissing {
+            get {
+                return ResourceManager.GetString("TechnologyMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Technology Name is missing.
+        /// </summary>
+        internal static string TechnologyNameMissing {
+            get {
+                return ResourceManager.GetString("TechnologyNameMissing", resourceCulture);
             }
         }
     }
