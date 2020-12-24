@@ -8,6 +8,7 @@ namespace CompanyManagementDataLayer
 {
     class DataValidationHelper
     {
+        DataClasses1DataContext dc = new DataClasses1DataContext();
         public String CheckCumpulsoryFieldsOfProject(Project project)
         {
 
@@ -159,6 +160,7 @@ namespace CompanyManagementDataLayer
         public  bool IfProjectExists(int projectID)
         {
             List<Project> listOfProjects = new List<Project>();
+            listOfProjects = (from Project in dc.Projects select Project).ToList();
             bool projectExists;
             projectExists = false;
             foreach (Project project in listOfProjects)
@@ -176,6 +178,7 @@ namespace CompanyManagementDataLayer
         public  bool IfEmployeeExists(int employeeID)
         {
             List<Employee> listOfEmployee = new List<Employee>();
+            listOfEmployee = (from Employee in dc.Employees select Employee).ToList();
             bool employeeExists;
             employeeExists = false;
             foreach (Employee employee in listOfEmployee)
@@ -193,6 +196,7 @@ namespace CompanyManagementDataLayer
         public bool IfTaskExists(int taskID)
         {
             List<Task> listOfTasks = new List<Task>();
+            listOfTasks = (from Task in dc.Tasks select Task).ToList();
             bool taskExists;
             taskExists = false;
             foreach (Task task in listOfTasks)
@@ -209,6 +213,7 @@ namespace CompanyManagementDataLayer
         public bool IfTechnologyExists(int technologyID)
         {
             List<Technology> listOfTechnologies = new List<Technology>();
+            listOfTechnologies = (from Technology in dc.Technologies select Technology).ToList();
             bool technologyExists;
             technologyExists = false;
 
@@ -226,6 +231,7 @@ namespace CompanyManagementDataLayer
         public bool IfTechnologyIsAssignedToTask(int technologyID, int taskID)
         {
             List<TaskTechnology> listOfTaskTechnology = new List<TaskTechnology>();
+            listOfTaskTechnology = (from TaskTechnology in dc.TaskTechnologies select TaskTechnology).ToList();
             bool technologyAssignedToTask;
             technologyAssignedToTask = false;
 

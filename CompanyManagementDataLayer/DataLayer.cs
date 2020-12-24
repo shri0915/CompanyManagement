@@ -455,13 +455,13 @@ namespace CompanyManagementDataLayer
 
 
                 if (validateTheInput.IfEmployeeExists(employeeID))
-                {
-                    List<Employee> employeeToBeRemoved = (from Employee in dc.Employees where Employee.EmployeeID == employeeID select Employee).ToList();
-                    dc.Employees.DeleteAllOnSubmit(employeeToBeRemoved);
+                {                    
                     List<EmployeeProject> employeeProjectToBeRemoved = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID select EmployeeProject).ToList();
                     dc.EmployeeProjects.DeleteAllOnSubmit(employeeProjectToBeRemoved);
                     List<EmployeeTask> employeeTaskToBeRemoved = (from EmployeeTask in dc.EmployeeTasks where EmployeeTask.EmployeeID == employeeID select EmployeeTask).ToList();
                     dc.EmployeeTasks.DeleteAllOnSubmit(employeeTaskToBeRemoved);
+                    List<Employee> employeeToBeRemoved = (from Employee in dc.Employees where Employee.EmployeeID == employeeID select Employee).ToList();
+                    dc.Employees.DeleteAllOnSubmit(employeeToBeRemoved);
                     dc.SubmitChanges();
                 }
                 else 
@@ -483,15 +483,11 @@ namespace CompanyManagementDataLayer
                 {
                     List<TaskTechnology> taskTechnologyToBeDeleted = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TechnologyID == technology select TaskTechnology).ToList();
                     dc.TaskTechnologies.DeleteAllOnSubmit(taskTechnologyToBeDeleted);
-                    dc.SubmitChanges();
-
                     List<ProjectTechnology> projectTechnologyToBeDeleted = (from ProjectTechnology in dc.ProjectTechnologies where ProjectTechnology.TechnologyID == technology select ProjectTechnology).ToList();
                     dc.ProjectTechnologies.DeleteAllOnSubmit(projectTechnologyToBeDeleted);
-                    dc.SubmitChanges();
-
                     List<Technology> technologyToBeDeleted = (from Technology in dc.Technologies where Technology.TechnologyID == technology select Technology).ToList();
                     dc.Technologies.DeleteAllOnSubmit(technologyToBeDeleted);
-                    dc.SubmitChanges();
+                    
                 }
                 else 
                 {
