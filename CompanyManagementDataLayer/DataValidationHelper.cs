@@ -159,7 +159,7 @@ namespace CompanyManagementDataLayer
 
         public  bool IfProjectExists(int projectID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             bool projectExists;
             projectExists = (from Project in dc.Projects where Project.ProjectID == projectID select Project).Any();
             return projectExists;
@@ -167,7 +167,7 @@ namespace CompanyManagementDataLayer
 
         public  bool IfEmployeeExists(int employeeID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             bool employeeExists;
             employeeExists = (from Employee in dc.Employees where Employee.EmployeeID == employeeID select Employee).Any();
             return employeeExists;
@@ -175,28 +175,28 @@ namespace CompanyManagementDataLayer
 
         public bool IfTaskExists(int taskID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             bool taskExists;
             taskExists = (from Task in dc.Tasks where Task.TaskID == taskID select Task).Any();
             return taskExists;
         }
         public bool IfTechnologyExists(int technologyID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             bool technologyExists = (from Technology in dc.Technologies where Technology.TechnologyID == technologyID select Technology).Any();
             return technologyExists;
         }
 
         public bool IfTechnologyIsAssignedToTask(int technologyID, int taskID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             bool technologyAssignedToTask = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TechnologyID == technologyID &&
                                              TaskTechnology.TaskID == taskID select TaskTechnology).Any();
             return technologyAssignedToTask;
         }
         public bool IfEmployeeIsAssignedToProject(int employeeID, int projectID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             bool employeeAssignedToProject = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID 
                                               && EmployeeProject.ProjectID == projectID select EmployeeProject).Any();
             return employeeAssignedToProject;

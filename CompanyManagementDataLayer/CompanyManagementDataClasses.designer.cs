@@ -23,7 +23,7 @@ namespace CompanyManagementDataLayer
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Company_2")]
-	public partial class DataClasses1DataContext : System.Data.Linq.DataContext
+	public partial class CompanyManagementDataClassesDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -71,31 +71,31 @@ namespace CompanyManagementDataLayer
     partial void DeleteTechnology(Technology instance);
     #endregion
 		
-		public DataClasses1DataContext() : 
+		public CompanyManagementDataClassesDataContext() : 
 				base(global::CompanyManagementDataLayer.Properties.Settings.Default.Company_2ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(string connection) : 
+		public CompanyManagementDataClassesDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(System.Data.IDbConnection connection) : 
+		public CompanyManagementDataClassesDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public CompanyManagementDataClassesDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public CompanyManagementDataClassesDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();

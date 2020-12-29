@@ -38,7 +38,7 @@ namespace CompanyManagementDataLayer
 
         public List<Project> GetAllProjects()
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
 
             try
             {
@@ -54,7 +54,7 @@ namespace CompanyManagementDataLayer
         }
         public List<Technology> GetAllTechnologies()
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             try
             {
                 List<Technology> listOfTechnologies = (from Technology in dc.Technologies select Technology).ToList();
@@ -69,7 +69,7 @@ namespace CompanyManagementDataLayer
 
         public int GetEmployeeCountForProject(int projectID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             if (dataValidationHelper.IfProjectExists(projectID))
                 {
@@ -94,7 +94,7 @@ namespace CompanyManagementDataLayer
 
         public List<Employee> GetAllEmployeesForProject(int projectID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             if (dataValidationHelper.IfProjectExists(projectID))
             {
@@ -119,7 +119,7 @@ namespace CompanyManagementDataLayer
 
         public List<Project> GetAllDelayedProjects()
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             try
             {
                 List<Project> listOfDelayedProjects = (from Project in dc.Projects where Project.ProjectStatus == (int)Status.Delayed select Project).ToList();
@@ -134,7 +134,7 @@ namespace CompanyManagementDataLayer
 
         public List<Project> GetAllProjectsForEmployee(int employeeID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             if (dataValidationHelper.IfEmployeeExists(employeeID))
             {
@@ -160,7 +160,7 @@ namespace CompanyManagementDataLayer
 
         public List<Task> GetAllTasksForEmployee(int employeeID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             if (dataValidationHelper.IfEmployeeExists(employeeID))
             {
@@ -185,7 +185,7 @@ namespace CompanyManagementDataLayer
 
         public List<TaskTechnology> GetAllTechnologyTasksForEmployee(int technologyID, int employeeID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             if (!dataValidationHelper.IfEmployeeExists(employeeID))
             {
@@ -218,7 +218,7 @@ namespace CompanyManagementDataLayer
 
         public List<ProjectTechnology> GetAllTechnologyProjects(int technologyID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             if (dataValidationHelper.IfTechnologyExists(technologyID))
             {
@@ -243,7 +243,7 @@ namespace CompanyManagementDataLayer
 
         public List<ProjectTask> GetAllActiveTasksForProject(int projectID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             if (dataValidationHelper.IfProjectExists(projectID))
             {
@@ -268,7 +268,7 @@ namespace CompanyManagementDataLayer
 
         public List<TaskTechnology> GetAllTechnologiesForEmployee(int employeeID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             if (dataValidationHelper.IfEmployeeExists(employeeID))
             {
@@ -294,14 +294,14 @@ namespace CompanyManagementDataLayer
 
         public int GetProjectCountForEmployee(int employeeID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             if (dataValidationHelper.IfEmployeeExists(employeeID))
             {
 
                 try
                 {
-                    int projectCountForEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID select EmployeeProject.ProjectID).Count();
+                    int projectCountForEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID && EmployeeProject.Project.ProjectStatus == (int)Status.Active select EmployeeProject.ProjectID).Count();
                     return projectCountForEmployee;
                 }
                 catch (Exception e)
@@ -313,14 +313,14 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                int projectCountForEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID select EmployeeProject.ProjectID).Count();
+                int projectCountForEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID && EmployeeProject.Project.ProjectStatus == (int)Status.Active select EmployeeProject.ProjectID).Count();
                 return projectCountForEmployee;
             }
         }
 
         public List<EmployeeProject> GetAllActiveProjectsManagedByEmployee(int employeeID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             if (dataValidationHelper.IfEmployeeExists(employeeID))
             {
@@ -345,7 +345,7 @@ namespace CompanyManagementDataLayer
 
         public List<EmployeeTask> GetAllDelayedTasksForEmployee(int employeeID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             if (dataValidationHelper.IfEmployeeExists(employeeID))
             {
@@ -370,7 +370,7 @@ namespace CompanyManagementDataLayer
 
         public void AddProject(Project project)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
 
             try
@@ -410,7 +410,7 @@ namespace CompanyManagementDataLayer
 
         public void AddTechnology(Technology technology)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
@@ -440,7 +440,7 @@ namespace CompanyManagementDataLayer
 
         public void AddEmployee(Employee employee)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
@@ -471,7 +471,7 @@ namespace CompanyManagementDataLayer
 
         public void AssignEmployeeToProject(int employeeID, int projectID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
@@ -508,7 +508,7 @@ namespace CompanyManagementDataLayer
         }
         public void CreateTaskInProject(Task task, int projectID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
@@ -543,7 +543,7 @@ namespace CompanyManagementDataLayer
         }
         public void AssignTechnologyToTask(int technologyID, int taskID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
 
             if (!dataValidationHelper.IfTaskExists(taskID))
@@ -580,7 +580,7 @@ namespace CompanyManagementDataLayer
         }
         public void UpdateTechnologiesForTask(List<int> technologyIDs, int taskID) 
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
@@ -618,7 +618,7 @@ namespace CompanyManagementDataLayer
         }
         public void DeleteEmployeeFromSystem(int employeeID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
@@ -647,7 +647,7 @@ namespace CompanyManagementDataLayer
         }
         public void DeleteTechnology(int technology)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
@@ -674,7 +674,7 @@ namespace CompanyManagementDataLayer
         }
         public void DeleteTask(int taskID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
@@ -703,7 +703,7 @@ namespace CompanyManagementDataLayer
         }
         public void DeleteProject(int projectID)
         {
-            DataClasses1DataContext dc = new DataClasses1DataContext();
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {

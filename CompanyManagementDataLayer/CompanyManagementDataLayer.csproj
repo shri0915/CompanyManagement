@@ -43,10 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLayer.cs" />
-    <Compile Include="DataClasses1.designer.cs">
+    <Compile Include="CompanyManagementDataClasses.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataClasses1.dbml</DependentUpon>
+      <DependentUpon>CompanyManagementDataClasses.dbml</DependentUpon>
     </Compile>
     <Compile Include="DataValidationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,9 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="DataClasses1.dbml">
+    <None Include="CompanyManagementDataClasses.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
+      <LastGenOutput>CompanyManagementDataClasses.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">
@@ -77,8 +77,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DataClasses1.dbml.layout">
-      <DependentUpon>DataClasses1.dbml</DependentUpon>
+    <None Include="CompanyManagementDataClasses.dbml.layout">
+      <DependentUpon>CompanyManagementDataClasses.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
