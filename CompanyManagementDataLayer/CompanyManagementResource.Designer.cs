@@ -88,6 +88,15 @@ namespace CompanyManagementDataLayer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Client does not exist in the system.
+        /// </summary>
+        internal static string ClientMissing {
+            get {
+                return ResourceManager.GetString("ClientMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Client Name is missing.
         /// </summary>
         internal static string ClientNameMissing {
@@ -138,6 +147,15 @@ namespace CompanyManagementDataLayer {
         internal static string DepartmentLocationMissing {
             get {
                 return ResourceManager.GetString("DepartmentLocationMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Department does not exist in the system.
+        /// </summary>
+        internal static string DepartmentMissing {
+            get {
+                return ResourceManager.GetString("DepartmentMissing", resourceCulture);
             }
         }
         
@@ -273,6 +291,15 @@ namespace CompanyManagementDataLayer {
         internal static string StatusMissing {
             get {
                 return ResourceManager.GetString("StatusMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task with this TaskID already exists.
+        /// </summary>
+        internal static string TaskAlreadyExists {
+            get {
+                return ResourceManager.GetString("TaskAlreadyExists", resourceCulture);
             }
         }
         

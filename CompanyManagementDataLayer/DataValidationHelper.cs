@@ -201,5 +201,18 @@ namespace CompanyManagementDataLayer
                                               && EmployeeProject.ProjectID == projectID select EmployeeProject).Any();
             return employeeAssignedToProject;
         }
+
+        public bool IfClientExists(int clientID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            bool clientExist = (from Client in dc.Clients where Client.ClientID == clientID select Client).Any();
+            return clientExist;
+        }
+        public bool IfDepartmentExists(int departmentID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            bool departmentExist = (from Department in dc.Departments where Department.DepartmentID == departmentID select Department).Any();
+            return departmentExist;
+        }
     }
 }

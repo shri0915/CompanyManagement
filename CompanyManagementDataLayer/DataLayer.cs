@@ -380,20 +380,36 @@ namespace CompanyManagementDataLayer
                 // Insert the values to the database
                 if (!dataValidationHelper.IfProjectExists(project.ProjectID))
                 {
-                    String checkProjectCumpulsoryFieldsValidation = dataValidationHelper.CheckCumpulsoryFieldsOfProject(project);
-                    if (checkProjectCumpulsoryFieldsValidation != CompanyManagementResource.AllColumnsPresent)
+
+                    if (dataValidationHelper.IfClientExists(project.ClientID))
                     {
-                        throw new Exception(checkProjectCumpulsoryFieldsValidation);
+                        if (dataValidationHelper.IfDepartmentExists(project.DepartmentID))
+                        {
+                            String compulsoryFieldsValidationResult = dataValidationHelper.CheckCumpulsoryFieldsOfProject(project);
+                            if (compulsoryFieldsValidationResult != CompanyManagementResource.AllColumnsPresent)
+                            {
+                                throw new Exception(compulsoryFieldsValidationResult);
+                            }
+                            else
+                            {
+                                dc.Projects.InsertOnSubmit(project);
+                                dc.SubmitChanges();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine(CompanyManagementResource.ProjectAlreadyExists);
+                        }
                     }
                     else
                     {
-                        dc.Projects.InsertOnSubmit(project);
-                        dc.SubmitChanges();
+                        Console.WriteLine(CompanyManagementResource.DepartmentMissing);
                     }
                 }
+
                 else
                 {
-                    Console.WriteLine(CompanyManagementResource.ProjectAlreadyExists);
+                    Console.WriteLine(CompanyManagementResource.ClientMissing);
                 }
             }
 
@@ -416,10 +432,10 @@ namespace CompanyManagementDataLayer
             {
                 if (!dataValidationHelper.IfTechnologyExists(technology.TechnologyID))
                 {
-                    string checkCumpolsoryFieldsForTechnology = dataValidationHelper.CheckCompulsoryFieldsOfTechnology(technology);
-                    if (checkCumpolsoryFieldsForTechnology != CompanyManagementResource.AllColumnsPresent)
+                    string compulsoryFieldsValidationResult = dataValidationHelper.CheckCompulsoryFieldsOfTechnology(technology);
+                    if (compulsoryFieldsValidationResult != CompanyManagementResource.AllColumnsPresent)
                     {
-                        Console.WriteLine(checkCumpolsoryFieldsForTechnology);
+                        Console.WriteLine(compulsoryFieldsValidationResult);
                     }
                     else {
                         dc.Technologies.InsertOnSubmit(technology);
@@ -446,20 +462,27 @@ namespace CompanyManagementDataLayer
             {
                 if (!dataValidationHelper.IfEmployeeExists(employee.EmployeeID))
                 {
-                    string checkCumpolsoryFieldsForEmployee = dataValidationHelper.CheckCompulsoryFieldsOfEmployee(employee);
-                    if (checkCumpolsoryFieldsForEmployee != CompanyManagementResource.AllColumnsPresent)
+                    if (dataValidationHelper.IfDepartmentExists(employee.DepartmentID))
                     {
-                        Console.WriteLine(checkCumpolsoryFieldsForEmployee);
+                        string compulsoryFieldsValidationResult = dataValidationHelper.CheckCompulsoryFieldsOfEmployee(employee);
+                        if (compulsoryFieldsValidationResult != CompanyManagementResource.AllColumnsPresent)
+                        {
+                            Console.WriteLine(compulsoryFieldsValidationResult);
+                        }
+                        else
+                        {
+                            dc.Employees.InsertOnSubmit(employee);
+                            dc.SubmitChanges();
+                        }
                     }
                     else
                     {
-                        dc.Employees.InsertOnSubmit(employee);
-                        dc.SubmitChanges();
+                        Console.WriteLine(CompanyManagementResource.EmployeeAlreadyExists);
                     }
                 }
                 else
                 {
-                    Console.WriteLine(CompanyManagementResource.EmployeeAlreadyExists);
+                    Console.WriteLine(CompanyManagementResource.DepartmentMissing);
                 }
             }
             catch (Exception e)
@@ -519,19 +542,26 @@ namespace CompanyManagementDataLayer
                 
                 else
                 {
-                    string checkCompulsoryFieldsOfTask = dataValidationHelper.CheckCompulsoryFieldsOfTask(task);
-                    if (checkCompulsoryFieldsOfTask != CompanyManagementResource.AllColumnsPresent)
+                    string compulsoryFieldsValidationResult = dataValidationHelper.CheckCompulsoryFieldsOfTask(task);
+                    if (compulsoryFieldsValidationResult != CompanyManagementResource.AllColumnsPresent)
                     {
-                        Console.WriteLine(checkCompulsoryFieldsOfTask);
+                        Console.WriteLine(compulsoryFieldsValidationResult);
                     }
                     else
                     {
-                        dc.Tasks.InsertOnSubmit(task);
-                        ProjectTask objProjectTask = new ProjectTask();
-                        objProjectTask.ProjectID = projectID;
-                        objProjectTask.TaskID = task.TaskID;
-                        dc.ProjectTasks.InsertOnSubmit(objProjectTask);
-                        dc.SubmitChanges();
+                        if (!dataValidationHelper.IfTaskExists(task.TaskID))
+                        {
+                            dc.Tasks.InsertOnSubmit(task);
+                            ProjectTask objProjectTask = new ProjectTask();
+                            objProjectTask.ProjectID = projectID;
+                            objProjectTask.TaskID = task.TaskID;
+                            dc.ProjectTasks.InsertOnSubmit(objProjectTask);
+                            dc.SubmitChanges();
+                        }
+                        else
+                        {
+                            Console.WriteLine(CompanyManagementResource.TaskAlreadyExists);
+                        }
                     }
                 }
             }

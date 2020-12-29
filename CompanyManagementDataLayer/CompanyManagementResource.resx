@@ -126,6 +126,9 @@
   <data name="ClientIDMissing" xml:space="preserve">
     <value>Client ID is missing</value>
   </data>
+  <data name="ClientMissing" xml:space="preserve">
+    <value>Client does not exist in the system</value>
+  </data>
   <data name="ClientNameMissing" xml:space="preserve">
     <value>Client Name is missing</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="DepartmentLocationMissing" xml:space="preserve">
     <value>Department Location is missing</value>
+  </data>
+  <data name="DepartmentMissing" xml:space="preserve">
+    <value>Department does not exist in the system</value>
   </data>
   <data name="DepartmentNameMissing" xml:space="preserve">
     <value>Department Name is missing</value>
@@ -188,6 +194,9 @@
   </data>
   <data name="StatusMissing" xml:space="preserve">
     <value>Status cannot be empty</value>
+  </data>
+  <data name="TaskAlreadyExists" xml:space="preserve">
+    <value>Task with this TaskID already exists</value>
   </data>
   <data name="TaskIDMissing" xml:space="preserve">
     <value>Task ID is missing</value>
