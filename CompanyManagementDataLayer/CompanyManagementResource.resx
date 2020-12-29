@@ -153,6 +153,9 @@
   <data name="EmployeeAlreadyExists" xml:space="preserve">
     <value>Employee with this EmployeeID already exists in the system</value>
   </data>
+  <data name="EmployeeAssignedToProject" xml:space="preserve">
+    <value>This specific employee is already assigned this specific project</value>
+  </data>
   <data name="EmployeeDesignationMissing" xml:space="preserve">
     <value>Employee Designation cannot be empty</value>
   </data>

@@ -172,6 +172,7 @@ namespace CompanyManagementBL
             try
             {
                 List<BOProjectTechnology> listOfTechnologiesForProjects = new List<BOProjectTechnology>();
+                
                 return listOfTechnologiesForProjects;
 
 

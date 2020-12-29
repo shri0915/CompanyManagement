@@ -245,7 +245,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientID", DbType="Int NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ClientID
 		{
 			get

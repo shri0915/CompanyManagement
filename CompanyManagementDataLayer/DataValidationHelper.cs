@@ -8,33 +8,33 @@ namespace CompanyManagementDataLayer
 {
     class DataValidationHelper
     {
-        DataClasses1DataContext dc = new DataClasses1DataContext();
+        
         public String CheckCumpulsoryFieldsOfProject(Project project)
         {
 
             if (project.ProjectID.Equals(null))
             {
-                return Resource1.ProjectIDMissing;
+                return CompanyManagementResource.ProjectIDMissing;
             }
             else if (project.ProjectID <= 0)
             {
-                return Resource1.ProjectIDNegativeOrZero;
+                return CompanyManagementResource.ProjectIDNegativeOrZero;
             }
             else if (string.IsNullOrEmpty(project.ProjectName))
             {
-                return Resource1.ProjectNameMissing;
+                return CompanyManagementResource.ProjectNameMissing;
             }
             else if (project.ClientID.Equals(null))
             {
-                return Resource1.ClientIDForProjectMissing;
+                return CompanyManagementResource.ClientIDForProjectMissing;
             }
             else if (project.DepartmentID.Equals(null))
             {
-                return Resource1.DepartmentIDForProjectMissing;
+                return CompanyManagementResource.DepartmentIDForProjectMissing;
             }
             else
             {
-                return Resource1.AllColumnsPresent;
+                return CompanyManagementResource.AllColumnsPresent;
             }
         }
 
@@ -42,15 +42,15 @@ namespace CompanyManagementDataLayer
         {
             if (task.TaskID == 0)
             {
-                return Resource1.TaskIDMissing;
+                return CompanyManagementResource.TaskIDMissing;
             }
             else if (string.IsNullOrEmpty(task.TaskName))
             {
-                return Resource1.TaskNameMissing;
+                return CompanyManagementResource.TaskNameMissing;
             }
             else
             {
-                return Resource1.AllColumnsPresent;
+                return CompanyManagementResource.AllColumnsPresent;
             }
 
         }
@@ -59,17 +59,17 @@ namespace CompanyManagementDataLayer
         {
             if (technology.TechnologyID.Equals(null) || technology.TechnologyID <= 0)
             {
-                return Resource1.TechnologyIDMissing;
+                return CompanyManagementResource.TechnologyIDMissing;
             
             }
 
             else if (string.IsNullOrEmpty(technology.TechnologyName))
             {
-                return Resource1.TechnologyNameMissing;
+                return CompanyManagementResource.TechnologyNameMissing;
             }
             else
             {
-                return Resource1.AllColumnsPresent;
+                return CompanyManagementResource.AllColumnsPresent;
             }
 
         }
@@ -78,27 +78,27 @@ namespace CompanyManagementDataLayer
         {
             if (employee.DepartmentID.Equals(null) || employee.DepartmentID <= 0)
             {
-                return Resource1.DepartmentIDMissing;
+                return CompanyManagementResource.DepartmentIDMissing;
             }
             else if (employee.EmployeeID.Equals(null) || employee.EmployeeID <= 0)
             {
-                return Resource1.EmployeeIDMissing;
+                return CompanyManagementResource.EmployeeIDMissing;
             }
             else if (string.IsNullOrEmpty(employee.EmployeeName))
             {
-                return Resource1.EmployeeNameMissing;
+                return CompanyManagementResource.EmployeeNameMissing;
             }
             else if (string.IsNullOrEmpty(employee.EmployeeDesignation))
             {
-                return Resource1.EmployeeDesignationMissing;
+                return CompanyManagementResource.EmployeeDesignationMissing;
             }
             else if (string.IsNullOrEmpty(employee.EmployeeAddress))
             {
-                return Resource1.EmployeeAddressMissing;
+                return CompanyManagementResource.EmployeeAddressMissing;
             }
             else
             {
-                return Resource1.AllColumnsPresent;
+                return CompanyManagementResource.AllColumnsPresent;
             }
         }
 
@@ -106,15 +106,15 @@ namespace CompanyManagementDataLayer
         {
             if (projectTask.ProjectTaskStatus.Equals(null) || projectTask.ProjectTaskStatus <= 0)
             {
-                return Resource1.StatusMissing;
+                return CompanyManagementResource.StatusMissing;
             }
             else if (projectTask.TaskID.Equals(null) || projectTask.TaskID <= 0)
             {
-                return Resource1.TaskIDMissing;
+                return CompanyManagementResource.TaskIDMissing;
             }
             else
             {
-                return Resource1.AllColumnsPresent;
+                return CompanyManagementResource.AllColumnsPresent;
             }
 
         }
@@ -124,19 +124,19 @@ namespace CompanyManagementDataLayer
 
             if (employeeProject.EmployeeID.Equals(null) || employeeProject.EmployeeID <= 0)
             {
-                return Resource1.EmployeeIDMissing;
+                return CompanyManagementResource.EmployeeIDMissing;
             }
             else if (employeeProject.ProjectID.Equals(null) || employeeProject.ProjectID <= 0)
             {
-                return Resource1.ProjectIDMissing;
+                return CompanyManagementResource.ProjectIDMissing;
             }
             else if (employeeProject.EmployeeRoleID.Equals(null) || employeeProject.EmployeeRoleID <= 0)
             {
-                return Resource1.EmployeeRoleIDMIssing;
+                return CompanyManagementResource.EmployeeRoleIDMIssing;
             }
             else
             {
-                return Resource1.AllColumnsPresent;
+                return CompanyManagementResource.AllColumnsPresent;
             }
         }
 
@@ -145,106 +145,61 @@ namespace CompanyManagementDataLayer
 
             if (taskTechnology.TaskID <= 0 || taskTechnology.TaskID.Equals(null))
             {
-                return Resource1.TaskIDMissing;
+                return CompanyManagementResource.TaskIDMissing;
             }
             else if (taskTechnology.TechnologyID <= 0 || taskTechnology.TechnologyID.Equals(null))
             {
-                return Resource1.TaskIDMissing;
+                return CompanyManagementResource.TaskIDMissing;
             }
             else
             {
-                return Resource1.AllColumnsPresent;
+                return CompanyManagementResource.AllColumnsPresent;
             }
         }
 
         public  bool IfProjectExists(int projectID)
         {
-            List<Project> listOfProjects = new List<Project>();
-            listOfProjects = (from Project in dc.Projects select Project).ToList();
+            DataClasses1DataContext dc = new DataClasses1DataContext();
             bool projectExists;
-            projectExists = false;
-            foreach (Project project in listOfProjects)
-            {
-                if(project.ProjectID == projectID)
-                {
-                    projectExists = true;
-                    break;
-                }
-            }
-
+            projectExists = (from Project in dc.Projects where Project.ProjectID == projectID select Project).Any();
             return projectExists;
         }
 
         public  bool IfEmployeeExists(int employeeID)
         {
-            List<Employee> listOfEmployee = new List<Employee>();
-            listOfEmployee = (from Employee in dc.Employees select Employee).ToList();
+            DataClasses1DataContext dc = new DataClasses1DataContext();
             bool employeeExists;
-            employeeExists = false;
-            foreach (Employee employee in listOfEmployee)
-            {
-                if (employee.EmployeeID == employeeID)
-                {
-                    employeeExists = true;
-                    break;
-                }
-            }
-
+            employeeExists = (from Employee in dc.Employees where Employee.EmployeeID == employeeID select Employee).Any();
             return employeeExists;
         }
 
         public bool IfTaskExists(int taskID)
         {
-            List<Task> listOfTasks = new List<Task>();
-            listOfTasks = (from Task in dc.Tasks select Task).ToList();
+            DataClasses1DataContext dc = new DataClasses1DataContext();
             bool taskExists;
-            taskExists = false;
-            foreach (Task task in listOfTasks)
-            {
-                if (task.TaskID == taskID)
-                {
-                    taskExists = true;
-                    break;
-                }
-            }
-
+            taskExists = (from Task in dc.Tasks where Task.TaskID == taskID select Task).Any();
             return taskExists;
         }
         public bool IfTechnologyExists(int technologyID)
         {
-            List<Technology> listOfTechnologies = new List<Technology>();
-            listOfTechnologies = (from Technology in dc.Technologies select Technology).ToList();
-            bool technologyExists;
-            technologyExists = false;
-
-            foreach(Technology technology in listOfTechnologies)
-            {
-                if (technology.TechnologyID == technologyID)
-                {
-                    technologyExists = true;
-                    break;
-                }
-            }
+            DataClasses1DataContext dc = new DataClasses1DataContext();
+            bool technologyExists = (from Technology in dc.Technologies where Technology.TechnologyID == technologyID select Technology).Any();
             return technologyExists;
         }
 
         public bool IfTechnologyIsAssignedToTask(int technologyID, int taskID)
         {
-            List<TaskTechnology> listOfTaskTechnology = new List<TaskTechnology>();
-            listOfTaskTechnology = (from TaskTechnology in dc.TaskTechnologies select TaskTechnology).ToList();
-            bool technologyAssignedToTask;
-            technologyAssignedToTask = false;
-
-            foreach(TaskTechnology taskTechnology in listOfTaskTechnology)
-            {
-                if(taskTechnology.TaskID == taskID && taskTechnology.TechnologyID == technologyID)
-                {
-                    technologyAssignedToTask = true;
-                    break;
-                }
-            }
-
+            DataClasses1DataContext dc = new DataClasses1DataContext();
+            bool technologyAssignedToTask = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TechnologyID == technologyID &&
+                                             TaskTechnology.TaskID == taskID select TaskTechnology).Any();
             return technologyAssignedToTask;
+        }
+        public bool IfEmployeeIsAssignedToProject(int employeeID, int projectID)
+        {
+            DataClasses1DataContext dc = new DataClasses1DataContext();
+            bool employeeAssignedToProject = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID 
+                                              && EmployeeProject.ProjectID == projectID select EmployeeProject).Any();
+            return employeeAssignedToProject;
         }
     }
 }
