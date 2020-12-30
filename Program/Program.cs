@@ -125,7 +125,7 @@ namespace Program
             
 
             //List the number of projects an employee is working on
-            Console.WriteLine("Please input the employee ID for whom you want to list the projects");
+            Console.WriteLine("Please input the employee ID for whom you want to list the number of projects");
             employeeID = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine(dataLayer.GetProjectCountForEmployee(employeeID));
 
@@ -172,7 +172,7 @@ namespace Program
             //Add new Employee
             Employee employee1 = new Employee();
             Console.WriteLine("Please enter the Employee ID");
-            Convert.ToInt32(Console.ReadLine());
+            employee1.EmployeeID = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Please enter the Employee Name");
             employee1.EmployeeName = Console.ReadLine();
             Console.WriteLine("Please enter the Employee Address");
@@ -183,6 +183,7 @@ namespace Program
             employee1.EmployeeContact = Console.ReadLine();
             Console.WriteLine("Please enter the Department ID to which the employee belongs");
             employee1.DepartmentID = Convert.ToInt32(Console.ReadLine());
+            dataLayer.AddEmployee(employee1);
 
             //Assign Employee to Project
             Console.WriteLine("Please enter the Employee ID whom you want to assign to the project");

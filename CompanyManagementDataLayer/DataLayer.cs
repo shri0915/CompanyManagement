@@ -398,18 +398,18 @@ namespace CompanyManagementDataLayer
                         }
                         else
                         {
-                            Console.WriteLine(CompanyManagementResource.ProjectAlreadyExists);
+                            Console.WriteLine(CompanyManagementResource.DepartmentMissing);
                         }
                     }
                     else
                     {
-                        Console.WriteLine(CompanyManagementResource.DepartmentMissing);
+                        Console.WriteLine(CompanyManagementResource.ClientMissing);
                     }
                 }
 
                 else
                 {
-                    Console.WriteLine(CompanyManagementResource.ClientMissing);
+                    Console.WriteLine(CompanyManagementResource.ProjectAlreadyExists);
                 }
             }
 
