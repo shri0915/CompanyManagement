@@ -18,7 +18,7 @@ namespace Program
             int technologyID = 0;
             int projectID = 0;
             int taskID = 0;
-
+            
             //List all the Projects
             Console.WriteLine("Here are all the projects in the database");
             foreach (Project returnedProject in dataLayer.GetAllProjects())
@@ -151,8 +151,6 @@ namespace Program
 
            //Adding new Project
            Project project = new Project();
-           Console.WriteLine("Please enter the Project ID");
-           project.ProjectID = Convert.ToInt32(Console.ReadLine());
            Console.WriteLine("Please enter the Project Name");
            project.ProjectName = Console.ReadLine();
            project.ProjectStatus = 1;
@@ -164,8 +162,6 @@ namespace Program
 
             //Add new Technology
             Technology technology = new Technology();
-            Console.WriteLine("Please enter the Technology ID");
-            technology.TechnologyID = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Please input the Technology Name");
             technology.TechnologyName = Console.ReadLine();
             dataLayer.AddTechnology(technology);
@@ -173,8 +169,6 @@ namespace Program
 
             //Add new Employee
             Employee employee = new Employee();
-            Console.WriteLine("Please enter the Employee ID");
-            employee.EmployeeID = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Please enter the Employee Name");
             employee.EmployeeName = Console.ReadLine();
             Console.WriteLine("Please enter the Employee Address");
@@ -194,22 +188,6 @@ namespace Program
             projectID = Convert.ToInt32(Console.ReadLine());
             dataLayer.AssignEmployeeToProject(employeeID, projectID);
 
-            //Delete Technology
-            Console.WriteLine("Please enter the Technology ID you want to delete");
-            dataLayer.DeleteTechnology(Convert.ToInt32(Console.ReadLine()));
-
-            //Delete Task
-            Console.WriteLine("Please enter the Task ID you want to delete");
-            dataLayer.DeleteTask(Convert.ToInt32(Console.ReadLine()));
-
-            //Delete Project
-            Console.WriteLine("Please enter the Project ID you want to delete");
-            dataLayer.DeleteProject(Convert.ToInt32(Console.ReadLine()));
-
-            //Delete Employee from system
-            Console.WriteLine("Please enter the Employee ID to be deleted");
-            dataLayer.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));
-
             //Assign Technology To Task
             Console.WriteLine("Please enter the Technology ID you want to assign to the task");
             technologyID = Convert.ToInt32(Console.ReadLine());
@@ -220,8 +198,6 @@ namespace Program
             //Create Task In Project
             Console.WriteLine("Creating a new task");
             CompanyManagementDataLayer.Task task = new CompanyManagementDataLayer.Task();
-            Console.WriteLine("Please enter the Task ID");
-            task.TaskID = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Please enter the Task Name");
             task.TaskName = Console.ReadLine();
             Console.WriteLine("Please enter the Task Description");
@@ -244,6 +220,21 @@ namespace Program
             taskID = Convert.ToInt32(Console.ReadLine());
             dataLayer.UpdateTechnologiesForTask(technologIDs, taskID);
 
+            //Delete Technology
+            Console.WriteLine("Please enter the Technology ID you want to delete");
+            dataLayer.DeleteTechnology(Convert.ToInt32(Console.ReadLine()));
+
+            //Delete Task
+            Console.WriteLine("Please enter the Task ID you want to delete");
+            dataLayer.DeleteTask(Convert.ToInt32(Console.ReadLine()));
+
+            //Delete Project
+            Console.WriteLine("Please enter the Project ID you want to delete");
+            dataLayer.DeleteProject(Convert.ToInt32(Console.ReadLine()));
+
+            //Delete Employee from system
+            Console.WriteLine("Please enter the Employee ID to be deleted");
+            dataLayer.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));
 
             Console.WriteLine("Press enter to close...");
             Console.ReadLine();

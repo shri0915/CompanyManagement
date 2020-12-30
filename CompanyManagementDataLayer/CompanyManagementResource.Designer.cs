@@ -295,6 +295,15 @@ namespace CompanyManagementDataLayer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This Task is already assigned to this Project.
+        /// </summary>
+        internal static string TaskAlreadyAssignedToProject {
+            get {
+                return ResourceManager.GetString("TaskAlreadyAssignedToProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task with this TaskID already exists.
         /// </summary>
         internal static string TaskAlreadyExists {

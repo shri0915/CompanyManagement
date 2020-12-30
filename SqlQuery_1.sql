@@ -1,4 +1,4 @@
-﻿use Company_2;
+﻿use Company;
 select * from TaskTechnology;
 select * from EmployeeTask;
 select * from StatusMaster;

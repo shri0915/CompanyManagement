@@ -195,6 +195,9 @@
   <data name="StatusMissing" xml:space="preserve">
     <value>Status cannot be empty</value>
   </data>
+  <data name="TaskAlreadyAssignedToProject" xml:space="preserve">
+    <value>This Task is already assigned to this Project</value>
+  </data>
   <data name="TaskAlreadyExists" xml:space="preserve">
     <value>Task with this TaskID already exists</value>
   </data>

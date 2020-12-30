@@ -9,18 +9,10 @@ namespace CompanyManagementDataLayer
     class DataValidationHelper
     {
         
-        public String CheckCumpulsoryFieldsOfProject(Project project)
+        public String CheckCompulsoryFieldsOfProject(Project project)
         {
 
-            if (project.ProjectID.Equals(null))
-            {
-                return CompanyManagementResource.ProjectIDMissing;
-            }
-            else if (project.ProjectID <= 0)
-            {
-                return CompanyManagementResource.ProjectIDNegativeOrZero;
-            }
-            else if (string.IsNullOrEmpty(project.ProjectName))
+            if (string.IsNullOrEmpty(project.ProjectName))
             {
                 return CompanyManagementResource.ProjectNameMissing;
             }
@@ -40,11 +32,7 @@ namespace CompanyManagementDataLayer
 
         public  string CheckCompulsoryFieldsOfTask(Task task)
         {
-            if (task.TaskID == 0)
-            {
-                return CompanyManagementResource.TaskIDMissing;
-            }
-            else if (string.IsNullOrEmpty(task.TaskName))
+            if (string.IsNullOrEmpty(task.TaskName))
             {
                 return CompanyManagementResource.TaskNameMissing;
             }
@@ -57,13 +45,7 @@ namespace CompanyManagementDataLayer
 
         public  string CheckCompulsoryFieldsOfTechnology(Technology technology)
         {
-            if (technology.TechnologyID.Equals(null) || technology.TechnologyID <= 0)
-            {
-                return CompanyManagementResource.TechnologyIDMissing;
-            
-            }
-
-            else if (string.IsNullOrEmpty(technology.TechnologyName))
+            if (string.IsNullOrEmpty(technology.TechnologyName))
             {
                 return CompanyManagementResource.TechnologyNameMissing;
             }
@@ -79,10 +61,6 @@ namespace CompanyManagementDataLayer
             if (employee.DepartmentID.Equals(null) || employee.DepartmentID <= 0)
             {
                 return CompanyManagementResource.DepartmentIDMissing;
-            }
-            else if (employee.EmployeeID.Equals(null) || employee.EmployeeID <= 0)
-            {
-                return CompanyManagementResource.EmployeeIDMissing;
             }
             else if (string.IsNullOrEmpty(employee.EmployeeName))
             {
@@ -104,13 +82,13 @@ namespace CompanyManagementDataLayer
 
         public  string CheckCompulsoryFieldsOfProjectTask(ProjectTask projectTask)
         {
-            if (projectTask.ProjectTaskStatus.Equals(null) || projectTask.ProjectTaskStatus <= 0)
-            {
-                return CompanyManagementResource.StatusMissing;
-            }
-            else if (projectTask.TaskID.Equals(null) || projectTask.TaskID <= 0)
+            if (projectTask.TaskID.Equals(null) || projectTask.TaskID <= 0)
             {
                 return CompanyManagementResource.TaskIDMissing;
+            }
+            else if(projectTask.ProjectID.Equals(null) || projectTask.ProjectID <=0)
+            {
+                return CompanyManagementResource.ProjectIDMissing;
             }
             else
             {
@@ -130,7 +108,7 @@ namespace CompanyManagementDataLayer
             {
                 return CompanyManagementResource.ProjectIDMissing;
             }
-            else if (employeeProject.EmployeeRoleID.Equals(null) || employeeProject.EmployeeRoleID <= 0)
+            else if (employeeProject.EmployeeRoleInProject.Equals(null) || employeeProject.EmployeeRoleInProject <= 0)
             {
                 return CompanyManagementResource.EmployeeRoleIDMIssing;
             }
@@ -206,7 +184,6 @@ namespace CompanyManagementDataLayer
         {
             CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             bool clientExist = (from Client in dc.Clients where Client.ClientID == clientID select Client).Any();
-            //bool clientExists = (bool)(from Client in dc.Clients where Client.ClientID == clientID select true);
             return clientExist;
         }
         public bool IfDepartmentExists(int departmentID)
@@ -214,6 +191,12 @@ namespace CompanyManagementDataLayer
             CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             bool departmentExist = (from Department in dc.Departments where Department.DepartmentID == departmentID select Department).Any();
             return departmentExist;
+        }
+        public bool IfTaskAssignedToProject(int taskID, int projectID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            bool taskAssignedToProject = (from ProjectTask in dc.ProjectTasks where ProjectTask.ProjectID == projectID && ProjectTask.TaskID == taskID select ProjectTask).Any();
+            return taskAssignedToProject;
         }
     }
 }

@@ -42,12 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataLayer.cs" />
     <Compile Include="CompanyManagementDataClasses.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CompanyManagementDataClasses.dbml</DependentUpon>
     </Compile>
+    <Compile Include="DataLayer.cs" />
     <Compile Include="DataValidationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -80,8 +80,6 @@
     <None Include="CompanyManagementDataClasses.dbml.layout">
       <DependentUpon>CompanyManagementDataClasses.dbml</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="CompanyManagementResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CompanyManagementResource.Designer.cs</LastGenOutput>

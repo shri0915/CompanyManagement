@@ -25,17 +25,7 @@ namespace CompanyManagementDataLayer
             SystemManager = 5
         }
 
-        /* Things remaining:
-         * Data validation
-         * Validation on operations like update, delete*/
-
-
-
-
-
         
-        
-
         public List<Project> GetAllProjects()
         {
             CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
@@ -325,7 +315,7 @@ namespace CompanyManagementDataLayer
             {
                 try
                 {
-                    List<EmployeeProject> listOfActiveProjectsManagedByEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID && EmployeeProject.Project.ProjectStatus == (int)Status.Active && EmployeeProject.EmployeeRoleID == (int)Role.ProjectManager select EmployeeProject).ToList();
+                    List<EmployeeProject> listOfActiveProjectsManagedByEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID && EmployeeProject.Project.ProjectStatus == (int)Status.Active && EmployeeProject.EmployeeRoleInProject == (int)Role.ProjectManager select EmployeeProject).ToList();
                     return listOfActiveProjectsManagedByEmployee;
                 }
                 catch (Exception e)
@@ -337,7 +327,7 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                List<EmployeeProject> listOfActiveProjectsManagedByEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID && EmployeeProject.Project.ProjectStatus == (int)Status.Active && EmployeeProject.EmployeeRoleID == (int)Role.ProjectManager select EmployeeProject).ToList();
+                List<EmployeeProject> listOfActiveProjectsManagedByEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID && EmployeeProject.Project.ProjectStatus == (int)Status.Active && EmployeeProject.EmployeeRoleInProject == (int)Role.ProjectManager select EmployeeProject).ToList();
                 return listOfActiveProjectsManagedByEmployee;
             }
         }
@@ -374,41 +364,45 @@ namespace CompanyManagementDataLayer
 
             try
             {
-
-
-                // Insert the values to the database
-                if (!dataValidationHelper.IfProjectExists(project.ProjectID))
+                String compulsoryFieldsValidationResult = dataValidationHelper.CheckCompulsoryFieldsOfProject(project);
+                if (compulsoryFieldsValidationResult != CompanyManagementResource.AllColumnsPresent)
                 {
-
-                    if (dataValidationHelper.IfClientExists(project.ClientID))
-                    {
-                        if (dataValidationHelper.IfDepartmentExists(project.DepartmentID))
-                        {
-                            String compulsoryFieldsValidationResult = dataValidationHelper.CheckCumpulsoryFieldsOfProject(project);
-                            if (compulsoryFieldsValidationResult != CompanyManagementResource.AllColumnsPresent)
-                            {
-                                throw new Exception(compulsoryFieldsValidationResult);
-                            }
-                            else
-                            {
-                                dc.Projects.InsertOnSubmit(project);
-                                dc.SubmitChanges();
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine(CompanyManagementResource.DepartmentMissing);
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine(CompanyManagementResource.ClientMissing);
-                    }
+                    throw new Exception(compulsoryFieldsValidationResult);
                 }
 
                 else
                 {
-                    Console.WriteLine(CompanyManagementResource.ProjectAlreadyExists);
+
+                    // Insert the values to the database
+                    if (!dataValidationHelper.IfDepartmentExists(project.DepartmentID) && !dataValidationHelper.IfClientExists(project.ClientID))
+                    {
+                        
+                            Console.WriteLine(CompanyManagementResource.DepartmentMissing + " and " + CompanyManagementResource.ClientMissing);
+                        
+                    }
+                    else
+                    {
+                            if (dataValidationHelper.IfClientExists(project.ClientID))
+                            {
+                                if (dataValidationHelper.IfDepartmentExists(project.DepartmentID))
+                                {
+
+
+                                    dc.Projects.InsertOnSubmit(project);
+                                    dc.SubmitChanges();
+
+                                }
+                                else
+                                {
+                                    Console.WriteLine(CompanyManagementResource.DepartmentMissing);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine(CompanyManagementResource.ClientMissing);
+                            }
+                    }
+                    
                 }
             }
 
@@ -429,21 +423,15 @@ namespace CompanyManagementDataLayer
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
-                if (!dataValidationHelper.IfTechnologyExists(technology.TechnologyID))
+                string compulsoryFieldsValidationResult = dataValidationHelper.CheckCompulsoryFieldsOfTechnology(technology);
+                if (compulsoryFieldsValidationResult != CompanyManagementResource.AllColumnsPresent)
                 {
-                    string compulsoryFieldsValidationResult = dataValidationHelper.CheckCompulsoryFieldsOfTechnology(technology);
-                    if (compulsoryFieldsValidationResult != CompanyManagementResource.AllColumnsPresent)
-                    {
-                        Console.WriteLine(compulsoryFieldsValidationResult);
-                    }
-                    else {
-                        dc.Technologies.InsertOnSubmit(technology);
-                        dc.SubmitChanges();
-                    }
+                    Console.WriteLine(compulsoryFieldsValidationResult);
                 }
                 else
                 {
-                    Console.WriteLine(CompanyManagementResource.TechnologyAlreadyExists);
+                        dc.Technologies.InsertOnSubmit(technology);
+                        dc.SubmitChanges();
                 }
             }
             catch (Exception e)
@@ -459,30 +447,28 @@ namespace CompanyManagementDataLayer
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
-                if (!dataValidationHelper.IfEmployeeExists(employee.EmployeeID))
+                string compulsoryFieldsValidationResult = dataValidationHelper.CheckCompulsoryFieldsOfEmployee(employee);
+                if (compulsoryFieldsValidationResult != CompanyManagementResource.AllColumnsPresent)
                 {
+                    Console.WriteLine(compulsoryFieldsValidationResult);
+                }
+                else
+                {
+
                     if (dataValidationHelper.IfDepartmentExists(employee.DepartmentID))
                     {
-                        string compulsoryFieldsValidationResult = dataValidationHelper.CheckCompulsoryFieldsOfEmployee(employee);
-                        if (compulsoryFieldsValidationResult != CompanyManagementResource.AllColumnsPresent)
-                        {
-                            Console.WriteLine(compulsoryFieldsValidationResult);
-                        }
-                        else
-                        {
-                            dc.Employees.InsertOnSubmit(employee);
-                            dc.SubmitChanges();
-                        }
+
+
+                        dc.Employees.InsertOnSubmit(employee);
+                        dc.SubmitChanges();
+
                     }
                     else
                     {
                         Console.WriteLine(CompanyManagementResource.DepartmentMissing);
                     }
                 }
-                else
-                {
-                    Console.WriteLine(CompanyManagementResource.EmployeeAlreadyExists);
-                }
+                
             }
             catch (Exception e)
             {
@@ -497,7 +483,11 @@ namespace CompanyManagementDataLayer
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
-                if (!dataValidationHelper.IfEmployeeExists(employeeID))
+                if(!dataValidationHelper.IfEmployeeExists(employeeID) && !dataValidationHelper.IfProjectExists(projectID))
+                {
+                    Console.WriteLine(CompanyManagementResource.EmployeeMissing + " and" + CompanyManagementResource.ProjectMissing);
+                }
+                else if (!dataValidationHelper.IfEmployeeExists(employeeID))
                 {
                     Console.WriteLine(CompanyManagementResource.EmployeeMissing);
                 }
@@ -534,33 +524,34 @@ namespace CompanyManagementDataLayer
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
-                if (!dataValidationHelper.IfProjectExists(projectID))
+                string compulsoryFieldsValidationResult = dataValidationHelper.CheckCompulsoryFieldsOfTask(task);
+                if (compulsoryFieldsValidationResult != CompanyManagementResource.AllColumnsPresent)
                 {
-                    Console.WriteLine(CompanyManagementResource.ProjectMissing);
+                    Console.WriteLine(compulsoryFieldsValidationResult);
                 }
-                
                 else
                 {
-                    string compulsoryFieldsValidationResult = dataValidationHelper.CheckCompulsoryFieldsOfTask(task);
-                    if (compulsoryFieldsValidationResult != CompanyManagementResource.AllColumnsPresent)
+                    dc.Tasks.InsertOnSubmit(task);
+                    dc.SubmitChanges();
+                    if (!dataValidationHelper.IfProjectExists(projectID))
                     {
-                        Console.WriteLine(compulsoryFieldsValidationResult);
+                        Console.WriteLine(CompanyManagementResource.ProjectMissing);
                     }
+
                     else
                     {
-                        if (!dataValidationHelper.IfTaskExists(task.TaskID))
-                        {
-                            dc.Tasks.InsertOnSubmit(task);
-                            ProjectTask objProjectTask = new ProjectTask();
-                            objProjectTask.ProjectID = projectID;
-                            objProjectTask.TaskID = task.TaskID;
-                            dc.ProjectTasks.InsertOnSubmit(objProjectTask);
-                            dc.SubmitChanges();
-                        }
-                        else
-                        {
-                            Console.WriteLine(CompanyManagementResource.TaskAlreadyExists);
-                        }
+                            if (!dataValidationHelper.IfTaskAssignedToProject(task.TaskID,projectID))
+                            {
+                                ProjectTask objProjectTask = new ProjectTask();
+                                objProjectTask.ProjectID = projectID;
+                                objProjectTask.TaskID = task.TaskID;
+                                dc.ProjectTasks.InsertOnSubmit(objProjectTask);
+                                dc.SubmitChanges();
+                            }
+                            else
+                            {
+                                Console.WriteLine(CompanyManagementResource.TaskAlreadyAssignedToProject);
+                            }
                     }
                 }
             }
@@ -575,7 +566,11 @@ namespace CompanyManagementDataLayer
             CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
 
-            if (!dataValidationHelper.IfTaskExists(taskID))
+            if(!dataValidationHelper.IfTaskExists(taskID) && !dataValidationHelper.IfTechnologyExists(technologyID))
+            {
+                Console.WriteLine(CompanyManagementResource.TaskMissing + " and " + CompanyManagementResource.TechnologyMissing);
+            }
+            else if (!dataValidationHelper.IfTaskExists(taskID))
             {
                 Console.WriteLine(CompanyManagementResource.TaskMissing);
             }
