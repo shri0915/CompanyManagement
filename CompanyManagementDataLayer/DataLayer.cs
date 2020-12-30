@@ -112,8 +112,7 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.ProjectMissing);
-                List<Employee> listOfEmployeeFromProject = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.ProjectID == projectID select EmployeeProject.Employee).ToList();
-                return listOfEmployeeFromProject;
+                return null;
             }
         }
 
@@ -618,15 +617,14 @@ namespace CompanyManagementDataLayer
                     List<TaskTechnology> taskTechnologyToBeDeletedForUpdation = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID select TaskTechnology).ToList();
                     dc.TaskTechnologies.DeleteAllOnSubmit(taskTechnologyToBeDeletedForUpdation);
                     dc.SubmitChanges();
-                    foreach (int technology in technologyIDs)
+                    foreach (int technologyID in technologyIDs)
                     {
-                        if (dataValidationHelper.IfTechnologyExists(technology))
+                        if (dataValidationHelper.IfTechnologyExists(technologyID))
                         {
                             TaskTechnology taskTechnologyToBeInsertedForUpdation = new TaskTechnology();
                             taskTechnologyToBeInsertedForUpdation.TaskID = taskID;
-                            taskTechnologyToBeInsertedForUpdation.TechnologyID = technology;
+                            taskTechnologyToBeInsertedForUpdation.TechnologyID = technologyID;
                             dc.TaskTechnologies.InsertOnSubmit(taskTechnologyToBeInsertedForUpdation);
-                            dc.SubmitChanges();
                         }
                         else
                         {
@@ -634,6 +632,7 @@ namespace CompanyManagementDataLayer
                         }
 
                     }
+                    dc.SubmitChanges();
                 }
                 else
                 {

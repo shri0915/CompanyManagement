@@ -206,6 +206,7 @@ namespace CompanyManagementDataLayer
         {
             CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             bool clientExist = (from Client in dc.Clients where Client.ClientID == clientID select Client).Any();
+            //bool clientExists = (bool)(from Client in dc.Clients where Client.ClientID == clientID select true);
             return clientExist;
         }
         public bool IfDepartmentExists(int departmentID)
