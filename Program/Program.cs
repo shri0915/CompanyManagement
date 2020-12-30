@@ -205,8 +205,41 @@ namespace Program
 
             //Delete Employee from system
             Console.WriteLine("Please enter the Employee ID to be deleted");
-           dataLayer.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));
+            dataLayer.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));
 
+            //Assign Technology To Task
+            Console.WriteLine("Please enter the Technology ID you want to assign to the task");
+            technologyID = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Please enter the Task ID for which you want to assign the technology");
+            int taskID = Convert.ToInt32(Console.ReadLine());
+            dataLayer.AssignTechnologyToTask(technologyID, taskID);
+
+            //Create Task In Project
+            Console.WriteLine("Creating a new task");
+            CompanyManagementDataLayer.Task task1 = new CompanyManagementDataLayer.Task();
+            Console.WriteLine("Please enter the Task ID");
+            task1.TaskID = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Please enter the Task Name");
+            task1.TaskName = Console.ReadLine();
+            Console.WriteLine("Please enter the Task Description");
+            task1.TaskDescription = Console.ReadLine();
+            Console.WriteLine("Please enter the Project ID to which you want to add this Task");
+            projectID = Convert.ToInt32(Console.ReadLine());
+            dataLayer.CreateTaskInProject(task1, projectID);
+
+            //Update Technologies For Task
+            List<int> technologIDs = new List<int>();
+            int count = 0;
+            Console.WriteLine("Please enter the number of (count) technology IDs to be updated");
+            count = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine("Please enter the Technology ID number " + (i+1) + " : ");
+                technologIDs.Add(Convert.ToInt32(Console.ReadLine()));
+            }
+            Console.WriteLine("Please enter the Task ID to which you want to assign the above Technologies");
+            taskID = Convert.ToInt32(Console.ReadLine());
+            dataLayer.UpdateTechnologiesForTask(technologIDs, taskID);
 
 
             Console.WriteLine("Press enter to close...");

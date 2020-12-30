@@ -477,12 +477,12 @@ namespace CompanyManagementDataLayer
                     }
                     else
                     {
-                        Console.WriteLine(CompanyManagementResource.EmployeeAlreadyExists);
+                        Console.WriteLine(CompanyManagementResource.DepartmentMissing);
                     }
                 }
                 else
                 {
-                    Console.WriteLine(CompanyManagementResource.DepartmentMissing);
+                    Console.WriteLine(CompanyManagementResource.EmployeeAlreadyExists);
                 }
             }
             catch (Exception e)
@@ -535,7 +535,7 @@ namespace CompanyManagementDataLayer
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
-                if (dataValidationHelper.IfProjectExists(projectID))
+                if (!dataValidationHelper.IfProjectExists(projectID))
                 {
                     Console.WriteLine(CompanyManagementResource.ProjectMissing);
                 }
