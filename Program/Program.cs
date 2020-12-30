@@ -19,6 +19,7 @@ namespace Program
             int projectID = 0;
             int taskID = 0;
             
+            
             //List all the Projects
             Console.WriteLine("Here are all the projects in the database");
             foreach (Project returnedProject in dataLayer.GetAllProjects())
@@ -180,14 +181,14 @@ namespace Program
             Console.WriteLine("Please enter the Department ID to which the employee belongs");
             employee.DepartmentID = Convert.ToInt32(Console.ReadLine());
             dataLayer.AddEmployee(employee);
-
+            
             //Assign Employee to Project
             Console.WriteLine("Please enter the Employee ID whom you want to assign to the project");
             employeeID = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Please enter the Project ID to which you want to add the employee");
             projectID = Convert.ToInt32(Console.ReadLine());
             dataLayer.AssignEmployeeToProject(employeeID, projectID);
-
+            
             //Assign Technology To Task
             Console.WriteLine("Please enter the Technology ID you want to assign to the task");
             technologyID = Convert.ToInt32(Console.ReadLine());
@@ -235,7 +236,7 @@ namespace Program
             //Delete Employee from system
             Console.WriteLine("Please enter the Employee ID to be deleted");
             dataLayer.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));
-
+            
             Console.WriteLine("Press enter to close...");
             Console.ReadLine();
         }

@@ -485,7 +485,7 @@ namespace CompanyManagementDataLayer
             {
                 if(!dataValidationHelper.IfEmployeeExists(employeeID) && !dataValidationHelper.IfProjectExists(projectID))
                 {
-                    Console.WriteLine(CompanyManagementResource.EmployeeMissing + " and" + CompanyManagementResource.ProjectMissing);
+                    Console.WriteLine(CompanyManagementResource.EmployeeMissing + " and " + CompanyManagementResource.ProjectMissing);
                 }
                 else if (!dataValidationHelper.IfEmployeeExists(employeeID))
                 {
@@ -623,7 +623,7 @@ namespace CompanyManagementDataLayer
                         }
                         else
                         {
-                            Console.WriteLine(CompanyManagementResource.TechnologyMissing);
+                            Console.WriteLine(CompanyManagementResource.TechnologyMissing + " :-> " + technologyID);
                         }
 
                     }
