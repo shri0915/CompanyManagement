@@ -137,7 +137,15 @@ namespace Program
                 Console.WriteLine(activeProjectManagedByEmployee.Project.ProjectName);
             }
 
+            //List all delayed tasks for an employee
+            Console.WriteLine("Please input the employee id of whom you want to display the delayed tasks");
+            employeeID = Convert.ToInt32(Console.ReadLine());
+            foreach(var employeeTask in dataLayer.GetAllDelayedTasksForEmployee(employeeID))
+            {
+                Console.WriteLine(employeeTask.Task.TaskName);
+            }
 
+            //
 
 
            //Adding new Project
@@ -153,10 +161,53 @@ namespace Program
            project1.DepartmentID = Convert.ToInt32(Console.ReadLine());
            dataLayer.AddProject(project1);
 
-           
+            //Add new Technology
+            Technology technology1 = new Technology();
+            Console.WriteLine("Please enter the Technology ID");
+            technology1.TechnologyID = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Please input the Technology Name");
+            technology1.TechnologyName = Console.ReadLine();
+            dataLayer.AddTechnology(technology1);
 
-           Console.WriteLine("Please enter the Employee ID to be deleted");
+            //Add new Employee
+            Employee employee1 = new Employee();
+            Console.WriteLine("Please enter the Employee ID");
+            Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Please enter the Employee Name");
+            employee1.EmployeeName = Console.ReadLine();
+            Console.WriteLine("Please enter the Employee Address");
+            employee1.EmployeeAddress = Console.ReadLine();
+            Console.WriteLine("Please enter the Employee Designation");
+            employee1.EmployeeDesignation = Console.ReadLine();
+            Console.WriteLine("Please enter the Employee Contact");
+            employee1.EmployeeContact = Console.ReadLine();
+            Console.WriteLine("Please enter the Department ID to which the employee belongs");
+            employee1.DepartmentID = Convert.ToInt32(Console.ReadLine());
+
+            //Assign Employee to Project
+            Console.WriteLine("Please enter the Employee ID whom you want to assign to the project");
+            employeeID = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Please enter the Project ID to which you want to add the employee");
+            projectID = Convert.ToInt32(Console.ReadLine());
+            dataLayer.AssignEmployeeToProject(employeeID, projectID);
+
+            //Delete Technology
+            Console.WriteLine("Please enter the Technology ID you want to delete");
+            dataLayer.DeleteTechnology(Convert.ToInt32(Console.ReadLine()));
+
+            //Delete Task
+            Console.WriteLine("Please enter the Task ID you want to delete");
+            dataLayer.DeleteTask(Convert.ToInt32(Console.ReadLine()));
+
+            //Delete Project
+            Console.WriteLine("Please enter the Project ID you want to delete");
+            dataLayer.DeleteProject(Convert.ToInt32(Console.ReadLine()));
+
+            //Delete Employee from system
+            Console.WriteLine("Please enter the Employee ID to be deleted");
            dataLayer.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));
+
+
 
             Console.WriteLine("Press enter to close...");
             Console.ReadLine();
