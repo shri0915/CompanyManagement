@@ -77,8 +77,7 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.ProjectMissing);
-                int countOfEmployeesOfProject = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.ProjectID == projectID select EmployeeProject).Count();
-                return countOfEmployeesOfProject;
+                return 0;
             }
         }
 
@@ -141,8 +140,7 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                List<Project> listOfProjectForEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID select EmployeeProject.Project).ToList();
-                return listOfProjectForEmployee;
+                return null;
 
             }
         }
@@ -167,8 +165,7 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                List<Task> listOfTasksForEmployee = (from EmployeeTask in dc.EmployeeTasks where EmployeeTask.EmployeeID == employeeID select EmployeeTask.Task).ToList();
-                return listOfTasksForEmployee;
+                return null;
             }
         }
 
@@ -179,14 +176,12 @@ namespace CompanyManagementDataLayer
             if (!dataValidationHelper.IfEmployeeExists(employeeID))
             {
                 Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                List<TaskTechnology> listOfTaskTechnologies = (from EmployeeTask in dc.EmployeeTasks join TaskTechnology in dc.TaskTechnologies on EmployeeTask.TaskID equals TaskTechnology.TaskID where TaskTechnology.TechnologyID == technologyID && EmployeeTask.EmployeeID == employeeID select TaskTechnology).ToList();
-                return listOfTaskTechnologies;
+                return null;
             }
             else if(!dataValidationHelper.IfTechnologyExists(technologyID))
             {
                 Console.WriteLine(CompanyManagementResource.TechnologyMissing);
-                List<TaskTechnology> listOfTaskTechnologies = (from EmployeeTask in dc.EmployeeTasks join TaskTechnology in dc.TaskTechnologies on EmployeeTask.TaskID equals TaskTechnology.TaskID where TaskTechnology.TechnologyID == technologyID && EmployeeTask.EmployeeID == employeeID select TaskTechnology).ToList();
-                return listOfTaskTechnologies;
+                return null;
             }
             else
             {
@@ -225,8 +220,7 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.TechnologyMissing);
-                List<ProjectTechnology> listOfProjectTechnologies = (from ProjectTechnology in dc.ProjectTechnologies where ProjectTechnology.TechnologyID == technologyID select ProjectTechnology).ToList();
-                return listOfProjectTechnologies;
+                return null;
             }
         }
 
@@ -250,8 +244,7 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.ProjectMissing);
-                List<ProjectTask> listOfActiveTasksForProject = (from ProjectTask in dc.ProjectTasks where ProjectTask.ProjectID == projectID && ProjectTask.ProjectTaskStatus == (int)Status.Active select ProjectTask).ToList();
-                return listOfActiveTasksForProject;
+                return null;
             }
         }
 
@@ -275,8 +268,7 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                List<TaskTechnology> listOfTechnologiesForEmployee = (from TaskTechnology in dc.TaskTechnologies join EmployeeTask in dc.EmployeeTasks on TaskTechnology.TaskID equals EmployeeTask.TaskID where EmployeeTask.EmployeeID == employeeID select TaskTechnology).ToList();
-                return listOfTechnologiesForEmployee;
+                return null;
 
             }
         }
@@ -302,8 +294,7 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                int projectCountForEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID && EmployeeProject.Project.ProjectStatus == (int)Status.Active select EmployeeProject.ProjectID).Count();
-                return projectCountForEmployee;
+                return 0;
             }
         }
 
@@ -327,8 +318,7 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                List<EmployeeProject> listOfActiveProjectsManagedByEmployee = (from EmployeeProject in dc.EmployeeProjects where EmployeeProject.EmployeeID == employeeID && EmployeeProject.Project.ProjectStatus == (int)Status.Active && EmployeeProject.EmployeeRoleInProject == (int)Role.ProjectManager select EmployeeProject).ToList();
-                return listOfActiveProjectsManagedByEmployee;
+                return null;
             }
         }
 
@@ -352,8 +342,7 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                List<EmployeeTask> listOfAllDelayedTasksForEmployee = (from EmployeeTask in dc.EmployeeTasks where EmployeeTask.EmployeeID == employeeID && EmployeeTask.EmployeeTaskStatus == (int)Status.Delayed select EmployeeTask).ToList();
-                return listOfAllDelayedTasksForEmployee;
+                return null;
             }
         }
 
