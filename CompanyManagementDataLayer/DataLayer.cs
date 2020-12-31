@@ -57,7 +57,7 @@ namespace CompanyManagementDataLayer
             }
         }
 
-        public int GetEmployeeCountForProject(int projectID)
+        public int? GetEmployeeCountForProject(int projectID)
         {
             CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
@@ -77,7 +77,7 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.ProjectMissing);
-                return 0;
+                return null;
             }
         }
 
@@ -273,7 +273,7 @@ namespace CompanyManagementDataLayer
             }
         }
 
-        public int GetProjectCountForEmployee(int employeeID)
+        public int? GetProjectCountForEmployee(int employeeID)
         {
             CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
@@ -294,7 +294,7 @@ namespace CompanyManagementDataLayer
             else
             {
                 Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                return 0;
+                return null;
             }
         }
 
