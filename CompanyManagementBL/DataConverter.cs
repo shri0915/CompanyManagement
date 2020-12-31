@@ -8,7 +8,7 @@ using CompanyManagementBL.Entities;
 
 namespace CompanyManagementBL
 {
-    public class ConvertDataLayerToBusinessLayer
+    public class DataConverter
     {
         public static List<BOProject> ConvertProjectListToBOProjectList(List<Project> Projects)
         {

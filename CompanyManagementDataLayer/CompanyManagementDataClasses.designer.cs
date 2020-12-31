@@ -22,8 +22,8 @@ namespace CompanyManagementDataLayer
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Company_2")]
-	public partial class DataClasses1DataContext : System.Data.Linq.DataContext
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Company")]
+	public partial class CompanyManagementDataClassesDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -71,31 +71,31 @@ namespace CompanyManagementDataLayer
     partial void DeleteTechnology(Technology instance);
     #endregion
 		
-		public DataClasses1DataContext() : 
-				base(global::CompanyManagementDataLayer.Properties.Settings.Default.Company_2ConnectionString, mappingSource)
+		public CompanyManagementDataClassesDataContext() : 
+				base(global::CompanyManagementDataLayer.Properties.Settings.Default.CompanyConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(string connection) : 
+		public CompanyManagementDataClassesDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(System.Data.IDbConnection connection) : 
+		public CompanyManagementDataClassesDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public CompanyManagementDataClassesDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public CompanyManagementDataClassesDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
@@ -245,7 +245,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ClientID
 		{
 			get
@@ -451,7 +451,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int DepartmentID
 		{
 			get
@@ -637,13 +637,13 @@ namespace CompanyManagementDataLayer
 		
 		private string _EmployeeName;
 		
-		private int _DepartmentID;
-		
 		private string _EmployeeDesignation;
 		
 		private string _EmployeeAddress;
 		
 		private string _EmployeeContact;
+		
+		private int _DepartmentID;
 		
 		private EntitySet<EmployeeProject> _EmployeeProjects;
 		
@@ -659,14 +659,14 @@ namespace CompanyManagementDataLayer
     partial void OnEmployeeIDChanged();
     partial void OnEmployeeNameChanging(string value);
     partial void OnEmployeeNameChanged();
-    partial void OnDepartmentIDChanging(int value);
-    partial void OnDepartmentIDChanged();
     partial void OnEmployeeDesignationChanging(string value);
     partial void OnEmployeeDesignationChanged();
     partial void OnEmployeeAddressChanging(string value);
     partial void OnEmployeeAddressChanged();
     partial void OnEmployeeContactChanging(string value);
     partial void OnEmployeeContactChanged();
+    partial void OnDepartmentIDChanging(int value);
+    partial void OnDepartmentIDChanged();
     #endregion
 		
 		public Employee()
@@ -677,7 +677,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int EmployeeID
 		{
 			get
@@ -713,30 +713,6 @@ namespace CompanyManagementDataLayer
 					this._EmployeeName = value;
 					this.SendPropertyChanged("EmployeeName");
 					this.OnEmployeeNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentID", DbType="Int NOT NULL")]
-		public int DepartmentID
-		{
-			get
-			{
-				return this._DepartmentID;
-			}
-			set
-			{
-				if ((this._DepartmentID != value))
-				{
-					if (this._Department.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDepartmentIDChanging(value);
-					this.SendPropertyChanging();
-					this._DepartmentID = value;
-					this.SendPropertyChanged("DepartmentID");
-					this.OnDepartmentIDChanged();
 				}
 			}
 		}
@@ -797,6 +773,30 @@ namespace CompanyManagementDataLayer
 					this._EmployeeContact = value;
 					this.SendPropertyChanged("EmployeeContact");
 					this.OnEmployeeContactChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentID", DbType="Int NOT NULL")]
+		public int DepartmentID
+		{
+			get
+			{
+				return this._DepartmentID;
+			}
+			set
+			{
+				if ((this._DepartmentID != value))
+				{
+					if (this._Department.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDepartmentIDChanging(value);
+					this.SendPropertyChanging();
+					this._DepartmentID = value;
+					this.SendPropertyChanged("DepartmentID");
+					this.OnDepartmentIDChanged();
 				}
 			}
 		}
@@ -918,7 +918,7 @@ namespace CompanyManagementDataLayer
 		
 		private int _ProjectID;
 		
-		private int _EmployeeRoleID;
+		private System.Nullable<int> _EmployeeRoleInProject;
 		
 		private EntityRef<Employee> _Employee;
 		
@@ -936,8 +936,8 @@ namespace CompanyManagementDataLayer
     partial void OnEmployeeIDChanged();
     partial void OnProjectIDChanging(int value);
     partial void OnProjectIDChanged();
-    partial void OnEmployeeRoleIDChanging(int value);
-    partial void OnEmployeeRoleIDChanged();
+    partial void OnEmployeeRoleInProjectChanging(System.Nullable<int> value);
+    partial void OnEmployeeRoleInProjectChanged();
     #endregion
 		
 		public EmployeeProject()
@@ -948,7 +948,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeProjectID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeProjectID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int EmployeeProjectID
 		{
 			get
@@ -1016,26 +1016,26 @@ namespace CompanyManagementDataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeRoleID", DbType="Int NOT NULL")]
-		public int EmployeeRoleID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeRoleInProject", DbType="Int")]
+		public System.Nullable<int> EmployeeRoleInProject
 		{
 			get
 			{
-				return this._EmployeeRoleID;
+				return this._EmployeeRoleInProject;
 			}
 			set
 			{
-				if ((this._EmployeeRoleID != value))
+				if ((this._EmployeeRoleInProject != value))
 				{
 					if (this._RoleMaster.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnEmployeeRoleIDChanging(value);
+					this.OnEmployeeRoleInProjectChanging(value);
 					this.SendPropertyChanging();
-					this._EmployeeRoleID = value;
-					this.SendPropertyChanged("EmployeeRoleID");
-					this.OnEmployeeRoleIDChanged();
+					this._EmployeeRoleInProject = value;
+					this.SendPropertyChanged("EmployeeRoleInProject");
+					this.OnEmployeeRoleInProjectChanged();
 				}
 			}
 		}
@@ -1108,7 +1108,7 @@ namespace CompanyManagementDataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RoleMaster_EmployeeProject", Storage="_RoleMaster", ThisKey="EmployeeRoleID", OtherKey="RoleID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RoleMaster_EmployeeProject", Storage="_RoleMaster", ThisKey="EmployeeRoleInProject", OtherKey="RoleID", IsForeignKey=true)]
 		public RoleMaster RoleMaster
 		{
 			get
@@ -1131,11 +1131,11 @@ namespace CompanyManagementDataLayer
 					if ((value != null))
 					{
 						value.EmployeeProjects.Add(this);
-						this._EmployeeRoleID = value.RoleID;
+						this._EmployeeRoleInProject = value.RoleID;
 					}
 					else
 					{
-						this._EmployeeRoleID = default(int);
+						this._EmployeeRoleInProject = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("RoleMaster");
 				}
@@ -1205,7 +1205,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTaskID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTaskID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int EmployeeTaskID
 		{
 			get
@@ -1475,7 +1475,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ProjectID
 		{
 			get
@@ -1827,7 +1827,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTaskID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTaskID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ProjectTaskID
 		{
 			get
@@ -2054,7 +2054,7 @@ namespace CompanyManagementDataLayer
 		
 		private int _TechnologyID;
 		
-		private string _ProjectTechnologyVersionNumber;
+		private string _TechnologyVersion;
 		
 		private EntityRef<Project> _Project;
 		
@@ -2070,8 +2070,8 @@ namespace CompanyManagementDataLayer
     partial void OnProjectIDChanged();
     partial void OnTechnologyIDChanging(int value);
     partial void OnTechnologyIDChanged();
-    partial void OnProjectTechnologyVersionNumberChanging(string value);
-    partial void OnProjectTechnologyVersionNumberChanged();
+    partial void OnTechnologyVersionChanging(string value);
+    partial void OnTechnologyVersionChanged();
     #endregion
 		
 		public ProjectTechnology()
@@ -2081,7 +2081,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTechnologyID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTechnologyID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ProjectTechnologyID
 		{
 			get
@@ -2149,22 +2149,22 @@ namespace CompanyManagementDataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTechnologyVersionNumber", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string ProjectTechnologyVersionNumber
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TechnologyVersion", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string TechnologyVersion
 		{
 			get
 			{
-				return this._ProjectTechnologyVersionNumber;
+				return this._TechnologyVersion;
 			}
 			set
 			{
-				if ((this._ProjectTechnologyVersionNumber != value))
+				if ((this._TechnologyVersion != value))
 				{
-					this.OnProjectTechnologyVersionNumberChanging(value);
+					this.OnTechnologyVersionChanging(value);
 					this.SendPropertyChanging();
-					this._ProjectTechnologyVersionNumber = value;
-					this.SendPropertyChanged("ProjectTechnologyVersionNumber");
-					this.OnProjectTechnologyVersionNumberChanged();
+					this._TechnologyVersion = value;
+					this.SendPropertyChanged("TechnologyVersion");
+					this.OnTechnologyVersionChanged();
 				}
 			}
 		}
@@ -2290,7 +2290,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int RoleID
 		{
 			get
@@ -2350,7 +2350,7 @@ namespace CompanyManagementDataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RoleMaster_EmployeeProject", Storage="_EmployeeProjects", ThisKey="RoleID", OtherKey="EmployeeRoleID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="RoleMaster_EmployeeProject", Storage="_EmployeeProjects", ThisKey="RoleID", OtherKey="EmployeeRoleInProject")]
 		public EntitySet<EmployeeProject> EmployeeProjects
 		{
 			get
@@ -2434,7 +2434,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int StatusID
 		{
 			get
@@ -2628,7 +2628,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TaskID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TaskID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int TaskID
 		{
 			get
@@ -2819,7 +2819,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TaskTechnologyID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TaskTechnologyID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int TaskTechnologyID
 		{
 			get
@@ -3007,7 +3007,7 @@ namespace CompanyManagementDataLayer
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TechnologyID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TechnologyID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int TechnologyID
 		{
 			get

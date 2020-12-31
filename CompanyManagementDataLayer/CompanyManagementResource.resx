@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AllCloumnsPresent" xml:space="preserve">
+  <data name="AllColumnsPresent" xml:space="preserve">
     <value>All columns have values</value>
   </data>
   <data name="ClientIDForProjectMissing" xml:space="preserve">
@@ -125,6 +125,9 @@
   </data>
   <data name="ClientIDMissing" xml:space="preserve">
     <value>Client ID is missing</value>
+  </data>
+  <data name="ClientMissing" xml:space="preserve">
+    <value>Client does not exist in the system</value>
   </data>
   <data name="ClientNameMissing" xml:space="preserve">
     <value>Client Name is missing</value>
@@ -144,8 +147,38 @@
   <data name="DepartmentLocationMissing" xml:space="preserve">
     <value>Department Location is missing</value>
   </data>
+  <data name="DepartmentMissing" xml:space="preserve">
+    <value>Department does not exist in the system</value>
+  </data>
   <data name="DepartmentNameMissing" xml:space="preserve">
     <value>Department Name is missing</value>
+  </data>
+  <data name="EmployeeAddressMissing" xml:space="preserve">
+    <value>Employee Address cannot be empty</value>
+  </data>
+  <data name="EmployeeAlreadyExists" xml:space="preserve">
+    <value>Employee with this EmployeeID already exists in the system</value>
+  </data>
+  <data name="EmployeeAssignedToProject" xml:space="preserve">
+    <value>This specific employee is already assigned this specific project</value>
+  </data>
+  <data name="EmployeeDesignationMissing" xml:space="preserve">
+    <value>Employee Designation cannot be empty</value>
+  </data>
+  <data name="EmployeeIDMissing" xml:space="preserve">
+    <value>Employee ID cannot be null or 0 or -ve</value>
+  </data>
+  <data name="EmployeeMissing" xml:space="preserve">
+    <value>Employee does not exist. Please input an existing exployee's Employee ID</value>
+  </data>
+  <data name="EmployeeNameMissing" xml:space="preserve">
+    <value>Employee Name field is empty</value>
+  </data>
+  <data name="EmployeeRoleIDMIssing" xml:space="preserve">
+    <value>Employee must have a role in the project</value>
+  </data>
+  <data name="ProjectAlreadyExists" xml:space="preserve">
+    <value>Project with this ProjectID already exists in the system</value>
   </data>
   <data name="ProjectIDMissing" xml:space="preserve">
     <value>Project ID is missing</value>
@@ -153,7 +186,43 @@
   <data name="ProjectIDNegativeOrZero" xml:space="preserve">
     <value>Project ID has to be greater than 0</value>
   </data>
+  <data name="ProjectMissing" xml:space="preserve">
+    <value>Project does not exist. Please input an existing project's Project ID</value>
+  </data>
   <data name="ProjectNameMissing" xml:space="preserve">
     <value>Project Name is missing</value>
+  </data>
+  <data name="StatusMissing" xml:space="preserve">
+    <value>Status cannot be empty</value>
+  </data>
+  <data name="TaskAlreadyAssignedToProject" xml:space="preserve">
+    <value>This Task is already assigned to this Project</value>
+  </data>
+  <data name="TaskAlreadyExists" xml:space="preserve">
+    <value>Task with this TaskID already exists</value>
+  </data>
+  <data name="TaskIDMissing" xml:space="preserve">
+    <value>Task ID is missing</value>
+  </data>
+  <data name="TaskMissing" xml:space="preserve">
+    <value>Task does not exist. Please input an existing task's Task ID</value>
+  </data>
+  <data name="TaskNameMissing" xml:space="preserve">
+    <value>Task Name is missing</value>
+  </data>
+  <data name="TechnologyAlreadyExists" xml:space="preserve">
+    <value>Technology with this TechnologyID already exists in the system</value>
+  </data>
+  <data name="TechnologyAssignedToTask" xml:space="preserve">
+    <value>This specific Technology is already assigned to the specific Task</value>
+  </data>
+  <data name="TechnologyIDMissing" xml:space="preserve">
+    <value>Technology ID is missing</value>
+  </data>
+  <data name="TechnologyMissing" xml:space="preserve">
+    <value>Technology does not exist. Please input an existing technology's Technology ID</value>
+  </data>
+  <data name="TechnologyNameMissing" xml:space="preserve">
+    <value>Technology Name is missing</value>
   </data>
 </root>

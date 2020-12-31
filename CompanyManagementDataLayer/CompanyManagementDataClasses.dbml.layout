@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.25, 12" name="CompanyManagementDataClasses">
+  <DataContextMoniker Name="/CompanyManagementDataClassesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="39e56441-ba58-4f39-adc1-fa82df76c8e3" absoluteBounds="3.5, 3.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CompanyManagementDataClassesDataContext/Client" />
+      <nestedChildShapes>
+        <elementListCompartment Id="82fe4126-762f-416b-8574-ef6498cf303d" absoluteBounds="3.515, 4.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8e432497-cbef-41d3-9cc1-4cb1cc06523c" absoluteBounds="0.75, 5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CompanyManagementDataClassesDataContext/Department" />
+      <nestedChildShapes>
+        <elementListCompartment Id="942397fd-ac0b-42e4-a750-cd661361b39c" absoluteBounds="0.765, 5.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="28910526-a972-4e03-96d3-1ddb92546f8e" absoluteBounds="3.5, 5.875, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/CompanyManagementDataClassesDataContext/Employee" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2d457345-4d6f-4b35-9d34-68bfd35423c9" absoluteBounds="3.515, 6.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a01b2888-3fbb-437c-928a-867ca96cb718" absoluteBounds="9, 5.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CompanyManagementDataClassesDataContext/EmployeeProject" />
+      <nestedChildShapes>
+        <elementListCompartment Id="93f2d954-4546-4a3e-9794-8f3a1d195b03" absoluteBounds="9.015, 5.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0fb7c9a1-d8ab-41c4-90e6-0425f1a90001" absoluteBounds="6.25, 7.125, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CompanyManagementDataClassesDataContext/EmployeeTask" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5e8feee5-1bc7-40c3-8c6a-390cfe5cf087" absoluteBounds="6.265, 7.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="89c29594-cb17-4614-98a5-9160fae2887c" absoluteBounds="6.25, 4.125, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/CompanyManagementDataClassesDataContext/Project" />
+      <nestedChildShapes>
+        <elementListCompartment Id="870ac045-e5f9-4a2b-8629-577c859a2a7a" absoluteBounds="6.265, 4.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7b412626-4f3a-4dd1-aa85-0afac60ef719" absoluteBounds="9, 2.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CompanyManagementDataClassesDataContext/ProjectTask" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9593ae39-9663-453a-881d-683856d581cc" absoluteBounds="9.015, 2.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="88895924-086b-4cd1-9c3e-4d1821003d4f" absoluteBounds="12, 4.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/CompanyManagementDataClassesDataContext/ProjectTechnology" />
+      <nestedChildShapes>
+        <elementListCompartment Id="aa1303ad-6b29-42bd-b2c2-55f81d7bf62c" absoluteBounds="12.015, 4.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1e339a7c-598d-48a2-b7d9-0c3ee32e2930" absoluteBounds="6.25, 10.375, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/CompanyManagementDataClassesDataContext/RoleMaster" />
+      <nestedChildShapes>
+        <elementListCompartment Id="36fdcafc-aeee-4cd7-9e97-e66e996f233e" absoluteBounds="6.265, 10.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e2b09e43-8da6-4729-a78e-aa42b684b232" absoluteBounds="3.5, 1.375, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/CompanyManagementDataClassesDataContext/StatusMaster" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d5b5aa04-794d-4548-be9f-28b36c7baf54" absoluteBounds="3.515, 1.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="76d10636-d749-408a-827a-87b44acdbc2f" absoluteBounds="6.25, 1.375, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/CompanyManagementDataClassesDataContext/Task" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ee6a74a8-bbd9-4d21-94c3-94cddefb1368" absoluteBounds="6.265, 1.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ca7294ff-b0be-48df-9d31-d8d009c5f46d" absoluteBounds="12, 6.875, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/CompanyManagementDataClassesDataContext/TaskTechnology" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3fb2d76c-2a7e-4784-9d57-90174da0d1e8" absoluteBounds="12.015, 7.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e6bebf70-a074-44ac-b121-37e351224aed" absoluteBounds="9.25, 8.5, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/CompanyManagementDataClassesDataContext/Technology" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e397f4e8-a312-450a-92ef-0a44d2c93b69" absoluteBounds="9.265, 8.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.75 : 5); (1.75 : 4.3124995); (3.5 : 4.3124995)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Department/Department_Client" />
+      <nodes>
+        <classShapeMoniker Id="8e432497-cbef-41d3-9cc1-4cb1cc06523c" />
+        <classShapeMoniker Id="39e56441-ba58-4f39-adc1-fa82df76c8e3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.22679768880208); (3.5 : 6.22679768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Department/Department_Employee" />
+      <nodes>
+        <classShapeMoniker Id="8e432497-cbef-41d3-9cc1-4cb1cc06523c" />
+        <classShapeMoniker Id="28910526-a972-4e03-96d3-1ddb92546f8e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 6.39349609375); (5.79166666666667 : 6.39349609375 : JumpStart); (5.95833333333333 : 6.39349609375 : JumpEnd); (8.63541666666667 : 6.39349609375 : JumpStart); (8.89583333333333 : 6.39349609375 : JumpEnd); (9 : 6.39349609375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Employee/Employee_EmployeeProject" />
+      <nodes>
+        <classShapeMoniker Id="28910526-a972-4e03-96d3-1ddb92546f8e" />
+        <classShapeMoniker Id="a01b2888-3fbb-437c-928a-867ca96cb718" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 7.48159912109375); (5.79166666666667 : 7.48159912109375 : JumpStart); (5.95833333333333 : 7.48159912109375 : JumpEnd); (6.25 : 7.48159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Employee/Employee_EmployeeTask" />
+      <nodes>
+        <classShapeMoniker Id="28910526-a972-4e03-96d3-1ddb92546f8e" />
+        <classShapeMoniker Id="0fb7c9a1-d8ab-41c4-90e6-0425f1a90001" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 5.57294840494792); (8.63541666666667 : 5.57294840494792 : JumpStart); (8.89583333333333 : 5.57294840494792 : JumpEnd); (9 : 5.57294840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Project/Project_EmployeeProject" />
+      <nodes>
+        <classShapeMoniker Id="89c29594-cb17-4614-98a5-9160fae2887c" />
+        <classShapeMoniker Id="a01b2888-3fbb-437c-928a-867ca96cb718" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.66429768880208); (5.79166666666667 : 4.66429768880208 : JumpStart); (6.11458333333333 : 4.66429768880208 : JumpEnd); (6.25 : 4.66429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Client/Client_Project" />
+      <nodes>
+        <classShapeMoniker Id="39e56441-ba58-4f39-adc1-fa82df76c8e3" />
+        <classShapeMoniker Id="89c29594-cb17-4614-98a5-9160fae2887c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 5.53929768880208); (5.79166666666667 : 5.53929768880208 : JumpStart); (5.95833333333333 : 5.53929768880208 : JumpEnd); (6.25 : 5.53929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Department/Department_Project" />
+      <nodes>
+        <classShapeMoniker Id="8e432497-cbef-41d3-9cc1-4cb1cc06523c" />
+        <classShapeMoniker Id="89c29594-cb17-4614-98a5-9160fae2887c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 4.125); (8.625 : 3.75); (8.625 : 4.20359537760417); (8.65982443490112 : 4.16877094270304 : JumpStart); (8.87142556509888 : 3.95716981250529 : JumpEnd); (9 : 3.82859537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Project/Project_ProjectTask" />
+      <nodes>
+        <classShapeMoniker Id="89c29594-cb17-4614-98a5-9160fae2887c" />
+        <classShapeMoniker Id="7b412626-4f3a-4dd1-aa85-0afac60ef719" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 4.71875); (8.63541666666667 : 4.71875 : JumpStart); (8.89583333333333 : 4.71875 : JumpEnd); (12 : 4.71875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Project/Project_ProjectTechnology" />
+      <nodes>
+        <classShapeMoniker Id="89c29594-cb17-4614-98a5-9160fae2887c" />
+        <classShapeMoniker Id="88895924-086b-4cd1-9c3e-4d1821003d4f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 11.0681469726562); (9.09375 : 11.0681469726562); (9.09375 : 6.82859537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/RoleMaster/RoleMaster_EmployeeProject" />
+      <nodes>
+        <classShapeMoniker Id="1e339a7c-598d-48a2-b7d9-0c3ee32e2930" />
+        <classShapeMoniker Id="a01b2888-3fbb-437c-928a-867ca96cb718" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.47760602088341 : 2.7612939453125); (5.69107443490112 : 2.97476235933021 : JumpStart); (5.80892556509888 : 3.09261348952797 : JumpEnd); (5.875 : 3.15868792442909); (5.875 : 8.12384924934896); (6.25 : 8.12384924934896)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/StatusMaster/StatusMaster_EmployeeTask" />
+      <nodes>
+        <classShapeMoniker Id="e2b09e43-8da6-4729-a78e-aa42b684b232" />
+        <classShapeMoniker Id="0fb7c9a1-d8ab-41c4-90e6-0425f1a90001" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 2.70690756745793); (5.69107443490112 : 2.89798200235905 : JumpStart); (5.80892556509888 : 3.01583313255681 : JumpEnd); (6.03125 : 3.23815756745793); (6.03125 : 5.10179768880208); (6.25 : 5.10179768880208)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/StatusMaster/StatusMaster_Project" />
+      <nodes>
+        <classShapeMoniker Id="e2b09e43-8da6-4729-a78e-aa42b684b232" />
+        <classShapeMoniker Id="89c29594-cb17-4614-98a5-9160fae2887c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 2.00970178372897); (5.75 : 2.00970178372897); (5.75 : 3.29494216145833); (5.79166666666667 : 3.29494216145833 : JumpStart); (5.95833333333333 : 3.29494216145833 : JumpEnd); (8.63541666666667 : 3.29494216145833 : JumpStart); (8.80208333333333 : 3.29494216145833 : JumpEnd); (9 : 3.29494216145833)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/StatusMaster/StatusMaster_ProjectTask" />
+      <nodes>
+        <classShapeMoniker Id="e2b09e43-8da6-4729-a78e-aa42b684b232" />
+        <classShapeMoniker Id="7b412626-4f3a-4dd1-aa85-0afac60ef719" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.22760602088341 : 2.7612939453125); (8.8125 : 3.34618792442909); (8.8125 : 6.5625); (8.77767556509888 : 6.59732443490112 : JumpStart); (8.65982443490112 : 6.71517556509888 : JumpEnd); (8.25 : 7.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Task/Task_EmployeeTask" />
+      <nodes>
+        <classShapeMoniker Id="76d10636-d749-408a-827a-87b44acdbc2f" />
+        <classShapeMoniker Id="0fb7c9a1-d8ab-41c4-90e6-0425f1a90001" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 2.4434689538762); (9 : 2.4434689538762)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Task/Task_ProjectTask" />
+      <nodes>
+        <classShapeMoniker Id="76d10636-d749-408a-827a-87b44acdbc2f" />
+        <classShapeMoniker Id="7b412626-4f3a-4dd1-aa85-0afac60ef719" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 2.70690756745793); (8.71875 : 3.17565756745793); (8.71875 : 7.56814697265625); (9.01041666666667 : 7.56814697265625 : JumpStart); (9.17708333333333 : 7.56814697265625 : JumpEnd); (11.0729166666667 : 7.56814697265625 : JumpStart); (11.2395833333333 : 7.56814697265625 : JumpEnd); (12 : 7.56814697265625)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Task/Task_TaskTechnology" />
+      <nodes>
+        <classShapeMoniker Id="76d10636-d749-408a-827a-87b44acdbc2f" />
+        <classShapeMoniker Id="ca7294ff-b0be-48df-9d31-d8d009c5f46d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.15625 : 8.5); (11.15625 : 4.9843775); (12 : 4.9843775)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Technology/Technology_ProjectTechnology" />
+      <nodes>
+        <classShapeMoniker Id="e6bebf70-a074-44ac-b121-37e351224aed" />
+        <classShapeMoniker Id="88895924-086b-4cd1-9c3e-4d1821003d4f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 9.09699625651042); (13 : 9.09699625651042); (13 : 8.2612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CompanyManagementDataClassesDataContext/Technology/Technology_TaskTechnology" />
+      <nodes>
+        <classShapeMoniker Id="e6bebf70-a074-44ac-b121-37e351224aed" />
+        <classShapeMoniker Id="ca7294ff-b0be-48df-9d31-d8d009c5f46d" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
