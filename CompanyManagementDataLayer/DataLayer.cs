@@ -574,7 +574,7 @@ namespace CompanyManagementDataLayer
                     if (!dataValidationHelper.IfTechnologyIsAssignedToTask(technologyID, taskID))
                     {
                         TaskTechnology objTaskTechnology = new TaskTechnology();
-                        objTaskTechnology.TaskTechnologyID = technologyID;
+                        objTaskTechnology.TechnologyID = technologyID;
                         objTaskTechnology.TaskID = taskID;
                         dc.TaskTechnologies.InsertOnSubmit(objTaskTechnology);
                         dc.SubmitChanges();
@@ -744,6 +744,85 @@ namespace CompanyManagementDataLayer
             }
         }
 
+        public bool? IfProjectUsesTheTechnology(int taskID, int technologyID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            DataValidationHelper dataValidationHelper = new DataValidationHelper();
+            try
+            {
+                bool taskExists = dataValidationHelper.IfTaskExists(taskID);
+                bool technologyExists = dataValidationHelper.IfTechnologyExists(technologyID);
+                if (!taskExists && !technologyExists)
+                {
+                    Console.WriteLine(CompanyManagementResource.TaskMissing + " and " + CompanyManagementResource.TechnologyMissing);
+                    return null;
+                }
+                else if(!taskExists)
+                {
+                    Console.WriteLine(CompanyManagementResource.TaskMissing);
+                    return null;
+                }
+                else if(!technologyExists)
+                {
+                    Console.WriteLine(CompanyManagementResource.TechnologyMissing);
+                    return null;
+                }
+                else
+                {
+                    bool projectTaskExists = (from ProjectTask in dc.ProjectTasks
+                                             join ProjectTechnology in dc.ProjectTechnologies on
+                       ProjectTask.ProjectID equals ProjectTechnology.ProjectID
+                                             where ProjectTask.TaskID == taskID && ProjectTechnology.TechnologyID == technologyID
+                                             select ProjectTask).Any();
+                    return projectTaskExists;
 
+                    
+                }
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw e;
+            }
+        }
+
+       public int? GetCountOfTechnologiesAssignedToATask(int taskID, int technologyID)
+        {
+            try
+            {
+                CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+                DataValidationHelper dataValidationHelper = new DataValidationHelper();
+                bool taskExists = dataValidationHelper.IfTaskExists(taskID);
+                bool technologyExists = dataValidationHelper.IfTechnologyExists(technologyID);
+                if (!taskExists && !technologyExists)
+                {
+                    Console.WriteLine(CompanyManagementResource.TaskMissing + " and " + CompanyManagementResource.TechnologyMissing);
+                    return null;
+                }
+                else if(!taskExists)
+                {
+                    Console.WriteLine(CompanyManagementResource.TaskMissing);
+                    return null;
+                }
+                else if(!technologyExists)
+                {
+                    Console.WriteLine(CompanyManagementResource.TechnologyMissing);
+                    return null;
+                }
+                else
+                {
+                    int countOfTechnologyAssignedToATask = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID
+                                                            && TaskTechnology.TechnologyID == technologyID select TaskTechnology).Count();
+                    return countOfTechnologyAssignedToATask;
+                }
+            }
+            
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw e;
+            }
+        }
     }
 }

@@ -42,6 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer.cs" />
+    <Compile Include="CompanyManagementBLResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompanyManagementBLResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataConverter.cs" />
     <Compile Include="Entities\BOEmployee.cs" />
     <Compile Include="Entities\BOEmployeeProject.cs" />
@@ -59,6 +64,12 @@
       <Project>{b20d93b8-af73-4ba4-b418-495f4a278e77}</Project>
       <Name>CompanyManagementDataLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CompanyManagementBLResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CompanyManagementBLResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

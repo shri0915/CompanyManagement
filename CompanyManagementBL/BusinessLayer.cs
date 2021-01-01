@@ -12,8 +12,8 @@ namespace CompanyManagementBL
     {
         
         DataLayer dataLayer = new DataLayer();
-
-
+        
+        
 
         public List<BOProject> GetAllProjects()
         {
@@ -364,11 +364,32 @@ namespace CompanyManagementBL
 
             }
         }
-        public void AssignTechnologyToTask(int technologyID, int taskID)
+        public void AssignTechnologyToTask(int technologyID, int taskID, int? maximumNumberOfTechnologiesThatCanBeAssignedToATask)
         {
             try
             {
+                int? countOfTechnologiesAssignedToATask = dataLayer.GetCountOfTechnologiesAssignedToATask(taskID, technologyID);
+                bool? projectUsesTheTechnology = dataLayer.IfProjectUsesTheTechnology(taskID, technologyID);
+                if (projectUsesTheTechnology.Equals(null) || countOfTechnologiesAssignedToATask.Equals(null))
+                {
 
+                }
+                else
+                {
+                    bool technologyAssignedToProjectBelongingToTask = (bool)dataLayer.IfProjectUsesTheTechnology(taskID, technologyID);
+                    if (technologyAssignedToProjectBelongingToTask && countOfTechnologiesAssignedToATask < maximumNumberOfTechnologiesThatCanBeAssignedToATask)
+                    {
+                        dataLayer.AssignTechnologyToTask(technologyID, taskID);
+                    }
+                    else if(countOfTechnologiesAssignedToATask >= maximumNumberOfTechnologiesThatCanBeAssignedToATask)
+                    {
+                        Console.WriteLine(CompanyManagementBLResource.CannotAssignTechnologyToTaskLimitReached);
+                    }
+                    else
+                    {
+                        Console.WriteLine(CompanyManagementBLResource.CannotAssignTechnologyToTask);
+                    }
+                }
 
 
             }
@@ -380,7 +401,7 @@ namespace CompanyManagementBL
 
             }
         }
-        public void UpdateTechnologiesForTask(List<int> technologyIDs, int taskID) //Incomplete. Yet to be written.
+        public void UpdateTechnologiesForTask(List<int> technologyIDs, int taskID)
         {
             try
             {
@@ -412,12 +433,23 @@ namespace CompanyManagementBL
 
             }
         }
-        public void DeleteTechnology(int technology)
+        public void DeleteTechnology(int technologyID, int? maxmimumNumberOfProjectAssociatedWithATechnologyForWhichTechnologyCanBeDeleted)
         {
             try
             {
+                int? countOfTechnologyProject = dataLayer.GetAllTechnologyProjects(technologyID).Count();
+                if(countOfTechnologyProject.Equals(null))
+                {
 
-
+                }
+                else if (countOfTechnologyProject >= maxmimumNumberOfProjectAssociatedWithATechnologyForWhichTechnologyCanBeDeleted)
+                {
+                    Console.WriteLine(CompanyManagementBLResource.CannotDeleteTechnology);
+                }
+                else
+                {
+                    dataLayer.DeleteTechnology(technologyID);
+                }
 
             }
 
@@ -460,5 +492,6 @@ namespace CompanyManagementBL
 
             }
         }
-    }
+
+        }
 }
