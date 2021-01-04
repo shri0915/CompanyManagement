@@ -201,7 +201,7 @@ namespace Program
             taskID = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Please enter the maximum number of technologies that can be assigned to a task");
             maximumNumberOfTechnologiesThatCanBeAssignedToATask = Convert.ToInt32(Console.ReadLine());
-            businessLayer.AssignTechnologyToTask(technologyID, taskID, maximumNumberOfTechnologiesThatCanBeAssignedToATask);
+            businessLayer.AssignTechnologyToTask(technologyID, taskID);
 
             /*
             //Create Task In Project

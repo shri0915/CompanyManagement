@@ -380,18 +380,21 @@ namespace CompanyManagementBL
 
             }
         }
-        public void AssignTechnologyToTask(int technologyID, int taskID, int? maximumNumberOfTechnologiesThatCanBeAssignedToATask)
+        public void AssignTechnologyToTask(int technologyID, int taskID)
         {
             try
             {
+                BOConstraints boConstraints = new BOConstraints();
+                CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+                List<int> projectIDs = (from ProjectTask in dc.ProjectTasks where ProjectTask.TaskID == taskID select ProjectTask.ProjectID).ToList();
                 DataLayer dataLayer = new DataLayer();
-                int technologiesTaskCount = dataLayer.GetCountOfTechnologiesAssignedToATask(taskID, technologyID);
-                bool projectUsesTheTechnology = dataLayer.IfProjectUsesTheTechnology(technologyID);
-                    if (projectUsesTheTechnology && technologiesTaskCount < maximumNumberOfTechnologiesThatCanBeAssignedToATask)
+                int technologiesTaskCount = dataLayer.GetCountOfTechnologiesAssignedToATask(taskID);
+                bool projectUsesTheTechnology = dataLayer.IfProjectUsesTheTechnology(technologyID, projectIDs);
+                    if (projectUsesTheTechnology && technologiesTaskCount < boConstraints.maxNumberOFTaskTechnology)
                     {
                         dataLayer.AssignTechnologyToTask(technologyID, taskID);
                     }
-                    else if(technologiesTaskCount >= maximumNumberOfTechnologiesThatCanBeAssignedToATask)
+                    else if(technologiesTaskCount >= boConstraints.maxNumberOFTaskTechnology)
                     {
                         Console.WriteLine(CompanyManagementBLResource.CannotAssignTechnologyToTaskLimitReached);
                     }
@@ -443,13 +446,14 @@ namespace CompanyManagementBL
 
             }
         }
-        public void DeleteTechnology(int technologyID, int? maxmimumNumberOfProjectAssociatedWithATechnologyForWhichTechnologyCanBeDeleted)
+        public void DeleteTechnology(int technologyID)
         {
             try
             {
+                BOConstraints boConstraints = new BOConstraints();
                 DataLayer dataLayer = new DataLayer();
                 int? countOfTechnologyProject = dataLayer.GetAllTechnologyProjects(technologyID).Count();
-                if (countOfTechnologyProject >= maxmimumNumberOfProjectAssociatedWithATechnologyForWhichTechnologyCanBeDeleted)
+                if (countOfTechnologyProject >= boConstraints.minNumberOfProjectTechnologies)
                 {
                     Console.WriteLine(CompanyManagementBLResource.CannotDeleteTechnology);
                 }

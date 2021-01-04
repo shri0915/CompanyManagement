@@ -744,23 +744,32 @@ namespace CompanyManagementDataLayer
             }
         }
 
-        public bool IfProjectUsesTheTechnology(int technologyID)
+        public bool IfProjectUsesTheTechnology(int technologyID, List<int> projectIDs)
         {
             CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
                 bool technologyExists = dataValidationHelper.IfTechnologyExists(technologyID);
-                if(!technologyExists)
+                bool doesProjectUseTechnology = false;
+                if (!technologyExists)
                 {
                     throw new Exception(CompanyManagementResource.TechnologyMissing);
                 }
                 else
                 {
-                    bool doesProjectUseTechnology = (from  ProjectTechnology in dc.ProjectTechnologies where ProjectTechnology.TechnologyID == technologyID
-                                             select ProjectTechnology).Any();
-                    return doesProjectUseTechnology;
+                    foreach (int projectID in projectIDs)
+                    {
+                       doesProjectUseTechnology = (from ProjectTechnology in dc.ProjectTechnologies
+                                                         where ProjectTechnology.TechnologyID == technologyID && ProjectTechnology.ProjectID == projectID
+                                                         select ProjectTechnology).Any();
+                        if(doesProjectUseTechnology)
+                        {
+                            break;
+                        }
+                    }
 
+                    return doesProjectUseTechnology;
                     
                 }
             }
@@ -772,30 +781,20 @@ namespace CompanyManagementDataLayer
             }
         }
 
-       public int GetCountOfTechnologiesAssignedToATask(int taskID, int technologyID)
+       public int GetCountOfTechnologiesAssignedToATask(int taskID)
         {
             try
             {
                 CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
                 DataValidationHelper dataValidationHelper = new DataValidationHelper();
                 bool taskExists = dataValidationHelper.IfTaskExists(taskID);
-                bool technologyExists = dataValidationHelper.IfTechnologyExists(technologyID);
-                if (!taskExists && !technologyExists)
-                {
-                    throw new Exception(CompanyManagementResource.TaskMissing + " and " + CompanyManagementResource.TechnologyMissing);
-                }
-                else if(!taskExists)
+                if(!taskExists)
                 {
                     throw new Exception(CompanyManagementResource.TaskMissing);
                 }
-                else if(!technologyExists)
-                {
-                    throw new Exception(CompanyManagementResource.TechnologyMissing);
-                }
                 else
                 {
-                    int countOfTechnologyAssignedToATask = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID
-                                                            && TaskTechnology.TechnologyID == technologyID select TaskTechnology).Count();
+                    int countOfTechnologyAssignedToATask = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID select TaskTechnology).Count();
                     return countOfTechnologyAssignedToATask;
                 }
             }
