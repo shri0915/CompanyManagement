@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CompanyManagementBL
 {
-    public class BOConstraints
+    public class BLConstraints
     {
         public int maxNumberOFTaskTechnology = 4;
-        public int minNumberOfProjectTechnologies = 2;
+        public int minNumberOfProjectsUsingTechnologies = 2;
     }
 }

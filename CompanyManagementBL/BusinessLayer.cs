@@ -384,17 +384,17 @@ namespace CompanyManagementBL
         {
             try
             {
-                BOConstraints boConstraints = new BOConstraints();
+                BLConstraints blConstraints = new BLConstraints();
                 CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
                 List<int> projectIDs = (from ProjectTask in dc.ProjectTasks where ProjectTask.TaskID == taskID select ProjectTask.ProjectID).ToList();
                 DataLayer dataLayer = new DataLayer();
                 int technologiesTaskCount = dataLayer.GetCountOfTechnologiesAssignedToATask(taskID);
                 bool projectUsesTheTechnology = dataLayer.IfProjectUsesTheTechnology(technologyID, projectIDs);
-                    if (projectUsesTheTechnology && technologiesTaskCount < boConstraints.maxNumberOFTaskTechnology)
+                    if (projectUsesTheTechnology && technologiesTaskCount < blConstraints.maxNumberOFTaskTechnology)
                     {
                         dataLayer.AssignTechnologyToTask(technologyID, taskID);
                     }
-                    else if(technologiesTaskCount >= boConstraints.maxNumberOFTaskTechnology)
+                    else if(technologiesTaskCount >= blConstraints.maxNumberOFTaskTechnology)
                     {
                         Console.WriteLine(CompanyManagementBLResource.CannotAssignTechnologyToTaskLimitReached);
                     }
@@ -450,10 +450,10 @@ namespace CompanyManagementBL
         {
             try
             {
-                BOConstraints boConstraints = new BOConstraints();
+                BLConstraints blConstraints = new BLConstraints();
                 DataLayer dataLayer = new DataLayer();
-                int? countOfTechnologyProject = dataLayer.GetAllTechnologyProjects(technologyID).Count();
-                if (countOfTechnologyProject >= boConstraints.minNumberOfProjectTechnologies)
+                int? countOfProjectsUsingTechnology = dataLayer.GetAllTechnologyProjects(technologyID).Count();
+                if (countOfProjectsUsingTechnology >= blConstraints.minNumberOfProjectsUsingTechnologies)
                 {
                     Console.WriteLine(CompanyManagementBLResource.CannotDeleteTechnology);
                 }
