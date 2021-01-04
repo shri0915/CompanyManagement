@@ -107,7 +107,7 @@ namespace CompanyManagementBL
             boEmployeeProject.EmployeeProjectID = employeeProject.EmployeeProjectID;
             boEmployeeProject.EmployeeID = employeeProject.EmployeeID;
             boEmployeeProject.ProjectID = employeeProject.ProjectID;
-            boEmployeeProject.EmployeeRoleInProject = employeeProject.EmployeeRoleInProject;
+            boEmployeeProject.employeeRoleInProject = (BOEmployeeProject.EmployeeRoleInProject)employeeProject.EmployeeRoleInProject;
             return boEmployeeProject;
         }
 

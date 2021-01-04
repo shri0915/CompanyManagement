@@ -22,7 +22,7 @@ namespace Program
             int? maxmimumNumberOfProjectAssociatedWithATechnologyForWhichTechnologyCanBeDeleted = 2;
             BusinessLayer businessLayer = new BusinessLayer();
             
-            /*
+            
             //List all the Projects
             Console.WriteLine("Here are all the projects in the database");
             foreach (Project returnedProject in dataLayer.GetAllProjects())
@@ -192,7 +192,7 @@ namespace Program
             projectID = Convert.ToInt32(Console.ReadLine());
             dataLayer.AssignEmployeeToProject(employeeID, projectID);
             
-            */
+            
 
             //Assign Technology To Task
             Console.WriteLine("Please enter the Technology ID you want to assign to the task");
@@ -203,7 +203,7 @@ namespace Program
             maximumNumberOfTechnologiesThatCanBeAssignedToATask = Convert.ToInt32(Console.ReadLine());
             businessLayer.AssignTechnologyToTask(technologyID, taskID);
 
-            /*
+            
             //Create Task In Project
             Console.WriteLine("Creating a new task");
             CompanyManagementDataLayer.Task task = new CompanyManagementDataLayer.Task();
@@ -242,14 +242,14 @@ namespace Program
             Console.WriteLine("Please enter the Employee ID to be deleted");
             dataLayer.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));
             
-            */
+            
             //Delete Technology
             Console.WriteLine("Please enter the Technology ID you want to delete");
             technologyID = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Please enter the limit on the projects associated with the technology. " +
                 "If the number of projects associated with technology in more than this in the system the technology won't be deleted");
             maxmimumNumberOfProjectAssociatedWithATechnologyForWhichTechnologyCanBeDeleted = Convert.ToInt32(Console.ReadLine());
-            businessLayer.DeleteTechnology(technologyID, maxmimumNumberOfProjectAssociatedWithATechnologyForWhichTechnologyCanBeDeleted);
+            businessLayer.DeleteTechnology(technologyID);
             
             Console.WriteLine("Press enter to close...");
             Console.ReadLine();

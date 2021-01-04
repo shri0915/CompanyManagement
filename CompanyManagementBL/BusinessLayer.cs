@@ -220,7 +220,6 @@ namespace CompanyManagementBL
             try
             {
                 DataLayer dataLayer = new DataLayer();
-
                 List<BOTaskTechnology> listOfTechnologiesForEmployee = new List<BOTaskTechnology>();
                 listOfTechnologiesForEmployee = DataConverter.ConvertTaskTechnologyListToBOTaskTechnologyList(dataLayer.GetAllTechnologiesForEmployee(employeeID));
                 return listOfTechnologiesForEmployee;
@@ -261,8 +260,6 @@ namespace CompanyManagementBL
                 List<BOEmployeeProject> listOfActiveProjectManagedByEmployee = new List<BOEmployeeProject>();
                 listOfActiveProjectManagedByEmployee = DataConverter.ConvertEmployeeProjectListToBOEmployeeProjectList(dataLayer.GetAllActiveProjectsManagedByEmployee(employeeID));
                 return listOfActiveProjectManagedByEmployee;
-
-
             }
 
             catch (Exception e)

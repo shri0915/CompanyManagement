@@ -11,6 +11,14 @@ namespace CompanyManagementBL.Entities
         public int EmployeeProjectID;
         public int EmployeeID;
         public int ProjectID;
-        public int? EmployeeRoleInProject;
+        public enum EmployeeRoleInProject
+        {
+            ProjectManager = 1,
+            TeamLead = 2,
+            UIDeveloper = 3,
+            BackendDeveloper = 4,
+            SystemManager = 5
+        }
+        public EmployeeRoleInProject employeeRoleInProject;
     }
 }
