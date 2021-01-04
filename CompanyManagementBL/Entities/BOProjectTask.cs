@@ -8,9 +8,9 @@ namespace CompanyManagementBL.Entities
 {
     public class BOProjectTask
     {
-        public int ProjectTask;
+        public int ProjectTaskID;
         public int ProjectID;
         public int TaskID;
-        public int ProjectTaskStatus;
+        public int? ProjectTaskStatus;
     }
 }

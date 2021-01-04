@@ -11,7 +11,7 @@ namespace CompanyManagementBL
     public class BusinessLayer
     {
         
-        DataLayer dataLayer = new DataLayer();
+        
         
         
 
@@ -19,10 +19,11 @@ namespace CompanyManagementBL
         {
             try
             {
+                DataLayer dataLayer = new DataLayer();
 
-                List<BOProject> listOfBOProjects = new List<BOProject>();
-                listOfBOProjects =  DataConverter.ConvertProjectListToBOProjectList(dataLayer.GetAllProjects());
-                return listOfBOProjects;
+                List<BOProject> listOfProjects = new List<BOProject>();
+                listOfProjects =  DataConverter.ConvertProjectListToBOProjectList(dataLayer.GetAllProjects());
+                return listOfProjects;
 
             }
 
@@ -38,9 +39,10 @@ namespace CompanyManagementBL
         {
             try
             {
-                List<BOTechnology> listOfBOTechologies = new List<BOTechnology>();
-                listOfBOTechologies = DataConverter.ConvertTechnologyListToBOTechnologyList(dataLayer.GetAllTechnologies());
-                return listOfBOTechologies;
+                DataLayer dataLayer = new DataLayer();
+                List<BOTechnology> listOfTechologies = new List<BOTechnology>();
+                listOfTechologies = DataConverter.ConvertTechnologyListToBOTechnologyList(dataLayer.GetAllTechnologies());
+                return listOfTechologies;
 
 
 
@@ -58,6 +60,7 @@ namespace CompanyManagementBL
         {
             try
             {
+                DataLayer dataLayer = new DataLayer();
                 int? countOfEmployeesForProject = 0;
                 countOfEmployeesForProject = dataLayer.GetEmployeeCountForProject(projectID);
                 return countOfEmployeesForProject;
@@ -78,10 +81,11 @@ namespace CompanyManagementBL
         {
             try
             {
+                DataLayer dataLayer = new DataLayer();
 
-                List<BOEmployee> listOfBOEmployee = new List<BOEmployee>();
-                listOfBOEmployee = DataConverter.ConvertEmployeeListToBOEmployeeList(dataLayer.GetAllEmployeesForProject(projectID));
-                return listOfBOEmployee;
+                List<BOEmployee> listOfEmployee = new List<BOEmployee>();
+                listOfEmployee = DataConverter.ConvertEmployeeListToBOEmployeeList(dataLayer.GetAllEmployeesForProject(projectID));
+                return listOfEmployee;
 
             }
 
@@ -97,6 +101,7 @@ namespace CompanyManagementBL
         {
             try
             {
+                DataLayer dataLayer = new DataLayer();
 
                 List<BOProject> listOfDelayedProjects = new List<BOProject>();
                 listOfDelayedProjects = DataConverter.ConvertProjectListToBOProjectList(dataLayer.GetAllDelayedProjects());
@@ -116,9 +121,11 @@ namespace CompanyManagementBL
         {
             try
             {
+                DataLayer dataLayer = new DataLayer();
 
-                List<BOProject> listOfDelayedProjects = new List<BOProject>();
-                return listOfDelayedProjects;
+                List<BOProject> listOfProjectsForEmployee = new List<BOProject>();
+                listOfProjectsForEmployee = DataConverter.ConvertProjectListToBOProjectList(dataLayer.GetAllProjectsForEmployee(employeeID));
+                return listOfProjectsForEmployee;
 
             }
 
@@ -134,7 +141,9 @@ namespace CompanyManagementBL
         {
             try
             {
+                DataLayer dataLayer = new DataLayer();
                 List<BOTask> listOfTasksForEmployee = new List<BOTask>();
+                listOfTasksForEmployee = DataConverter.ConvertTaskListToBOTaskList(dataLayer.GetAllTasksForEmployee(employeeID));
                 return listOfTasksForEmployee;
 
 
@@ -152,6 +161,7 @@ namespace CompanyManagementBL
         {
             try
             {
+                DataLayer dataLayer = new DataLayer();
 
                 List<BOTaskTechnology> listOfTechnologyTasksForEmployee = new List<BOTaskTechnology>();
                 listOfTechnologyTasksForEmployee = DataConverter.ConvertTaskTechnologyListToBOTaskTechnologyList(dataLayer.GetAllTechnologyTasksForEmployee(technologyID, employeeID));
@@ -171,11 +181,10 @@ namespace CompanyManagementBL
         {
             try
             {
-                List<BOProjectTechnology> listOfTechnologiesForProjects = new List<BOProjectTechnology>();
-                
-                return listOfTechnologiesForProjects;
-
-
+                DataLayer dataLayer = new DataLayer();
+                List<BOProjectTechnology> listOfProjectsUsingTechnology = new List<BOProjectTechnology>();
+                listOfProjectsUsingTechnology = DataConverter.ConertProjectTechnologyListToBOProjectTechnologyList(dataLayer.GetAllTechnologyProjects(technologyID));
+                return listOfProjectsUsingTechnology;
             }
 
             catch (Exception e)
@@ -190,7 +199,9 @@ namespace CompanyManagementBL
         {
             try
             {
+                DataLayer dataLayer = new DataLayer();
                 List<BOProjectTask> listOfActiveTasksForProject = new List<BOProjectTask>();
+                listOfActiveTasksForProject = DataConverter.ConvertProjectTaskListToBOProjectTaskList(dataLayer.GetAllActiveTasksForProject(projectID));
                 return listOfActiveTasksForProject;
 
 
@@ -208,8 +219,10 @@ namespace CompanyManagementBL
         {
             try
             {
+                DataLayer dataLayer = new DataLayer();
 
                 List<BOTaskTechnology> listOfTechnologiesForEmployee = new List<BOTaskTechnology>();
+                listOfTechnologiesForEmployee = DataConverter.ConvertTaskTechnologyListToBOTaskTechnologyList(dataLayer.GetAllTechnologiesForEmployee(employeeID));
                 return listOfTechnologiesForEmployee;
 
             }
@@ -222,12 +235,12 @@ namespace CompanyManagementBL
             }
         }
 
-        public int GetProjectCountForEmployee(int employeeID)
+        public int? GetProjectCountForEmployee(int employeeID)
         {
             try
             {
-
-                int projectCountForEmployee = 0;
+                DataLayer dataLayer = new DataLayer();
+                int? projectCountForEmployee = dataLayer.GetProjectCountForEmployee(employeeID);
                 return projectCountForEmployee;
 
             }
@@ -244,9 +257,11 @@ namespace CompanyManagementBL
         {
             try
             {
-
+                DataLayer dataLayer = new DataLayer();
                 List<BOEmployeeProject> listOfActiveProjectManagedByEmployee = new List<BOEmployeeProject>();
+                listOfActiveProjectManagedByEmployee = DataConverter.ConvertEmployeeProjectListToBOEmployeeProjectList(dataLayer.GetAllActiveProjectsManagedByEmployee(employeeID));
                 return listOfActiveProjectManagedByEmployee;
+
 
             }
 
@@ -262,6 +277,7 @@ namespace CompanyManagementBL
         {
             try
             {
+                DataLayer dataLayer = new DataLayer();
                 List<BOEmployeeTask> listOfDelayedTasksForEmployee = new List<BOEmployeeTask>();
                 return listOfDelayedTasksForEmployee;
 
@@ -281,8 +297,8 @@ namespace CompanyManagementBL
 
             try
             {
+                DataLayer dataLayer = new DataLayer();
 
-               
 
             }
 
@@ -301,7 +317,7 @@ namespace CompanyManagementBL
         {
             try
             {
-
+                DataLayer dataLayer = new DataLayer();
 
 
             }
@@ -319,7 +335,7 @@ namespace CompanyManagementBL
         {
             try
             {
-
+                DataLayer dataLayer = new DataLayer();
 
 
             }
@@ -336,7 +352,7 @@ namespace CompanyManagementBL
         {
             try
             {
-
+                DataLayer dataLayer = new DataLayer();
 
 
             }
@@ -352,7 +368,7 @@ namespace CompanyManagementBL
         {
             try
             {
-
+                DataLayer dataLayer = new DataLayer();
 
 
             }
@@ -368,20 +384,14 @@ namespace CompanyManagementBL
         {
             try
             {
-                int? countOfTechnologiesAssignedToATask = dataLayer.GetCountOfTechnologiesAssignedToATask(taskID, technologyID);
-                bool? projectUsesTheTechnology = dataLayer.IfProjectUsesTheTechnology(taskID, technologyID);
-                if (projectUsesTheTechnology.Equals(null) || countOfTechnologiesAssignedToATask.Equals(null))
-                {
-
-                }
-                else
-                {
-                    bool technologyAssignedToProjectBelongingToTask = (bool)dataLayer.IfProjectUsesTheTechnology(taskID, technologyID);
-                    if (technologyAssignedToProjectBelongingToTask && countOfTechnologiesAssignedToATask < maximumNumberOfTechnologiesThatCanBeAssignedToATask)
+                DataLayer dataLayer = new DataLayer();
+                int technologiesTaskCount = dataLayer.GetCountOfTechnologiesAssignedToATask(taskID, technologyID);
+                bool projectUsesTheTechnology = dataLayer.IfProjectUsesTheTechnology(technologyID);
+                    if (projectUsesTheTechnology && technologiesTaskCount < maximumNumberOfTechnologiesThatCanBeAssignedToATask)
                     {
                         dataLayer.AssignTechnologyToTask(technologyID, taskID);
                     }
-                    else if(countOfTechnologiesAssignedToATask >= maximumNumberOfTechnologiesThatCanBeAssignedToATask)
+                    else if(technologiesTaskCount >= maximumNumberOfTechnologiesThatCanBeAssignedToATask)
                     {
                         Console.WriteLine(CompanyManagementBLResource.CannotAssignTechnologyToTaskLimitReached);
                     }
@@ -389,7 +399,7 @@ namespace CompanyManagementBL
                     {
                         Console.WriteLine(CompanyManagementBLResource.CannotAssignTechnologyToTask);
                     }
-                }
+                
 
 
             }
@@ -405,7 +415,7 @@ namespace CompanyManagementBL
         {
             try
             {
-
+                DataLayer dataLayer = new DataLayer();
 
 
             }
@@ -421,7 +431,7 @@ namespace CompanyManagementBL
         {
             try
             {
-
+                DataLayer dataLayer = new DataLayer();
 
 
             }
@@ -437,12 +447,9 @@ namespace CompanyManagementBL
         {
             try
             {
+                DataLayer dataLayer = new DataLayer();
                 int? countOfTechnologyProject = dataLayer.GetAllTechnologyProjects(technologyID).Count();
-                if(countOfTechnologyProject.Equals(null))
-                {
-
-                }
-                else if (countOfTechnologyProject >= maxmimumNumberOfProjectAssociatedWithATechnologyForWhichTechnologyCanBeDeleted)
+                if (countOfTechnologyProject >= maxmimumNumberOfProjectAssociatedWithATechnologyForWhichTechnologyCanBeDeleted)
                 {
                     Console.WriteLine(CompanyManagementBLResource.CannotDeleteTechnology);
                 }
@@ -464,7 +471,7 @@ namespace CompanyManagementBL
         {
             try
             {
-
+                DataLayer dataLayer = new DataLayer();
 
 
             }
@@ -480,7 +487,7 @@ namespace CompanyManagementBL
         {
             try
             {
-
+                DataLayer dataLayer = new DataLayer();
 
 
             }

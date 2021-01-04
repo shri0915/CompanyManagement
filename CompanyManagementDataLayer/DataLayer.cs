@@ -744,37 +744,22 @@ namespace CompanyManagementDataLayer
             }
         }
 
-        public bool? IfProjectUsesTheTechnology(int taskID, int technologyID)
+        public bool IfProjectUsesTheTechnology(int technologyID)
         {
             CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             try
             {
-                bool taskExists = dataValidationHelper.IfTaskExists(taskID);
                 bool technologyExists = dataValidationHelper.IfTechnologyExists(technologyID);
-                if (!taskExists && !technologyExists)
+                if(!technologyExists)
                 {
-                    Console.WriteLine(CompanyManagementResource.TaskMissing + " and " + CompanyManagementResource.TechnologyMissing);
-                    return null;
-                }
-                else if(!taskExists)
-                {
-                    Console.WriteLine(CompanyManagementResource.TaskMissing);
-                    return null;
-                }
-                else if(!technologyExists)
-                {
-                    Console.WriteLine(CompanyManagementResource.TechnologyMissing);
-                    return null;
+                    throw new Exception(CompanyManagementResource.TechnologyMissing);
                 }
                 else
                 {
-                    bool projectTaskExists = (from ProjectTask in dc.ProjectTasks
-                                             join ProjectTechnology in dc.ProjectTechnologies on
-                       ProjectTask.ProjectID equals ProjectTechnology.ProjectID
-                                             where ProjectTask.TaskID == taskID && ProjectTechnology.TechnologyID == technologyID
-                                             select ProjectTask).Any();
-                    return projectTaskExists;
+                    bool doesProjectUseTechnology = (from  ProjectTechnology in dc.ProjectTechnologies where ProjectTechnology.TechnologyID == technologyID
+                                             select ProjectTechnology).Any();
+                    return doesProjectUseTechnology;
 
                     
                 }
@@ -787,7 +772,7 @@ namespace CompanyManagementDataLayer
             }
         }
 
-       public int? GetCountOfTechnologiesAssignedToATask(int taskID, int technologyID)
+       public int GetCountOfTechnologiesAssignedToATask(int taskID, int technologyID)
         {
             try
             {
@@ -797,18 +782,15 @@ namespace CompanyManagementDataLayer
                 bool technologyExists = dataValidationHelper.IfTechnologyExists(technologyID);
                 if (!taskExists && !technologyExists)
                 {
-                    Console.WriteLine(CompanyManagementResource.TaskMissing + " and " + CompanyManagementResource.TechnologyMissing);
-                    return null;
+                    throw new Exception(CompanyManagementResource.TaskMissing + " and " + CompanyManagementResource.TechnologyMissing);
                 }
                 else if(!taskExists)
                 {
-                    Console.WriteLine(CompanyManagementResource.TaskMissing);
-                    return null;
+                    throw new Exception(CompanyManagementResource.TaskMissing);
                 }
                 else if(!technologyExists)
                 {
-                    Console.WriteLine(CompanyManagementResource.TechnologyMissing);
-                    return null;
+                    throw new Exception(CompanyManagementResource.TechnologyMissing);
                 }
                 else
                 {
