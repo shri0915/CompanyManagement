@@ -270,7 +270,7 @@ namespace CompanyManagementBL
             }
         }
 
-        public List<BOEmployeeTask> GetAllDelayedTasksForEmployee(int employeeID)
+        public List<BOEmployeeTask> GetAllDelayedTasksForEmployee(int employeeID) //Yet to be implemented
         {
             try
             {
@@ -295,6 +295,7 @@ namespace CompanyManagementBL
             try
             {
                 DataLayer dataLayer = new DataLayer();
+                dataLayer.AddProject(project);
 
 
             }
@@ -315,6 +316,7 @@ namespace CompanyManagementBL
             try
             {
                 DataLayer dataLayer = new DataLayer();
+                dataLayer.AddTechnology(technology);
 
 
             }
@@ -333,6 +335,7 @@ namespace CompanyManagementBL
             try
             {
                 DataLayer dataLayer = new DataLayer();
+                dataLayer.AddEmployee(employee);
 
 
             }
@@ -345,7 +348,7 @@ namespace CompanyManagementBL
             }
         }
 
-        public void AssignEmployeeToProject(int employeeID, int projectID)
+        public void AssignEmployeeToProject(int employeeID, int projectID) //Yet to be implemented
         {
             try
             {
@@ -361,7 +364,7 @@ namespace CompanyManagementBL
 
             }
         }
-        public void CreateTaskInProject(CompanyManagementDataLayer.Task task, int projectID)
+        public void CreateTaskInProject(CompanyManagementDataLayer.Task task, int projectID) //Yet to be implemented
         {
             try
             {
@@ -411,7 +414,7 @@ namespace CompanyManagementBL
 
             }
         }
-        public void UpdateTechnologiesForTask(List<int> technologyIDs, int taskID)
+        public void UpdateTechnologiesForTask(List<int> technologyIDs, int taskID) //Yet to be implemented
         {
             try
             {
@@ -427,7 +430,7 @@ namespace CompanyManagementBL
 
             }
         }
-        public void DeleteEmployeeFromSystem(int employeeID)
+        public void DeleteEmployeeFromSystem(int employeeID) //Yet to be implemented
         {
             try
             {
@@ -468,7 +471,7 @@ namespace CompanyManagementBL
 
             }
         }
-        public void DeleteTask(int taskID)
+        public void DeleteTask(int taskID) //Yet to be implemented
         {
             try
             {
@@ -484,7 +487,7 @@ namespace CompanyManagementBL
 
             }
         }
-        public void DeleteProject(int projectID)
+        public void DeleteProject(int projectID) //Yet to be Implemented
         {
             try
             {
