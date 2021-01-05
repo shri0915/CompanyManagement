@@ -805,5 +805,30 @@ namespace CompanyManagementDataLayer
                 throw e;
             }
         }
+
+        public bool IfTaskNotStarted(int taskID)
+        {
+            try
+            {
+                CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+                DataValidationHelper dataValidationHelper = new DataValidationHelper();
+                bool taskExists = dataValidationHelper.IfTaskExists(taskID);
+                bool hastaskNotStarted = false;
+                if (!taskExists)
+                {
+                    throw new Exception(CompanyManagementResource.TaskMissing);
+                }
+                else
+                {
+                    hastaskNotStarted = (from ProjectTask in dc.ProjectTasks where ProjectTask.TaskID == taskID 
+                                   && ProjectTask.ProjectTaskStatus == (int)Status.NotStarted select ProjectTask).Any();
+                    return hastaskNotStarted;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

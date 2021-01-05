@@ -79,6 +79,15 @@ namespace CompanyManagementBL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot delete a task which has been started.
+        /// </summary>
+        internal static string CannotDeleteTask {
+            get {
+                return ResourceManager.GetString("CannotDeleteTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot delete technology.
         /// </summary>
         internal static string CannotDeleteTechnology {

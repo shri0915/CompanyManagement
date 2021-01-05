@@ -471,13 +471,20 @@ namespace CompanyManagementBL
 
             }
         }
-        public void DeleteTask(int taskID) //Yet to be implemented
+        public void DeleteTask(int taskID) 
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
-
-
+                bool hasTaskNotStarted = dataLayer.IfTaskNotStarted(taskID);
+                if(hasTaskNotStarted)
+                {
+                    dataLayer.DeleteTask(taskID);
+                }
+                else
+                {
+                    throw new Exception(CompanyManagementBLResource.CannotDeleteTask);
+                }
             }
 
             catch (Exception e)
