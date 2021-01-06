@@ -11,6 +11,13 @@ namespace CompanyManagementBL.Entities
         public int EmployeeTaskID;
         public int EmployeeID;
         public int TaskID;
-        public int? EmployeeTaskStatus;
+        public enum EmployeeTaskStatus
+        {
+            NotStarted = 1,
+            Active = 2,
+            Completed = 3,
+            Delayed = 4
+        }
+        public EmployeeTaskStatus employeeTaskStatus;
     }
 }

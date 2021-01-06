@@ -117,7 +117,7 @@ namespace CompanyManagementBL
             boEmployeeTask.EmployeeTaskID = employeeTask.EmployeeTaskID;
             boEmployeeTask.EmployeeID = employeeTask.EmployeeID;
             boEmployeeTask.TaskID = employeeTask.TaskID;
-            boEmployeeTask.EmployeeTaskStatus = employeeTask.EmployeeTaskStatus;
+            boEmployeeTask.employeeTaskStatus = (BOEmployeeTask.EmployeeTaskStatus)employeeTask.EmployeeTaskStatus;
             return boEmployeeTask;
         }
         public static BOEmployeeProject ConvertEmployeeProjectToBOEmployeeProject(EmployeeProject employeeProject)
