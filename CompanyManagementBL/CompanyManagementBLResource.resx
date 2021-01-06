@@ -120,6 +120,9 @@
   <data name="CannotAssignMoreProjects" xml:space="preserve">
     <value>Cannot assign more projects to this employee</value>
   </data>
+  <data name="CannotAssignMoreProjectsToPM" xml:space="preserve">
+    <value>Cannot assign more projects to this employee to manage</value>
+  </data>
   <data name="CannotAssignTechnologyToTask" xml:space="preserve">
     <value>Cannot assign this technology to this task.</value>
   </data>

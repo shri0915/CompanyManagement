@@ -495,6 +495,65 @@ namespace CompanyManagementDataLayer
                 throw e;
             }
         }
+
+        public void AssignEmployeeToProject(int employeeID, int projectID, int roleID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            DataValidationHelper dataValidationHelper = new DataValidationHelper();
+            try
+            {
+                if(!dataValidationHelper.IfEmployeeExists(employeeID) && !dataValidationHelper.IfProjectExists(projectID) && !dataValidationHelper.IfRoleExists(roleID))
+                {
+                    Console.WriteLine(CompanyManagementResource.EmployeeMissing + " and " + CompanyManagementResource.ProjectMissing + " and " + CompanyManagementResource.RoleMissing);
+                }
+                else if(!dataValidationHelper.IfRoleExists(roleID) && !dataValidationHelper.IfProjectExists(projectID))
+                {
+                    Console.WriteLine(CompanyManagementResource.RoleMissing + " and " + CompanyManagementResource.ProjectMissing);
+                }
+                else if(!dataValidationHelper.IfEmployeeExists(employeeID) && !dataValidationHelper.IfRoleExists(roleID))
+                {
+                    Console.WriteLine(CompanyManagementResource.EmployeeMissing + " and " + CompanyManagementResource.RoleMissing);
+                }
+                else if (!dataValidationHelper.IfEmployeeExists(employeeID) && !dataValidationHelper.IfProjectExists(projectID))
+                {
+                    Console.WriteLine(CompanyManagementResource.EmployeeMissing + " and " + CompanyManagementResource.ProjectMissing);
+                }
+                else if (!dataValidationHelper.IfEmployeeExists(employeeID))
+                {
+                    Console.WriteLine(CompanyManagementResource.EmployeeMissing);
+                }
+                else if (!dataValidationHelper.IfProjectExists(projectID))
+                {
+                    Console.WriteLine(CompanyManagementResource.ProjectMissing);
+                }
+                else if (!dataValidationHelper.IfRoleExists(roleID))
+                {
+                    Console.WriteLine(CompanyManagementResource.RoleMissing);
+                }
+                else
+                {
+                    if (!dataValidationHelper.IfEmployeeIsAssignedToProject(employeeID, projectID))
+                    {
+
+                        EmployeeProject objEmployeeProject = new EmployeeProject();
+                        objEmployeeProject.EmployeeID = employeeID;
+                        objEmployeeProject.ProjectID = projectID;
+                        objEmployeeProject.EmployeeRoleInProject = roleID;
+                        dc.EmployeeProjects.InsertOnSubmit(objEmployeeProject);
+                        dc.SubmitChanges();
+                    }
+                    else
+                    {
+                        Console.WriteLine(CompanyManagementResource.EmployeeAssignedToProject);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw e;
+            }
+        }
         public void CreateTaskInProject(Task task, int projectID)
         {
             CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();

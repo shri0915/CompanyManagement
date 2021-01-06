@@ -70,6 +70,15 @@ namespace CompanyManagementBL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot assign more projects to this employee to manage.
+        /// </summary>
+        internal static string CannotAssignMoreProjectsToPM {
+            get {
+                return ResourceManager.GetString("CannotAssignMoreProjectsToPM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot assign this technology to this task..
         /// </summary>
         internal static string CannotAssignTechnologyToTask {

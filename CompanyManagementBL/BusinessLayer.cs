@@ -19,9 +19,16 @@ namespace CompanyManagementBL
             Delayed = 4
         }
 
-        public Status status;
-        
-        
+        public enum Role
+        {
+            ProjectManager = 1,
+            TeamLead = 2,
+            UIDeveloper = 3,
+            BackendDeveloper = 4,
+            SystemManager = 5
+        }
+
+
 
         public List<BOProject> GetAllProjects()
         {
@@ -357,20 +364,35 @@ namespace CompanyManagementBL
             }
         }
 
-        public void AssignEmployeeToProject(int employeeID, int projectID) 
+        public void AssignEmployeeToProject(int employeeID, int projectID, int roleID) 
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
                 BLConstraints blConstraints = new BLConstraints();
                 int projectCountForEmployee = dataLayer.GetProjectCountForEmployee(employeeID);
-                if(projectCountForEmployee >= blConstraints.maxNumberOfProjectsForEmployee)
+                int projectManagedCountForEmployee = dataLayer.GetAllActiveProjectsManagedByEmployee(employeeID).Count();
+                if (roleID != (int)Role.ProjectManager)
                 {
-                    throw new Exception(CompanyManagementBLResource.CannotAssignMoreProjects);
+                    if (projectCountForEmployee >= blConstraints.maxNumberOfProjectsForEmployee)
+                    {
+                        throw new Exception(CompanyManagementBLResource.CannotAssignMoreProjects);
+                    }
+                    else
+                    {
+                        dataLayer.AssignEmployeeToProject(employeeID, projectID);
+                    }
                 }
                 else
                 {
-                    dataLayer.AssignEmployeeToProject(employeeID, projectID);
+                    if(projectManagedCountForEmployee < blConstraints.maxNumberOfProjectsManagedByEmployee)
+                    {
+                        dataLayer.AssignEmployeeToProject(employeeID, projectID, roleID);
+                    }
+                    else
+                    {
+                        throw new Exception(CompanyManagementBLResource.CannotAssignMoreProjectsToPM);
+                    }
                 }
 
             }

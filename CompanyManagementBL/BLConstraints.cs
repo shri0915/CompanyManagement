@@ -11,5 +11,6 @@ namespace CompanyManagementBL
         public int maxNumberOfTaskTechnology = 4;
         public int minNumberOfProjectsUsingTechnologies = 2;
         public int maxNumberOfProjectsForEmployee = 2;
+        public int maxNumberOfProjectsManagedByEmployee = 3;
     }
 }
