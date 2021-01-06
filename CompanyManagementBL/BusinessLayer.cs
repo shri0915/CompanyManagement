@@ -98,9 +98,9 @@ namespace CompanyManagementBL
             {
                 DataLayer dataLayer = new DataLayer();
 
-                List<BOEmployee> listOfEmployee = new List<BOEmployee>();
-                listOfEmployee = DataConverter.ConvertEmployeeListToBOEmployeeList(dataLayer.GetAllEmployeesForProject(projectID));
-                return listOfEmployee;
+                List<BOEmployee> listOfEmployees = new List<BOEmployee>();
+                listOfEmployees = DataConverter.ConvertEmployeeListToBOEmployeeList(dataLayer.GetAllEmployeesForProject(projectID));
+                return listOfEmployees;
 
             }
 
