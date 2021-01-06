@@ -61,6 +61,15 @@ namespace CompanyManagementBL {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot assign more projects to this employee.
+        /// </summary>
+        internal static string CannotAssignMoreProjects {
+            get {
+                return ResourceManager.GetString("CannotAssignMoreProjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot assign this technology to this task..
         /// </summary>
         internal static string CannotAssignTechnologyToTask {
@@ -75,6 +84,24 @@ namespace CompanyManagementBL {
         internal static string CannotAssignTechnologyToTaskLimitReached {
             get {
                 return ResourceManager.GetString("CannotAssignTechnologyToTaskLimitReached", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot creat task in this project since the project is completed.
+        /// </summary>
+        internal static string CannotCreateTaskInProject {
+            get {
+                return ResourceManager.GetString("CannotCreateTaskInProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot delete project.
+        /// </summary>
+        internal static string CannotDeleteProject {
+            get {
+                return ResourceManager.GetString("CannotDeleteProject", resourceCulture);
             }
         }
         

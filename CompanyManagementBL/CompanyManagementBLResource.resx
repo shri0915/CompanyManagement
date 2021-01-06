@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CannotAssignMoreProjects" xml:space="preserve">
+    <value>Cannot assign more projects to this employee</value>
+  </data>
   <data name="CannotAssignTechnologyToTask" xml:space="preserve">
     <value>Cannot assign this technology to this task.</value>
   </data>
   <data name="CannotAssignTechnologyToTaskLimitReached" xml:space="preserve">
     <value>Cannot assign any more technologies to this task. Limit for number technologies that can be assigned to this task has been reached</value>
+  </data>
+  <data name="CannotCreateTaskInProject" xml:space="preserve">
+    <value>Cannot creat task in this project since the project is completed</value>
+  </data>
+  <data name="CannotDeleteProject" xml:space="preserve">
+    <value>Cannot delete project</value>
   </data>
   <data name="CannotDeleteTask" xml:space="preserve">
     <value>Cannot delete a task which has been started</value>

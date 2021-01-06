@@ -11,6 +11,6 @@ namespace CompanyManagementBL.Entities
         public int EmployeeTaskID;
         public int EmployeeID;
         public int TaskID;
-        public int EmployeeTaskStatus;
+        public int? EmployeeTaskStatus;
     }
 }

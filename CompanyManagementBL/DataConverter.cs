@@ -68,7 +68,7 @@ namespace CompanyManagementBL
             return businessTaskTechnologies;
         }
 
-        public static List<BOProjectTechnology> ConertProjectTechnologyListToBOProjectTechnologyList(List<ProjectTechnology> projectTechnologies)
+        public static List<BOProjectTechnology> ConvertProjectTechnologyListToBOProjectTechnologyList(List<ProjectTechnology> projectTechnologies)
         {
             List<BOProjectTechnology> boProjectTechnologies = new List<BOProjectTechnology>();
             foreach(ProjectTechnology projectTechnology in projectTechnologies)
@@ -100,7 +100,26 @@ namespace CompanyManagementBL
             }
             return boEmployeeProjects;
         }
+        public static List<BOEmployeeTask> ConvertEmployeeTaskListtoBOEmployeeTaskList(List<EmployeeTask> employeeTasks)
+        {
+            List<BOEmployeeTask> boEmployeeTasks = new List<BOEmployeeTask>();
+            foreach(EmployeeTask employeeTask in employeeTasks)
+            {
+                BOEmployeeTask boEmployeeTask = ConvertEmployeeTaskToBOEmployeeTask(employeeTask);
+                boEmployeeTasks.Add(boEmployeeTask);
+            }
+            return boEmployeeTasks;
+        }
 
+        public static BOEmployeeTask ConvertEmployeeTaskToBOEmployeeTask(EmployeeTask employeeTask)
+        {
+            BOEmployeeTask boEmployeeTask = new BOEmployeeTask();
+            boEmployeeTask.EmployeeTaskID = employeeTask.EmployeeTaskID;
+            boEmployeeTask.EmployeeID = employeeTask.EmployeeID;
+            boEmployeeTask.TaskID = employeeTask.TaskID;
+            boEmployeeTask.EmployeeTaskStatus = employeeTask.EmployeeTaskStatus;
+            return boEmployeeTask;
+        }
         public static BOEmployeeProject ConvertEmployeeProjectToBOEmployeeProject(EmployeeProject employeeProject)
         {
             BOEmployeeProject boEmployeeProject = new BOEmployeeProject();

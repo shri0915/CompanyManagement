@@ -8,7 +8,8 @@ namespace CompanyManagementBL
 {
     public class BLConstraints
     {
-        public int maxNumberOFTaskTechnology = 4;
+        public int maxNumberOfTaskTechnology = 4;
         public int minNumberOfProjectsUsingTechnologies = 2;
+        public int maxNumberOfProjectsForEmployee = 2;
     }
 }

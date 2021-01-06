@@ -11,7 +11,15 @@ namespace CompanyManagementBL
     public class BusinessLayer
     {
         
-        
+       public enum Status
+        {
+            NotStarted = 1,
+            Active = 2,
+            Completed = 3,
+            Delayed = 4
+        }
+
+        public Status status;
         
         
 
@@ -56,12 +64,12 @@ namespace CompanyManagementBL
             }
         }
 
-        public int? GetEmployeeCountForProject(int projectID)
+        public int GetEmployeeCountForProject(int projectID)
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
-                int? countOfEmployeesForProject = 0;
+                int countOfEmployeesForProject = 0;
                 countOfEmployeesForProject = dataLayer.GetEmployeeCountForProject(projectID);
                 return countOfEmployeesForProject;
 
@@ -183,7 +191,7 @@ namespace CompanyManagementBL
             {
                 DataLayer dataLayer = new DataLayer();
                 List<BOProjectTechnology> listOfProjectsUsingTechnology = new List<BOProjectTechnology>();
-                listOfProjectsUsingTechnology = DataConverter.ConertProjectTechnologyListToBOProjectTechnologyList(dataLayer.GetAllTechnologyProjects(technologyID));
+                listOfProjectsUsingTechnology = DataConverter.ConvertProjectTechnologyListToBOProjectTechnologyList(dataLayer.GetAllTechnologyProjects(technologyID));
                 return listOfProjectsUsingTechnology;
             }
 
@@ -234,12 +242,12 @@ namespace CompanyManagementBL
             }
         }
 
-        public int? GetProjectCountForEmployee(int employeeID)
+        public int GetProjectCountForEmployee(int employeeID)
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
-                int? projectCountForEmployee = dataLayer.GetProjectCountForEmployee(employeeID);
+                int projectCountForEmployee = dataLayer.GetProjectCountForEmployee(employeeID);
                 return projectCountForEmployee;
 
             }
@@ -270,12 +278,13 @@ namespace CompanyManagementBL
             }
         }
 
-        public List<BOEmployeeTask> GetAllDelayedTasksForEmployee(int employeeID) //Yet to be implemented
+        public List<BOEmployeeTask> GetAllDelayedTasksForEmployee(int employeeID)
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
                 List<BOEmployeeTask> listOfDelayedTasksForEmployee = new List<BOEmployeeTask>();
+                listOfDelayedTasksForEmployee = DataConverter.ConvertEmployeeTaskListtoBOEmployeeTaskList(dataLayer.GetAllDelayedTasksForEmployee(employeeID));
                 return listOfDelayedTasksForEmployee;
 
 
@@ -348,12 +357,21 @@ namespace CompanyManagementBL
             }
         }
 
-        public void AssignEmployeeToProject(int employeeID, int projectID) //Yet to be implemented
+        public void AssignEmployeeToProject(int employeeID, int projectID) 
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
-
+                BLConstraints blConstraints = new BLConstraints();
+                int projectCountForEmployee = dataLayer.GetProjectCountForEmployee(employeeID);
+                if(projectCountForEmployee >= blConstraints.maxNumberOfProjectsForEmployee)
+                {
+                    throw new Exception(CompanyManagementBLResource.CannotAssignMoreProjects);
+                }
+                else
+                {
+                    dataLayer.AssignEmployeeToProject(employeeID, projectID);
+                }
 
             }
 
@@ -364,12 +382,20 @@ namespace CompanyManagementBL
 
             }
         }
-        public void CreateTaskInProject(CompanyManagementDataLayer.Task task, int projectID) //Yet to be implemented
+        public void CreateTaskInProject(CompanyManagementDataLayer.Task task, int projectID) 
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
-
+                int? projectStatus = dataLayer.GetProjectStatus(projectID);
+                if(projectStatus == (int)Status.Completed)
+                {
+                    throw new Exception(CompanyManagementBLResource.CannotCreateTaskInProject);
+                }
+                else
+                {
+                    dataLayer.CreateTaskInProject(task, projectID);
+                }
 
             }
 
@@ -380,21 +406,19 @@ namespace CompanyManagementBL
 
             }
         }
-        public void AssignTechnologyToTask(int technologyID, int taskID)
+        public void AssignTechnologyToTask(int technologyID, int taskID, int projectID)
         {
             try
             {
                 BLConstraints blConstraints = new BLConstraints();
-                CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
-                List<int> projectIDs = (from ProjectTask in dc.ProjectTasks where ProjectTask.TaskID == taskID select ProjectTask.ProjectID).ToList();
                 DataLayer dataLayer = new DataLayer();
                 int technologiesTaskCount = dataLayer.GetCountOfTechnologiesAssignedToATask(taskID);
-                bool projectUsesTheTechnology = dataLayer.IfProjectUsesTheTechnology(technologyID, projectIDs);
-                    if (projectUsesTheTechnology && technologiesTaskCount < blConstraints.maxNumberOFTaskTechnology)
+                bool projectUsesTheTechnology = dataLayer.DoesProjectUsesTheTechnology(technologyID, projectID);
+                    if (projectUsesTheTechnology && technologiesTaskCount < blConstraints.maxNumberOfTaskTechnology)
                     {
                         dataLayer.AssignTechnologyToTask(technologyID, taskID);
                     }
-                    else if(technologiesTaskCount >= blConstraints.maxNumberOFTaskTechnology)
+                    else if(technologiesTaskCount >= blConstraints.maxNumberOfTaskTechnology)
                     {
                         Console.WriteLine(CompanyManagementBLResource.CannotAssignTechnologyToTaskLimitReached);
                     }
@@ -414,12 +438,12 @@ namespace CompanyManagementBL
 
             }
         }
-        public void UpdateTechnologiesForTask(List<int> technologyIDs, int taskID) //Yet to be implemented
+        public void UpdateTechnologiesForTask(List<int> technologyIDs, int taskID) 
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
-
+                dataLayer.UpdateTechnologiesForTask(technologyIDs, taskID);
 
             }
 
@@ -430,12 +454,12 @@ namespace CompanyManagementBL
 
             }
         }
-        public void DeleteEmployeeFromSystem(int employeeID) //Yet to be implemented
+        public void DeleteEmployeeFromSystem(int employeeID) 
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
-
+                dataLayer.DeleteEmployeeFromSystem(employeeID);
 
             }
 
@@ -452,7 +476,7 @@ namespace CompanyManagementBL
             {
                 BLConstraints blConstraints = new BLConstraints();
                 DataLayer dataLayer = new DataLayer();
-                int? countOfProjectsUsingTechnology = dataLayer.GetAllTechnologyProjects(technologyID).Count();
+                int countOfProjectsUsingTechnology = dataLayer.GetAllTechnologyProjects(technologyID).Count();
                 if (countOfProjectsUsingTechnology >= blConstraints.minNumberOfProjectsUsingTechnologies)
                 {
                     Console.WriteLine(CompanyManagementBLResource.CannotDeleteTechnology);
@@ -476,8 +500,17 @@ namespace CompanyManagementBL
             try
             {
                 DataLayer dataLayer = new DataLayer();
-                bool hasTaskNotStarted = dataLayer.IfTaskNotStarted(taskID);
-                if(hasTaskNotStarted)
+                List<int?> listOfTaskStatus = dataLayer.GetTaskStatus(taskID);
+                bool canTaskBeDeleted = true;
+                foreach(int taskStatus in listOfTaskStatus)
+                {
+                    if(taskStatus != (int)Status.NotStarted)
+                    {
+                        canTaskBeDeleted = false;
+                        break;
+                    }
+                }
+                if(canTaskBeDeleted)
                 {
                     dataLayer.DeleteTask(taskID);
                 }
@@ -494,12 +527,20 @@ namespace CompanyManagementBL
 
             }
         }
-        public void DeleteProject(int projectID) //Yet to be Implemented
+        public void DeleteProject(int projectID)
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
-
+                int? projectSTatus = dataLayer.GetProjectStatus(projectID);
+                if(projectSTatus == (int)Status.NotStarted)
+                {
+                    dataLayer.DeleteProject(projectID);
+                }
+                else
+                {
+                    throw new Exception(CompanyManagementBLResource.CannotDeleteProject);
+                }
 
             }
 
