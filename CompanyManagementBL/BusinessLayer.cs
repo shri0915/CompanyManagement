@@ -172,14 +172,14 @@ namespace CompanyManagementBL
             }
         }
 
-        public List<BOTaskTechnology> GetAllTechnologyTasksForEmployee(int technologyID, int employeeID)
+        public List<BOTask> GetAllTechnologyTasksForEmployee(int technologyID, int employeeID)
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
 
-                List<BOTaskTechnology> listOfTechnologyTasksForEmployee = new List<BOTaskTechnology>();
-                listOfTechnologyTasksForEmployee = DataConverter.ConvertTaskTechnologyListToBOTaskTechnologyList(dataLayer.GetAllTechnologyTasksForEmployee(technologyID, employeeID));
+                List<BOTask> listOfTechnologyTasksForEmployee = new List<BOTask>();
+                listOfTechnologyTasksForEmployee = DataConverter.ConvertTaskTechnologyListToBOTaskList(dataLayer.GetAllTechnologyTasksForEmployee(technologyID, employeeID));
                 return listOfTechnologyTasksForEmployee;
 
             }
@@ -192,13 +192,13 @@ namespace CompanyManagementBL
             }
         }
 
-        public List<BOProjectTechnology> GetAllTechnologyProjects(int technologyID)
+        public List<BOProject> GetAllTechnologyProjects(int technologyID)
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
-                List<BOProjectTechnology> listOfProjectsUsingTechnology = new List<BOProjectTechnology>();
-                listOfProjectsUsingTechnology = DataConverter.ConvertProjectTechnologyListToBOProjectTechnologyList(dataLayer.GetAllTechnologyProjects(technologyID));
+                List<BOProject> listOfProjectsUsingTechnology = new List<BOProject>();
+                listOfProjectsUsingTechnology = DataConverter.ConvertProjectTechnologyListToBOProjectList(dataLayer.GetAllTechnologyProjects(technologyID));
                 return listOfProjectsUsingTechnology;
             }
 
@@ -210,13 +210,13 @@ namespace CompanyManagementBL
             }
         }
 
-        public List<BOProjectTask> GetAllActiveTasksForProject(int projectID)
+        public List<BOProject> GetAllActiveTasksForProject(int projectID)
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
-                List<BOProjectTask> listOfActiveTasksForProject = new List<BOProjectTask>();
-                listOfActiveTasksForProject = DataConverter.ConvertProjectTaskListToBOProjectTaskList(dataLayer.GetAllActiveTasksForProject(projectID));
+                List<BOProject> listOfActiveTasksForProject = new List<BOProject>();
+                listOfActiveTasksForProject = DataConverter.ConvertProjectTaskListToBOProjectList(dataLayer.GetAllActiveTasksForProject(projectID));
                 return listOfActiveTasksForProject;
 
 
@@ -230,13 +230,13 @@ namespace CompanyManagementBL
             }
         }
 
-        public List<BOTaskTechnology> GetAllTechnologiesForEmployee(int employeeID)
+        public List<BOTask> GetAllTechnologiesForEmployee(int employeeID)
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
-                List<BOTaskTechnology> listOfTechnologiesForEmployee = new List<BOTaskTechnology>();
-                listOfTechnologiesForEmployee = DataConverter.ConvertTaskTechnologyListToBOTaskTechnologyList(dataLayer.GetAllTechnologiesForEmployee(employeeID));
+                List<BOTask> listOfTechnologiesForEmployee = new List<BOTask>();
+                listOfTechnologiesForEmployee = DataConverter.ConvertTaskTechnologyListToBOTaskList(dataLayer.GetAllTechnologiesForEmployee(employeeID));
                 return listOfTechnologiesForEmployee;
 
             }
@@ -267,13 +267,13 @@ namespace CompanyManagementBL
             }
         }
 
-        public List<BOEmployeeProject> GetAllActiveProjectsManagedByEmployee(int employeeID)
+        public List<BOEmployee> GetAllActiveProjectsManagedByEmployee(int employeeID)
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
-                List<BOEmployeeProject> listOfActiveProjectManagedByEmployee = new List<BOEmployeeProject>();
-                listOfActiveProjectManagedByEmployee = DataConverter.ConvertEmployeeProjectListToBOEmployeeProjectList(dataLayer.GetAllActiveProjectsManagedByEmployee(employeeID));
+                List<BOEmployee> listOfActiveProjectManagedByEmployee = new List<BOEmployee>();
+                listOfActiveProjectManagedByEmployee = DataConverter.ConvertEmployeeProjectListToBOEmployeeList(dataLayer.GetAllActiveProjectsManagedByEmployee(employeeID));
                 return listOfActiveProjectManagedByEmployee;
             }
 
@@ -285,13 +285,13 @@ namespace CompanyManagementBL
             }
         }
 
-        public List<BOEmployeeTask> GetAllDelayedTasksForEmployee(int employeeID)
+        public List<BOEmployee> GetAllDelayedTasksForEmployee(int employeeID)
         {
             try
             {
                 DataLayer dataLayer = new DataLayer();
-                List<BOEmployeeTask> listOfDelayedTasksForEmployee = new List<BOEmployeeTask>();
-                listOfDelayedTasksForEmployee = DataConverter.ConvertEmployeeTaskListtoBOEmployeeTaskList(dataLayer.GetAllDelayedTasksForEmployee(employeeID));
+                List<BOEmployee> listOfDelayedTasksForEmployee = new List<BOEmployee>();
+                listOfDelayedTasksForEmployee = DataConverter.ConvertEmployeeTaskListtoBOEmployeeList(dataLayer.GetAllDelayedTasksForEmployee(employeeID));
                 return listOfDelayedTasksForEmployee;
 
 
@@ -436,11 +436,11 @@ namespace CompanyManagementBL
                 DataLayer dataLayer = new DataLayer();
                 int technologiesTaskCount = dataLayer.GetCountOfTechnologiesAssignedToATask(taskID);
                 bool projectUsesTheTechnology = dataLayer.DoesProjectUsesTheTechnology(technologyID, projectID);
-                    if (projectUsesTheTechnology && technologiesTaskCount < blConstraints.maxNumberOfTaskTechnology)
+                    if (projectUsesTheTechnology && technologiesTaskCount < blConstraints.maxNumberOfTaskTechnologies)
                     {
                         dataLayer.AssignTechnologyToTask(technologyID, taskID);
                     }
-                    else if(technologiesTaskCount >= blConstraints.maxNumberOfTaskTechnology)
+                    else if(technologiesTaskCount >= blConstraints.maxNumberOfTaskTechnologies)
                     {
                         Console.WriteLine(CompanyManagementBLResource.CannotAssignTechnologyToTaskLimitReached);
                     }
@@ -522,7 +522,7 @@ namespace CompanyManagementBL
             try
             {
                 DataLayer dataLayer = new DataLayer();
-                List<int?> listOfTaskStatus = dataLayer.GetTaskStatus(taskID);
+                List<int> listOfTaskStatus = dataLayer.GetTaskStatus(taskID);
                 bool canTaskBeDeleted = true;
                 foreach(int taskStatus in listOfTaskStatus)
                 {

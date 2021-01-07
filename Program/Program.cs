@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CompanyManagementBL;
+using CompanyManagementBL.Entities;
 using CompanyManagementDataLayer;
 
 namespace Program
@@ -13,19 +14,19 @@ namespace Program
         static void Main(string[] args)
         {
             
-            DataLayer dataLayer = new DataLayer();
+           
             int employeeID = 0;
             int technologyID = 0;
             int projectID = 0;
             int taskID = 0;
-            int? maximumNumberOfTechnologiesThatCanBeAssignedToATask = 4;
-            int? maxmimumNumberOfProjectAssociatedWithATechnologyForWhichTechnologyCanBeDeleted = 2;
+            int roleID = 0;
+
             BusinessLayer businessLayer = new BusinessLayer();
             
             
             //List all the Projects
             Console.WriteLine("Here are all the projects in the database");
-            foreach (Project returnedProject in dataLayer.GetAllProjects())
+            foreach (BOProject returnedProject in businessLayer.GetAllProjects())
             {
                 
                 Console.WriteLine(returnedProject.ProjectID + " " + returnedProject.ProjectName);
@@ -35,7 +36,7 @@ namespace Program
 
             //List all the Technologies
             Console.WriteLine("Here are all the technologies in the database");
-            foreach (Technology returnedTechnology in dataLayer.GetAllTechnologies())
+            foreach (BOTechnology returnedTechnology in businessLayer.GetAllTechnologies())
             {
                 
                 Console.WriteLine(returnedTechnology.TechnologyID + " " + returnedTechnology.TechnologyName);
@@ -45,26 +46,26 @@ namespace Program
 
             //Print the count of Employees in Project
             Console.WriteLine("The number of employees in the project: ");
-            Console.WriteLine(dataLayer.GetEmployeeCountForProject(2));
+            Console.WriteLine(businessLayer.GetEmployeeCountForProject(2));
             Console.WriteLine("************************************************");
 
             //List all the Employees in the Project
             Console.WriteLine("The employees in the project: ");
-            foreach (Employee employeeForProject in dataLayer.GetAllEmployeesForProject(2))
+            foreach (BOEmployee employeeForProject in businessLayer.GetAllEmployeesForProject(2))
             {                
                 Console.WriteLine(employeeForProject.EmployeeID + " " + employeeForProject.EmployeeName);
             }
 
             Console.WriteLine("************************************************");
             Console.WriteLine("The technology for the employee are: ");
-            foreach (TaskTechnology taskTechnology in dataLayer.GetAllTechnologyTasksForEmployee(2, 2))
+            foreach (BOTask taskTechnology in businessLayer.GetAllTechnologyTasksForEmployee(2, 2))
             {
-                Console.WriteLine(taskTechnology.TaskTechnologyID);
+                Console.WriteLine(taskTechnology.Technology.TechnologyName);
             }
             Console.WriteLine("************************************************");
             //List all delayed Projects
             Console.WriteLine("The delayed projects are : ");
-            foreach (Project delayedProjects in dataLayer.GetAllDelayedProjects())
+            foreach (BOProject delayedProjects in businessLayer.GetAllDelayedProjects())
             {                
                 Console.WriteLine(delayedProjects.ProjectName);
             }
@@ -73,7 +74,7 @@ namespace Program
             //List all projects for an employee
             Console.WriteLine("To know all the projects assigned to an employee please input the employee's Employee ID");
             employeeID = Convert.ToInt32(Console.ReadLine());
-            foreach(Project employeeProject in dataLayer.GetAllProjectsForEmployee(employeeID))
+            foreach(BOProject employeeProject in businessLayer.GetAllProjectsForEmployee(employeeID))
             {
                 Console.WriteLine(employeeProject.ProjectName);
             }
@@ -82,7 +83,7 @@ namespace Program
             //List all tasks for an employee
             Console.WriteLine("To know all the tasks assigned to an employee please input the employee's Employee ID");
             employeeID = Convert.ToInt32(Console.ReadLine());
-            foreach(CompanyManagementDataLayer.Task employeeTask in dataLayer.GetAllTasksForEmployee(employeeID))
+            foreach(BOTask employeeTask in businessLayer.GetAllTasksForEmployee(employeeID))
             {
                 Console.WriteLine(employeeTask.TaskName);
             }
@@ -92,23 +93,23 @@ namespace Program
             employeeID = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("To know all the tasks using a particular technology assigned to an employee please input the Technology ID");
             technologyID = Convert.ToInt32(Console.ReadLine());
-            foreach(TaskTechnology taskTechnology in dataLayer.GetAllTechnologyTasksForEmployee(technologyID,employeeID))
+            foreach(BOTask taskTechnology in businessLayer.GetAllTechnologyTasksForEmployee(technologyID,employeeID))
             {
-                Console.WriteLine(taskTechnology.Task.TaskName);
+                Console.WriteLine(taskTechnology.TaskName);
             }
 
             //List all the projects using a certain technology
             Console.WriteLine("Please input the technology ID for which you want to list the projects");
             technologyID = Convert.ToInt32(Console.ReadLine());
-            foreach(ProjectTechnology projectTechnology in dataLayer.GetAllTechnologyProjects(technologyID))
+            foreach(BOProject projectTechnology in businessLayer.GetAllTechnologyProjects(technologyID))
             {
-                Console.WriteLine(projectTechnology.Project.ProjectName);
+                Console.WriteLine(projectTechnology.ProjectName);
             }
 
             //List all the active tasks for a project
             Console.WriteLine("Please input the project for which you want to know all the active tasks");
             projectID = Convert.ToInt32(Console.ReadLine());
-            foreach(ProjectTask projectTask in dataLayer.GetAllActiveTasksForProject(projectID))
+            foreach(BOProject projectTask in businessLayer.GetAllActiveTasksForProject(projectID))
             {
                  Console.WriteLine(projectTask.Task.TaskName);
             }
@@ -117,7 +118,7 @@ namespace Program
             Console.WriteLine("Please input the employee ID for whom you want to list the technologies");
             technologyID = Convert.ToInt32(Console.ReadLine());
             List<String> technologyNames = new List<string>();
-            foreach (TaskTechnology taskTechnology in dataLayer.GetAllTechnologiesForEmployee(employeeID))
+            foreach (BOTask taskTechnology in businessLayer.GetAllTechnologiesForEmployee(employeeID))
             {
                 technologyNames.Add(taskTechnology.Technology.TechnologyName);
             }
@@ -132,12 +133,12 @@ namespace Program
             //List the number of projects an employee is working on
             Console.WriteLine("Please input the employee ID for whom you want to list the number of projects");
             employeeID = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine(dataLayer.GetProjectCountForEmployee(employeeID));
+            Console.WriteLine(businessLayer.GetProjectCountForEmployee(employeeID));
 
             //List all active projects managed by an employee
             Console.WriteLine("Please input the employee ID to know all the projects managed by that employee");
             employeeID = Convert.ToInt32(Console.ReadLine());
-            foreach(EmployeeProject activeProjectManagedByEmployee in dataLayer.GetAllActiveProjectsManagedByEmployee(employeeID))
+            foreach(BOEmployee activeProjectManagedByEmployee in businessLayer.GetAllActiveProjectsManagedByEmployee(employeeID))
             {
                 Console.WriteLine(activeProjectManagedByEmployee.Project.ProjectName);
             }
@@ -145,7 +146,7 @@ namespace Program
             //List all delayed tasks for an employee
             Console.WriteLine("Please input the employee id of whom you want to display the delayed tasks");
             employeeID = Convert.ToInt32(Console.ReadLine());
-            foreach(EmployeeTask employeeTask in dataLayer.GetAllDelayedTasksForEmployee(employeeID))
+            foreach(BOEmployee employeeTask in businessLayer.GetAllDelayedTasksForEmployee(employeeID))
             {
                 Console.WriteLine(employeeTask.Task.TaskName);
             }
@@ -162,13 +163,13 @@ namespace Program
            project.ClientID = Convert.ToInt32(Console.ReadLine());
            Console.WriteLine("Please enter the Department ID for the Project");
            project.DepartmentID = Convert.ToInt32(Console.ReadLine());
-           dataLayer.AddProject(project);
+           businessLayer.AddProject(project);
 
             //Add new Technology
             Technology technology = new Technology();
             Console.WriteLine("Please input the Technology Name");
             technology.TechnologyName = Console.ReadLine();
-            dataLayer.AddTechnology(technology);
+            businessLayer.AddTechnology(technology);
 
 
             //Add new Employee
@@ -183,14 +184,16 @@ namespace Program
             employee.EmployeeContact = Console.ReadLine();
             Console.WriteLine("Please enter the Department ID to which the employee belongs");
             employee.DepartmentID = Convert.ToInt32(Console.ReadLine());
-            dataLayer.AddEmployee(employee);
+            businessLayer.AddEmployee(employee);
             
             //Assign Employee to Project
             Console.WriteLine("Please enter the Employee ID whom you want to assign to the project");
             employeeID = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Please enter the Project ID to which you want to add the employee");
             projectID = Convert.ToInt32(Console.ReadLine());
-            dataLayer.AssignEmployeeToProject(employeeID, projectID);
+            Console.WriteLine("Please enter the Role ID you want to assign to the employee");
+            roleID = Convert.ToInt32(Console.ReadLine());
+            businessLayer.AssignEmployeeToProject(employeeID, projectID, roleID);
             
             
 
@@ -199,9 +202,9 @@ namespace Program
             technologyID = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Please enter the Task ID for which you want to assign the technology");
             taskID = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Please enter the maximum number of technologies that can be assigned to a task");
-            maximumNumberOfTechnologiesThatCanBeAssignedToATask = Convert.ToInt32(Console.ReadLine());
-            businessLayer.AssignTechnologyToTask(technologyID, taskID);
+            Console.WriteLine("Please enter the Project ID");
+            projectID = Convert.ToInt32(Console.ReadLine());
+            businessLayer.AssignTechnologyToTask(technologyID, taskID, projectID);
 
             
             //Create Task In Project
@@ -213,7 +216,7 @@ namespace Program
             task.TaskDescription = Console.ReadLine();
             Console.WriteLine("Please enter the Project ID to which you want to add this Task");
             projectID = Convert.ToInt32(Console.ReadLine());
-            dataLayer.CreateTaskInProject(task, projectID);
+            businessLayer.CreateTaskInProject(task, projectID);
 
             //Update Technologies For Task
             List<int> technologIDs = new List<int>();
@@ -227,28 +230,25 @@ namespace Program
             }
             Console.WriteLine("Please enter the Task ID to which you want to assign the above Technologies");
             taskID = Convert.ToInt32(Console.ReadLine());
-            dataLayer.UpdateTechnologiesForTask(technologIDs, taskID);
+            businessLayer.UpdateTechnologiesForTask(technologIDs, taskID);
 
 
             //Delete Task
             Console.WriteLine("Please enter the Task ID you want to delete");
-            dataLayer.DeleteTask(Convert.ToInt32(Console.ReadLine()));
+            businessLayer.DeleteTask(Convert.ToInt32(Console.ReadLine()));
 
             //Delete Project
             Console.WriteLine("Please enter the Project ID you want to delete");
-            dataLayer.DeleteProject(Convert.ToInt32(Console.ReadLine()));
+            businessLayer.DeleteProject(Convert.ToInt32(Console.ReadLine()));
 
             //Delete Employee from system
             Console.WriteLine("Please enter the Employee ID to be deleted");
-            dataLayer.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));
+            businessLayer.DeleteEmployeeFromSystem(Convert.ToInt32(Console.ReadLine()));
             
             
             //Delete Technology
             Console.WriteLine("Please enter the Technology ID you want to delete");
             technologyID = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Please enter the limit on the projects associated with the technology. " +
-                "If the number of projects associated with technology in more than this in the system the technology won't be deleted");
-            maxmimumNumberOfProjectAssociatedWithATechnologyForWhichTechnologyCanBeDeleted = Convert.ToInt32(Console.ReadLine());
             businessLayer.DeleteTechnology(technologyID);
             
             Console.WriteLine("Press enter to close...");

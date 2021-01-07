@@ -51,14 +51,10 @@
     </Compile>
     <Compile Include="DataConverter.cs" />
     <Compile Include="Entities\BOEmployee.cs" />
-    <Compile Include="Entities\BOEmployeeProject.cs" />
-    <Compile Include="Entities\BOEmployeeTask.cs" />
     <Compile Include="Entities\BOProject.cs" />
-    <Compile Include="Entities\BOProjectTask.cs" />
-    <Compile Include="Entities\BOProjectTechnology.cs" />
     <Compile Include="Entities\BOTask.cs" />
     <Compile Include="Entities\BOTechnology.cs" />
-    <Compile Include="Entities\BOTaskTechnology.cs" />
+    <Compile Include="EnumClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

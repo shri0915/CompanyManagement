@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompanyManagementBL.Entities
+namespace CompanyManagementBL
 {
-    public class BOEmployeeProject
+    public class EnumClass
     {
-        public int EmployeeProjectID;
-        public int EmployeeID;
-        public int ProjectID;
         public enum EmployeeRoleInProject
         {
             ProjectManager = 1,
@@ -20,5 +17,14 @@ namespace CompanyManagementBL.Entities
             SystemManager = 5
         }
         public EmployeeRoleInProject employeeRoleInProject;
+
+        public enum Status
+        {
+            NotStarted = 1,
+            Active = 2,
+            Completed = 3,
+            Delayed = 4
+        }
+        public Status status;
     }
 }

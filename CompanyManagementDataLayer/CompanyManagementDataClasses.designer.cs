@@ -918,7 +918,7 @@ namespace CompanyManagementDataLayer
 		
 		private int _ProjectID;
 		
-		private System.Nullable<int> _EmployeeRoleInProject;
+		private int _EmployeeRoleInProject;
 		
 		private EntityRef<Employee> _Employee;
 		
@@ -936,7 +936,7 @@ namespace CompanyManagementDataLayer
     partial void OnEmployeeIDChanged();
     partial void OnProjectIDChanging(int value);
     partial void OnProjectIDChanged();
-    partial void OnEmployeeRoleInProjectChanging(System.Nullable<int> value);
+    partial void OnEmployeeRoleInProjectChanging(int value);
     partial void OnEmployeeRoleInProjectChanged();
     #endregion
 		
@@ -1016,8 +1016,8 @@ namespace CompanyManagementDataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeRoleInProject", DbType="Int")]
-		public System.Nullable<int> EmployeeRoleInProject
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeRoleInProject", DbType="Int NOT NULL")]
+		public int EmployeeRoleInProject
 		{
 			get
 			{
@@ -1135,7 +1135,7 @@ namespace CompanyManagementDataLayer
 					}
 					else
 					{
-						this._EmployeeRoleInProject = default(Nullable<int>);
+						this._EmployeeRoleInProject = default(int);
 					}
 					this.SendPropertyChanged("RoleMaster");
 				}
@@ -1175,7 +1175,7 @@ namespace CompanyManagementDataLayer
 		
 		private int _TaskID;
 		
-		private System.Nullable<int> _EmployeeTaskStatus;
+		private int _EmployeeTaskStatus;
 		
 		private EntityRef<Employee> _Employee;
 		
@@ -1193,7 +1193,7 @@ namespace CompanyManagementDataLayer
     partial void OnEmployeeIDChanged();
     partial void OnTaskIDChanging(int value);
     partial void OnTaskIDChanged();
-    partial void OnEmployeeTaskStatusChanging(System.Nullable<int> value);
+    partial void OnEmployeeTaskStatusChanging(int value);
     partial void OnEmployeeTaskStatusChanged();
     #endregion
 		
@@ -1273,8 +1273,8 @@ namespace CompanyManagementDataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTaskStatus", DbType="Int")]
-		public System.Nullable<int> EmployeeTaskStatus
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTaskStatus", DbType="Int NOT NULL")]
+		public int EmployeeTaskStatus
 		{
 			get
 			{
@@ -1358,7 +1358,7 @@ namespace CompanyManagementDataLayer
 					}
 					else
 					{
-						this._EmployeeTaskStatus = default(Nullable<int>);
+						this._EmployeeTaskStatus = default(int);
 					}
 					this.SendPropertyChanged("StatusMaster");
 				}
@@ -1430,7 +1430,7 @@ namespace CompanyManagementDataLayer
 		
 		private string _ProjectName;
 		
-		private System.Nullable<int> _ProjectStatus;
+		private int _ProjectStatus;
 		
 		private int _ClientID;
 		
@@ -1456,7 +1456,7 @@ namespace CompanyManagementDataLayer
     partial void OnProjectIDChanged();
     partial void OnProjectNameChanging(string value);
     partial void OnProjectNameChanged();
-    partial void OnProjectStatusChanging(System.Nullable<int> value);
+    partial void OnProjectStatusChanging(int value);
     partial void OnProjectStatusChanged();
     partial void OnClientIDChanging(int value);
     partial void OnClientIDChanged();
@@ -1515,8 +1515,8 @@ namespace CompanyManagementDataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectStatus", DbType="Int")]
-		public System.Nullable<int> ProjectStatus
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectStatus", DbType="Int NOT NULL")]
+		public int ProjectStatus
 		{
 			get
 			{
@@ -1721,7 +1721,7 @@ namespace CompanyManagementDataLayer
 					}
 					else
 					{
-						this._ProjectStatus = default(Nullable<int>);
+						this._ProjectStatus = default(int);
 					}
 					this.SendPropertyChanged("StatusMaster");
 				}
@@ -1797,7 +1797,7 @@ namespace CompanyManagementDataLayer
 		
 		private int _TaskID;
 		
-		private System.Nullable<int> _ProjectTaskStatus;
+		private int _ProjectTaskStatus;
 		
 		private EntityRef<Project> _Project;
 		
@@ -1815,7 +1815,7 @@ namespace CompanyManagementDataLayer
     partial void OnProjectIDChanged();
     partial void OnTaskIDChanging(int value);
     partial void OnTaskIDChanged();
-    partial void OnProjectTaskStatusChanging(System.Nullable<int> value);
+    partial void OnProjectTaskStatusChanging(int value);
     partial void OnProjectTaskStatusChanged();
     #endregion
 		
@@ -1895,8 +1895,8 @@ namespace CompanyManagementDataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTaskStatus", DbType="Int")]
-		public System.Nullable<int> ProjectTaskStatus
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTaskStatus", DbType="Int NOT NULL")]
+		public int ProjectTaskStatus
 		{
 			get
 			{
@@ -1980,7 +1980,7 @@ namespace CompanyManagementDataLayer
 					}
 					else
 					{
-						this._ProjectTaskStatus = default(Nullable<int>);
+						this._ProjectTaskStatus = default(int);
 					}
 					this.SendPropertyChanged("StatusMaster");
 				}
@@ -2149,7 +2149,7 @@ namespace CompanyManagementDataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TechnologyVersion", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TechnologyVersion", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string TechnologyVersion
 		{
 			get
@@ -2330,7 +2330,7 @@ namespace CompanyManagementDataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleDescription", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleDescription", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string RoleDescription
 		{
 			get
@@ -2474,7 +2474,7 @@ namespace CompanyManagementDataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusDescription", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusDescription", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string StatusDescription
 		{
 			get

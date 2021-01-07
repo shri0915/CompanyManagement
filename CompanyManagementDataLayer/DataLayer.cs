@@ -845,14 +845,21 @@ namespace CompanyManagementDataLayer
             }
         }
 
-       public List<int?> GetTaskStatus(int taskID)
+       public List<int> GetTaskStatus(int taskID)
         {
             try
             {
                 CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
                 DataValidationHelper dataValidationHelper = new DataValidationHelper();
-                List<int?> taskStatusList = (from ProjectTask in dc.ProjectTasks where ProjectTask.TaskID == taskID select ProjectTask.ProjectTaskStatus).ToList();
-                return taskStatusList;
+                if (dataValidationHelper.IfTaskExists(taskID))
+                {
+                    List<int> taskStatusList = (from ProjectTask in dc.ProjectTasks where ProjectTask.TaskID == taskID select ProjectTask.ProjectTaskStatus).ToList();
+                    return taskStatusList;
+                }
+                else
+                {
+                    throw new Exception(CompanyManagementResource.TaskMissing);
+                }
             }
             catch(Exception e)
             {
@@ -861,18 +868,74 @@ namespace CompanyManagementDataLayer
         }
 
 
-        public int? GetProjectStatus(int projectID)
+        public int GetProjectStatus(int projectID)
         {
             try
             {
                 CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
                 DataValidationHelper dataValidationHelper = new DataValidationHelper();
-                int? projectStatusList = (from Project in dc.Projects where Project.ProjectID == projectID select Project.ProjectStatus).FirstOrDefault();
-                return projectStatusList;
+
+                if (dataValidationHelper.IfProjectExists(projectID))
+                {
+                    int projectStatusList = (from Project in dc.Projects where Project.ProjectID == projectID select Project.ProjectStatus).FirstOrDefault();
+                    return projectStatusList;
+                }
+                else
+                {
+                    throw new Exception(CompanyManagementResource.ProjectMissing);
+                }
             }
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+
+        public Project GetProject(int projectID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            DataValidationHelper dataValidationHelper = new DataValidationHelper();
+
+            if (dataValidationHelper.IfProjectExists(projectID))
+            {
+                Project project = (Project)(from Project in dc.Projects where Project.ProjectID == projectID select Project);
+                return project;
+            }
+            else
+            {
+                throw new Exception(CompanyManagementResource.ProjectMissing);
+            }
+        }
+
+        public CompanyManagementDataLayer.Task GetTask(int taskID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            DataValidationHelper dataValidationHelper = new DataValidationHelper();
+
+            if(dataValidationHelper.IfTaskExists(taskID))
+            {
+                Task task = (Task)(from Task in dc.Tasks where Task.TaskID == taskID select Task);
+                return task;
+            }
+            else
+            {
+                throw new Exception(CompanyManagementResource.TaskMissing);
+            }
+        }
+
+        public Department GetDepartment(int departmentID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            DataValidationHelper dataValidationHelper = new DataValidationHelper();
+
+            if(dataValidationHelper.IfDepartmentExists(departmentID))
+            {
+                Department department = (Department)(from Department in dc.Departments where Department.DepartmentID == departmentID select Department);
+                return department;
+            }
+            else
+            {
+                throw new Exception(CompanyManagementResource.DepartmentMissing);
             }
         }
     }
