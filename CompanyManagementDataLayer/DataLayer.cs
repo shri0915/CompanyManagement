@@ -57,7 +57,7 @@ namespace CompanyManagementDataLayer
             }
         }
 
-        public int? GetEmployeeCountForProject(int projectID)
+        public int GetEmployeeCountForProject(int projectID)
         {
             CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
@@ -76,8 +76,7 @@ namespace CompanyManagementDataLayer
             }
             else
             {
-                Console.WriteLine(CompanyManagementResource.ProjectMissing);
-                return null;
+                throw new Exception(CompanyManagementResource.ProjectMissing);
             }
         }
 
@@ -100,8 +99,7 @@ namespace CompanyManagementDataLayer
             }
             else
             {
-                Console.WriteLine(CompanyManagementResource.ProjectMissing);
-                return null;
+                throw new Exception(CompanyManagementResource.ProjectMissing);
             }
         }
 
@@ -139,8 +137,7 @@ namespace CompanyManagementDataLayer
             }
             else
             {
-                Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                return null;
+                throw new Exception(CompanyManagementResource.EmployeeMissing);
 
             }
         }
@@ -164,8 +161,7 @@ namespace CompanyManagementDataLayer
             }
             else
             {
-                Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                return null;
+                throw new Exception(CompanyManagementResource.EmployeeMissing);
             }
         }
 
@@ -175,13 +171,11 @@ namespace CompanyManagementDataLayer
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
             if (!dataValidationHelper.IfEmployeeExists(employeeID))
             {
-                Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                return null;
+                throw new Exception(CompanyManagementResource.EmployeeMissing);
             }
             else if(!dataValidationHelper.IfTechnologyExists(technologyID))
             {
-                Console.WriteLine(CompanyManagementResource.TechnologyMissing);
-                return null;
+                throw new Exception(CompanyManagementResource.TechnologyMissing);
             }
             else
             {
@@ -219,8 +213,7 @@ namespace CompanyManagementDataLayer
             }
             else
             {
-                Console.WriteLine(CompanyManagementResource.TechnologyMissing);
-                return null;
+                throw new Exception(CompanyManagementResource.TechnologyMissing);
             }
         }
 
@@ -243,8 +236,7 @@ namespace CompanyManagementDataLayer
             }
             else
             {
-                Console.WriteLine(CompanyManagementResource.ProjectMissing);
-                return null;
+                throw new Exception(CompanyManagementResource.ProjectMissing);
             }
         }
 
@@ -267,13 +259,12 @@ namespace CompanyManagementDataLayer
             }
             else
             {
-                Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                return null;
+                throw new Exception(CompanyManagementResource.EmployeeMissing);
 
             }
         }
 
-        public int? GetProjectCountForEmployee(int employeeID)
+        public int GetProjectCountForEmployee(int employeeID)
         {
             CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
             DataValidationHelper dataValidationHelper = new DataValidationHelper();
@@ -293,8 +284,7 @@ namespace CompanyManagementDataLayer
             }
             else
             {
-                Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                return null;
+                throw new Exception(CompanyManagementResource.EmployeeMissing);
             }
         }
 
@@ -317,8 +307,7 @@ namespace CompanyManagementDataLayer
             }
             else
             {
-                Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                return null;
+                throw new Exception(CompanyManagementResource.EmployeeMissing);
             }
         }
 
@@ -341,8 +330,7 @@ namespace CompanyManagementDataLayer
             }
             else
             {
-                Console.WriteLine(CompanyManagementResource.EmployeeMissing);
-                return null;
+                throw new Exception(CompanyManagementResource.EmployeeMissing);
             }
         }
 
@@ -507,6 +495,65 @@ namespace CompanyManagementDataLayer
                 throw e;
             }
         }
+
+        public void AssignEmployeeToProject(int employeeID, int projectID, int roleID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            DataValidationHelper dataValidationHelper = new DataValidationHelper();
+            try
+            {
+                if(!dataValidationHelper.IfEmployeeExists(employeeID) && !dataValidationHelper.IfProjectExists(projectID) && !dataValidationHelper.IfRoleExists(roleID))
+                {
+                    Console.WriteLine(CompanyManagementResource.EmployeeMissing + " and " + CompanyManagementResource.ProjectMissing + " and " + CompanyManagementResource.RoleMissing);
+                }
+                else if(!dataValidationHelper.IfRoleExists(roleID) && !dataValidationHelper.IfProjectExists(projectID))
+                {
+                    Console.WriteLine(CompanyManagementResource.RoleMissing + " and " + CompanyManagementResource.ProjectMissing);
+                }
+                else if(!dataValidationHelper.IfEmployeeExists(employeeID) && !dataValidationHelper.IfRoleExists(roleID))
+                {
+                    Console.WriteLine(CompanyManagementResource.EmployeeMissing + " and " + CompanyManagementResource.RoleMissing);
+                }
+                else if (!dataValidationHelper.IfEmployeeExists(employeeID) && !dataValidationHelper.IfProjectExists(projectID))
+                {
+                    Console.WriteLine(CompanyManagementResource.EmployeeMissing + " and " + CompanyManagementResource.ProjectMissing);
+                }
+                else if (!dataValidationHelper.IfEmployeeExists(employeeID))
+                {
+                    Console.WriteLine(CompanyManagementResource.EmployeeMissing);
+                }
+                else if (!dataValidationHelper.IfProjectExists(projectID))
+                {
+                    Console.WriteLine(CompanyManagementResource.ProjectMissing);
+                }
+                else if (!dataValidationHelper.IfRoleExists(roleID))
+                {
+                    Console.WriteLine(CompanyManagementResource.RoleMissing);
+                }
+                else
+                {
+                    if (!dataValidationHelper.IfEmployeeIsAssignedToProject(employeeID, projectID))
+                    {
+
+                        EmployeeProject objEmployeeProject = new EmployeeProject();
+                        objEmployeeProject.EmployeeID = employeeID;
+                        objEmployeeProject.ProjectID = projectID;
+                        objEmployeeProject.EmployeeRoleInProject = roleID;
+                        dc.EmployeeProjects.InsertOnSubmit(objEmployeeProject);
+                        dc.SubmitChanges();
+                    }
+                    else
+                    {
+                        Console.WriteLine(CompanyManagementResource.EmployeeAssignedToProject);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw e;
+            }
+        }
         public void CreateTaskInProject(Task task, int projectID)
         {
             CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
@@ -574,7 +621,7 @@ namespace CompanyManagementDataLayer
                     if (!dataValidationHelper.IfTechnologyIsAssignedToTask(technologyID, taskID))
                     {
                         TaskTechnology objTaskTechnology = new TaskTechnology();
-                        objTaskTechnology.TaskTechnologyID = technologyID;
+                        objTaskTechnology.TechnologyID = technologyID;
                         objTaskTechnology.TaskID = taskID;
                         dc.TaskTechnologies.InsertOnSubmit(objTaskTechnology);
                         dc.SubmitChanges();
@@ -744,6 +791,152 @@ namespace CompanyManagementDataLayer
             }
         }
 
+        public bool DoesProjectUsesTheTechnology(int technologyID, int projectID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            DataValidationHelper dataValidationHelper = new DataValidationHelper();
+            try
+            {
+                bool technologyExists = dataValidationHelper.IfTechnologyExists(technologyID);
+                bool doesProjectUseTechnology = false;
+                if (!technologyExists)
+                {
+                    throw new Exception(CompanyManagementResource.TechnologyMissing);
+                }
+                else
+                {
+                       doesProjectUseTechnology = (from ProjectTechnology in dc.ProjectTechnologies
+                                                         where ProjectTechnology.TechnologyID == technologyID && ProjectTechnology.ProjectID == projectID
+                                                         select ProjectTechnology).Any();
+                    }
 
+                    return doesProjectUseTechnology;
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw e;
+            }
+        }
+
+       public int GetCountOfTechnologiesAssignedToATask(int taskID)
+        {
+            try
+            {
+                CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+                DataValidationHelper dataValidationHelper = new DataValidationHelper();
+                bool taskExists = dataValidationHelper.IfTaskExists(taskID);
+                if(!taskExists)
+                {
+                    throw new Exception(CompanyManagementResource.TaskMissing);
+                }
+                else
+                {
+                    int countOfTechnologyAssignedToATask = (from TaskTechnology in dc.TaskTechnologies where TaskTechnology.TaskID == taskID select TaskTechnology).Count();
+                    return countOfTechnologyAssignedToATask;
+                }
+            }
+            
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw e;
+            }
+        }
+
+       public List<int> GetTaskStatus(int taskID)
+        {
+            try
+            {
+                CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+                DataValidationHelper dataValidationHelper = new DataValidationHelper();
+                if (dataValidationHelper.IfTaskExists(taskID))
+                {
+                    List<int> taskStatusList = (from ProjectTask in dc.ProjectTasks where ProjectTask.TaskID == taskID select ProjectTask.ProjectTaskStatus).ToList();
+                    return taskStatusList;
+                }
+                else
+                {
+                    throw new Exception(CompanyManagementResource.TaskMissing);
+                }
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        public int GetProjectStatus(int projectID)
+        {
+            try
+            {
+                CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+                DataValidationHelper dataValidationHelper = new DataValidationHelper();
+
+                if (dataValidationHelper.IfProjectExists(projectID))
+                {
+                    int projectStatusList = (from Project in dc.Projects where Project.ProjectID == projectID select Project.ProjectStatus).FirstOrDefault();
+                    return projectStatusList;
+                }
+                else
+                {
+                    throw new Exception(CompanyManagementResource.ProjectMissing);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public Project GetProject(int projectID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            DataValidationHelper dataValidationHelper = new DataValidationHelper();
+
+            if (dataValidationHelper.IfProjectExists(projectID))
+            {
+                Project project = (Project)(from Project in dc.Projects where Project.ProjectID == projectID select Project);
+                return project;
+            }
+            else
+            {
+                throw new Exception(CompanyManagementResource.ProjectMissing);
+            }
+        }
+
+        public CompanyManagementDataLayer.Task GetTask(int taskID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            DataValidationHelper dataValidationHelper = new DataValidationHelper();
+
+            if(dataValidationHelper.IfTaskExists(taskID))
+            {
+                Task task = (Task)(from Task in dc.Tasks where Task.TaskID == taskID select Task);
+                return task;
+            }
+            else
+            {
+                throw new Exception(CompanyManagementResource.TaskMissing);
+            }
+        }
+
+        public Department GetDepartment(int departmentID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            DataValidationHelper dataValidationHelper = new DataValidationHelper();
+
+            if(dataValidationHelper.IfDepartmentExists(departmentID))
+            {
+                Department department = (Department)(from Department in dc.Departments where Department.DepartmentID == departmentID select Department);
+                return department;
+            }
+            else
+            {
+                throw new Exception(CompanyManagementResource.DepartmentMissing);
+            }
+        }
     }
 }

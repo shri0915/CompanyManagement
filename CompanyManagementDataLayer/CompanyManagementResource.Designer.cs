@@ -286,6 +286,15 @@ namespace CompanyManagementDataLayer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No such role found in the system.
+        /// </summary>
+        internal static string RoleMissing {
+            get {
+                return ResourceManager.GetString("RoleMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status cannot be empty.
         /// </summary>
         internal static string StatusMissing {

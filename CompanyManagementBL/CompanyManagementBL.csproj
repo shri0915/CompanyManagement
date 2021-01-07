@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,17 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLConstraints.cs" />
     <Compile Include="BusinessLayer.cs" />
+    <Compile Include="CompanyManagementBLResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompanyManagementBLResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="DataConverter.cs" />
     <Compile Include="Entities\BOEmployee.cs" />
-    <Compile Include="Entities\BOEmployeeProject.cs" />
-    <Compile Include="Entities\BOEmployeeTask.cs" />
     <Compile Include="Entities\BOProject.cs" />
-    <Compile Include="Entities\BOProjectTask.cs" />
-    <Compile Include="Entities\BOProjectTechnology.cs" />
     <Compile Include="Entities\BOTask.cs" />
     <Compile Include="Entities\BOTechnology.cs" />
-    <Compile Include="Entities\BOTaskTechnology.cs" />
+    <Compile Include="EnumClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +62,12 @@
       <Project>{b20d93b8-af73-4ba4-b418-495f4a278e77}</Project>
       <Name>CompanyManagementDataLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CompanyManagementBLResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CompanyManagementBLResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
