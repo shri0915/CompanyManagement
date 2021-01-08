@@ -19,9 +19,15 @@ namespace CompanyManagementAPI.Controllers
             this.businessLayer = new BusinessLayer();
         }
 
-        public List<BOProject> GetAllProjects()
+        public List<String> GetAllProjects()
         {
-            return this.businessLayer.GetAllProjects();
+            List<String> projectNames = new List<string>();
+            foreach (BOProject project in this.businessLayer.GetAllProjects())
+            {
+                string projectName = project.ProjectName;
+                projectNames.Add(projectName);
+            }
+            return projectNames;
         }
     }
 }
