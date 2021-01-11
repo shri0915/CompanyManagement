@@ -10,10 +10,11 @@ using CompanyManagementBL.Entities;
 
 namespace CompanyManagementAPI.Controllers
 {
+    [Route("api/Project")]
     public class ProjectController : ApiController
     {
         
-
+        [HttpGet][Route("api/Project/GetAllProjects")]
         public List<string> GetAllProjects()
         {
             BusinessLayer businessLayer = new BusinessLayer();
