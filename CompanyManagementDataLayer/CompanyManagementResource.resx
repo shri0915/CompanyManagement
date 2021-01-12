@@ -192,6 +192,9 @@
   <data name="ProjectNameMissing" xml:space="preserve">
     <value>Project Name is missing</value>
   </data>
+  <data name="RoleMissing" xml:space="preserve">
+    <value>No such role found in the system</value>
+  </data>
   <data name="StatusMissing" xml:space="preserve">
     <value>Status cannot be empty</value>
   </data>

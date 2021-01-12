@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CompanyManagementDataLayer;
 
 namespace CompanyManagementBL.Entities
 {
@@ -10,8 +11,10 @@ namespace CompanyManagementBL.Entities
     {
         public int ProjectID;
         public string ProjectName;
-        public int? ProjectStatus;
-        public int ClientID;
-        public int DepartmentID;
+        public EnumClass.Status projectStatus;
+        public CompanyManagementDataLayer.Task Task;
+        public Client Client;
+        public Department Department;
+        public Technology Technology;
     }
 }

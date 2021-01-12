@@ -198,5 +198,12 @@ namespace CompanyManagementDataLayer
             bool taskAssignedToProject = (from ProjectTask in dc.ProjectTasks where ProjectTask.ProjectID == projectID && ProjectTask.TaskID == taskID select ProjectTask).Any();
             return taskAssignedToProject;
         }
+
+        public bool IfRoleExists(int roleID)
+        {
+            CompanyManagementDataClassesDataContext dc = new CompanyManagementDataClassesDataContext();
+            bool doesRoleExists = (from RoleMaster in dc.RoleMasters where RoleMaster.RoleID == roleID select RoleMaster).Any();
+            return doesRoleExists;
+        }
     }
 }
